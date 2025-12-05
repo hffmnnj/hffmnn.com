@@ -28,9 +28,9 @@
 			</p>
 		</header>
 
-		<div class="grid md:grid-cols-2 gap-8">
+		<div class="grid md:grid-cols-2 gap-8 items-stretch">
 			{#each projects as project, i}
-				<div class="animate-fade-up {i === 0 ? 'delay-100' : i === 1 ? 'delay-200' : i === 2 ? 'delay-300' : 'delay-400'}">
+				<div class="animate-fade-up h-full {i === 0 ? 'delay-100' : i === 1 ? 'delay-200' : i === 2 ? 'delay-300' : 'delay-400'}">
 				<ProjectCard
 					slug={project.slug}
 					title={project.title}

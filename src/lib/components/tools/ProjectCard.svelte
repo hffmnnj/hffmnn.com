@@ -22,8 +22,8 @@
 	}
 </script>
 
-<a href="/tools/{slug}" class="block glass-card p-8 group hover:border-white/15 transition-all duration-500 relative {className}">
-	<article>
+<a href="/tools/{slug}" class="flex flex-col glass-card p-8 group hover:border-white/15 transition-all duration-500 relative h-full {className}">
+	<article class="flex-1">
 		<div class="flex items-start justify-between mb-6">
 			<h3 class="font-display text-2xl font-semibold">
 				{title}
