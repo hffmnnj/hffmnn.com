@@ -75,6 +75,9 @@
 </div>
 
 <style>
+	:global(.readme-content h1:first-child) {
+		display: none;
+	}
 	:global(.readme-content h1) {
 		font-family: var(--font-display);
 		font-size: 1.875rem;
