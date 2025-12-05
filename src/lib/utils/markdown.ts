@@ -48,7 +48,8 @@ export function parseMarkdown(content: string, repo: RepoInfo): string {
 					if (imgMatch) {
 						const [, alt, imgSrc] = imgMatch;
 						const absoluteImgUrl = transformGitHubImageUrl(imgSrc, repo);
-						renderedText = `<img src="${absoluteImgUrl}" alt="${alt}" loading="lazy" class="inline-block h-5" />`;
+						// Use eager loading for badges - they're small, above-fold, and lazy loading can fail on mobile
+						renderedText = `<img src="${absoluteImgUrl}" alt="${alt}" loading="eager" class="inline-block h-5" />`;
 					}
 
 					return `<a href="${absoluteUrl}"${titleAttr}${external} class="text-white/80 hover:text-white underline">${renderedText}</a>`;
