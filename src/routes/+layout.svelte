@@ -2,8 +2,13 @@
 	import "../app.css";
 	import Header from "$lib/components/layout/Header.svelte";
 	import Footer from "$lib/components/layout/Footer.svelte";
+	import { afterNavigate } from "$app/navigation";
 
 	let { children } = $props();
+
+	afterNavigate(() => {
+		window.scrollTo(0, 0);
+	});
 </script>
 
 <svelte:head>
