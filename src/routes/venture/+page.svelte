@@ -173,7 +173,7 @@
 					<img
 						src="/images/rings1.png"
 						alt="Pulsyn Smart Ring - Available in Gold, Black, and Silver"
-						class="w-full max-w-lg h-auto drop-shadow-2xl"
+						class="w-full max-w-lg h-auto drop-shadow-2xl animate-float"
 						width="512"
 						height="512"
 					/>

@@ -79,7 +79,7 @@
 								<img
 									src="/images/ring_black.png"
 									alt="Pulsyn Smart Ring"
-									class="w-48 md:w-64 h-auto drop-shadow-2xl"
+									class="w-48 md:w-64 h-auto drop-shadow-2xl animate-float"
 									width="256"
 									height="256"
 								/>
