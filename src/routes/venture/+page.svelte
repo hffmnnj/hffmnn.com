@@ -202,10 +202,10 @@
 		<!-- Phoenix Note -->
 		<section class="mb-16">
 			<div class="glass-card p-8 text-center animate-fade-up">
-				<p class="text-muted-foreground mb-2">
+				<p class="text-muted-foreground">
 					<strong class="text-white">Made in America:</strong> Designed, assembled, packaged, and shipped from Phoenix, Arizona.
 				</p>
-				<p class="text-sm text-muted-foreground">
+				<p class="text-xs text-muted-foreground/60 mt-3">
 					Ring hardware crafted by expert manufacturing partners with 8+ years of wearable technology expertise.
 				</p>
 			</div>
