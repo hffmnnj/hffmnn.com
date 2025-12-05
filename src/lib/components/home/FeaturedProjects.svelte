@@ -2,8 +2,14 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Badge } from "$lib/components/ui/badge";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { ArrowRight01Icon, GithubIcon, InformationCircleIcon } from "@hugeicons/core-free-icons";
+	import { ArrowRight01Icon, GithubIcon } from "@hugeicons/core-free-icons";
 	import { projects } from "$lib/data/projects";
+
+	function handleGithubClick(e: MouseEvent, url: string) {
+		e.preventDefault();
+		e.stopPropagation();
+		window.open(url, '_blank', 'noopener,noreferrer');
+	}
 </script>
 
 <section class="py-24 px-6 border-t border-white/5">
@@ -25,43 +31,39 @@
 
 		<div class="grid md:grid-cols-2 gap-6">
 			{#each projects as project, i}
-				<article class="glass-card p-8 group hover:border-white/15 transition-all duration-500 animate-fade-up {i === 0 ? 'delay-100' : 'delay-200'}">
-					<div class="flex items-start justify-between mb-4">
-						<h3 class="font-display text-2xl font-semibold">
-							{project.title}
-						</h3>
-						<div class="flex gap-2">
-							<a
-								href="/tools/{project.slug}"
-								class="p-2 rounded-lg glass-button opacity-60 group-hover:opacity-100 transition-opacity"
-								aria-label="View project details"
-							>
-								<HugeiconsIcon icon={InformationCircleIcon} size={20} />
-							</a>
-							<a
-								href={project.githubUrl}
-								target="_blank"
-								rel="noopener noreferrer"
+				<a href="/tools/{project.slug}" class="block glass-card p-8 group hover:border-white/15 transition-all duration-500 animate-fade-up relative {i === 0 ? 'delay-100' : 'delay-200'}">
+					<article>
+						<div class="flex items-start justify-between mb-4">
+							<h3 class="font-display text-2xl font-semibold">
+								{project.title}
+							</h3>
+							<button
+								onclick={(e) => handleGithubClick(e, project.githubUrl)}
 								class="p-2 rounded-lg glass-button opacity-60 group-hover:opacity-100 transition-opacity"
 								aria-label="View on GitHub"
 							>
 								<HugeiconsIcon icon={GithubIcon} size={20} />
-							</a>
+							</button>
 						</div>
-					</div>
 
-					<p class="text-muted-foreground mb-6 leading-relaxed">
-						{project.shortDescription}
-					</p>
+						<p class="text-muted-foreground mb-6 leading-relaxed">
+							{project.shortDescription}
+						</p>
 
-					<div class="flex flex-wrap gap-2">
-						{#each project.tags.slice(0, 4) as tag}
-							<Badge variant="secondary" class="bg-white/5 border-white/10 text-white/70">
-								{tag}
-							</Badge>
-						{/each}
+						<div class="flex flex-wrap gap-2">
+							{#each project.tags.slice(0, 4) as tag}
+								<Badge variant="secondary" class="bg-white/5 border-white/10 text-white/70">
+									{tag}
+								</Badge>
+							{/each}
+						</div>
+					</article>
+
+					<!-- Arrow indicator -->
+					<div class="absolute bottom-8 right-8 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+						<HugeiconsIcon icon={ArrowRight01Icon} size={24} />
 					</div>
-				</article>
+				</a>
 			{/each}
 		</div>
 
