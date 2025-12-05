@@ -4,7 +4,7 @@
 	import { HugeiconsIcon } from "@hugeicons/svelte";
 	import { ArrowLeft01Icon, GithubIcon } from "@hugeicons/core-free-icons";
 	import { parseMarkdown } from "$lib/utils/markdown";
-	import { browser } from "$app/environment";
+	import { afterNavigate } from "$app/navigation";
 
 	let { data } = $props();
 
@@ -17,25 +17,15 @@
 			: null
 	);
 
-	// Determine back link based on referrer
+	// Determine back link based on where user navigated from
 	let backLink = $state({ href: "/tools", label: "Back to Tools" });
 
-	$effect(() => {
-		if (browser) {
-			const referrer = document.referrer;
-			if (referrer) {
-				try {
-					const url = new URL(referrer);
-					// Check if referrer is from same origin
-					if (url.origin === window.location.origin) {
-						if (url.pathname === "/" || url.pathname === "") {
-							backLink = { href: "/", label: "Back to Home" };
-						}
-					}
-				} catch {
-					// Invalid URL, keep default
-				}
-			}
+	afterNavigate((navigation) => {
+		const fromPath = navigation.from?.url?.pathname;
+		if (fromPath === "/" || fromPath === "") {
+			backLink = { href: "/", label: "Back to Home" };
+		} else {
+			backLink = { href: "/tools", label: "Back to Tools" };
 		}
 	});
 
