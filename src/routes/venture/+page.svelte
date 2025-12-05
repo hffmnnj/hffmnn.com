@@ -212,8 +212,8 @@
 		</section>
 
 		<section class="text-center">
-			<div class="inline-flex flex-col items-center gap-6 p-8 glass-card animate-fade-scale">
-				<div class="flex flex-col items-center gap-2">
+			<div class="inline-flex flex-row items-center gap-8 px-10 py-6 glass-card animate-fade-scale">
+				<div class="flex flex-col items-start gap-1">
 					<span class="text-sm text-pulsyn font-medium">Starting at</span>
 					<span class="font-display text-5xl font-bold text-white">$149</span>
 					<span class="text-xs text-muted-foreground">No subscription required</span>
