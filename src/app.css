@@ -92,7 +92,7 @@
 	}
 
 	html {
-		@apply antialiased scroll-smooth overflow-x-hidden;
+		@apply antialiased overflow-x-hidden;
 	}
 
 	body {
