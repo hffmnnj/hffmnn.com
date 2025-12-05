@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Badge } from "$lib/components/ui/badge";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { GithubIcon, ArrowRight01Icon, Tick01Icon } from "@hugeicons/core-free-icons";
+	import { GithubIcon, ArrowRight01Icon, Tick01Icon, RefreshIcon } from "@hugeicons/core-free-icons";
+	import type { CommitInfo } from "$lib/utils/github";
+	import { formatRelativeTime } from "$lib/utils/github";
 
 	interface Props {
 		slug: string;
@@ -10,10 +12,11 @@
 		tags: string[];
 		githubUrl: string;
 		features: string[];
+		lastCommit?: CommitInfo | null;
 		class?: string;
 	}
 
-	let { slug, title, description, tags, githubUrl, features, class: className }: Props = $props();
+	let { slug, title, description, tags, githubUrl, features, lastCommit, class: className }: Props = $props();
 
 	function handleGithubClick(e: MouseEvent) {
 		e.preventDefault();
@@ -28,13 +31,21 @@
 			<h3 class="font-display text-2xl font-semibold">
 				{title}
 			</h3>
-			<button
-				onclick={handleGithubClick}
-				class="p-2 rounded-lg glass-button opacity-60 group-hover:opacity-100 transition-opacity"
-				aria-label="View on GitHub"
-			>
-				<HugeiconsIcon icon={GithubIcon} size={20} />
-			</button>
+			<div class="flex items-center gap-2">
+				{#if lastCommit}
+					<div class="flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white/60">
+						<HugeiconsIcon icon={RefreshIcon} size={14} class="text-white/40" />
+						<span>{formatRelativeTime(lastCommit.date)}</span>
+					</div>
+				{/if}
+				<button
+					onclick={handleGithubClick}
+					class="p-2 rounded-lg glass-button opacity-60 hover:opacity-100 hover:scale-110 transition-all"
+					aria-label="View on GitHub"
+				>
+					<HugeiconsIcon icon={GithubIcon} size={20} />
+				</button>
+			</div>
 		</div>
 
 		<p class="text-muted-foreground mb-6 leading-relaxed">

@@ -2,7 +2,8 @@
 	import { Badge } from "$lib/components/ui/badge";
 	import { Button } from "$lib/components/ui/button";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { ArrowLeft01Icon, GithubIcon } from "@hugeicons/core-free-icons";
+	import { ArrowLeft01Icon, GithubIcon, RefreshIcon } from "@hugeicons/core-free-icons";
+	import { formatRelativeTime } from "$lib/utils/github";
 	import { parseMarkdown } from "$lib/utils/markdown";
 	import { afterNavigate } from "$app/navigation";
 
@@ -82,15 +83,23 @@
 				<h1 class="font-display text-3xl md:text-4xl font-bold tracking-tight">
 					{data.project.title}
 				</h1>
-				<a
-					href={data.project.githubUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="p-2 rounded-lg glass-button"
-					aria-label="View on GitHub"
-				>
-					<HugeiconsIcon icon={GithubIcon} size={24} />
-				</a>
+				<div class="flex items-center gap-2">
+					{#if data.lastCommit}
+						<div class="flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white/60">
+							<HugeiconsIcon icon={RefreshIcon} size={14} class="text-white/40" />
+							<span>{formatRelativeTime(data.lastCommit.date)}</span>
+						</div>
+					{/if}
+					<a
+						href={data.project.githubUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="p-2 rounded-lg glass-button opacity-60 hover:opacity-100 hover:scale-110 transition-all"
+						aria-label="View on GitHub"
+					>
+						<HugeiconsIcon icon={GithubIcon} size={20} />
+					</a>
+				</div>
 			</div>
 
 			<p class="text-muted-foreground mb-4">{data.project.description}</p>

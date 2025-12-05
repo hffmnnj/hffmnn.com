@@ -3,6 +3,8 @@
 	import About from "$lib/components/home/About.svelte";
 	import FeaturedProjects from "$lib/components/home/FeaturedProjects.svelte";
 	import PulsynSection from "$lib/components/home/PulsynSection.svelte";
+
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -22,6 +24,6 @@
 <div>
 	<Hero />
 	<About />
-	<FeaturedProjects />
+	<FeaturedProjects commits={data.commits} />
 	<PulsynSection />
 </div>

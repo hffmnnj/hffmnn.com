@@ -2,6 +2,8 @@
 	import ProjectCard from "$lib/components/tools/ProjectCard.svelte";
 	import { projects } from "$lib/data/projects";
 
+	let { data } = $props();
+
 	const collectionSchema = {
 		"@context": "https://schema.org",
 		"@type": "CollectionPage",
@@ -58,6 +60,7 @@
 					tags={project.tags}
 					githubUrl={project.githubUrl}
 					features={project.features}
+					lastCommit={data.commits[project.slug]}
 				/>
 				</div>
 			{/each}
