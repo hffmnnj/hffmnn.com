@@ -12,6 +12,25 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		slug: 'me-and-my-friends',
+		title: 'Me and My Friends (MAMF)',
+		description:
+			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
+		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
+		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
+		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'me-and-my-friends',
+		features: [
+			'Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)',
+			'RAG/knowledge base integration with Qdrant',
+			'Beautiful terminal UI with Ratatui',
+			'Council-style multi-advisor discussions',
+			'Living Council mode with consensus detection',
+			'Session history and export to Markdown'
+		]
+	},
+	{
 		slug: 'vibearchy',
 		title: 'Vibearchy',
 		description:
@@ -29,25 +48,6 @@ export const projects: Project[] = [
 			'119 handpicked wallpapers with smooth transitions',
 			'Custom Rofi menu ecosystem',
 			'Zen Browser integration with privacy extensions'
-		]
-	},
-	{
-		slug: 'me-and-my-friends',
-		title: 'Me and My Friends (MAMF)',
-		description:
-			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
-		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
-		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
-		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
-		githubOwner: 'hffmnnj',
-		githubRepo: 'me-and-my-friends',
-		features: [
-			'Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)',
-			'RAG/knowledge base integration with Qdrant',
-			'Beautiful terminal UI with Ratatui',
-			'Council-style multi-advisor discussions',
-			'Living Council mode with consensus detection',
-			'Session history and export to Markdown'
 		]
 	}
 ];
