@@ -48,8 +48,7 @@ export function parseMarkdown(content: string, repo: RepoInfo): string {
 					if (imgMatch) {
 						const [, alt, imgSrc] = imgMatch;
 						const absoluteImgUrl = transformGitHubImageUrl(imgSrc, repo);
-						// Use eager loading for badges with no-referrer policy to avoid Firefox mobile blocking
-						renderedText = `<img src="${absoluteImgUrl}" alt="${alt}" loading="eager" referrerpolicy="no-referrer" crossorigin="anonymous" class="inline-block h-5" />`;
+						renderedText = `<img src="${absoluteImgUrl}" alt="${alt}" loading="lazy" class="inline-block h-5" />`;
 					}
 
 					return `<a href="${absoluteUrl}"${titleAttr}${external} class="text-white/80 hover:text-white underline">${renderedText}</a>`;
@@ -61,7 +60,7 @@ export function parseMarkdown(content: string, repo: RepoInfo): string {
 
 		// Sanitize HTML to prevent XSS attacks from external README content
 		return DOMPurify.sanitize(html, {
-			ADD_ATTR: ['target', 'rel', 'loading', 'referrerpolicy', 'crossorigin'],
+			ADD_ATTR: ['target', 'rel', 'loading'],
 			ADD_TAGS: ['img']
 		});
 	} catch (error) {
