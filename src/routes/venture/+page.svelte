@@ -212,10 +212,10 @@
 		</section>
 
 		<section class="text-center">
-			<div class="inline-flex flex-row items-center gap-8 px-10 py-6 glass-card animate-fade-scale">
-				<div class="flex flex-col items-start gap-1">
+			<div class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 px-6 sm:px-10 py-6 glass-card animate-fade-scale">
+				<div class="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
 					<span class="text-sm text-pulsyn font-medium">Starting at</span>
-					<span class="font-display text-5xl font-bold text-white">$149</span>
+					<span class="font-display text-4xl sm:text-5xl font-bold text-white">$149</span>
 					<span class="text-xs text-muted-foreground">No subscription required</span>
 				</div>
 				<Button
