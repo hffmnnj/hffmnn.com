@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Badge } from "$lib/components/ui/badge";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { GithubIcon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+	import { GithubIcon, ArrowRight01Icon, Tick01Icon } from "@hugeicons/core-free-icons";
 
 	interface Props {
 		slug: string;
@@ -51,8 +51,8 @@
 
 		<ul class="space-y-2">
 			{#each features as feature}
-				<li class="text-sm text-muted-foreground flex items-center gap-2">
-					<span class="w-1.5 h-1.5 rounded-full bg-white/30 flex-shrink-0"></span>
+				<li class="text-sm text-muted-foreground flex items-start gap-2">
+					<HugeiconsIcon icon={Tick01Icon} size={16} class="text-white/40 flex-shrink-0 mt-0.5" />
 					{feature}
 				</li>
 			{/each}
