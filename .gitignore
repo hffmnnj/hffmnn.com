@@ -36,6 +36,7 @@ vite.config.ts.timestamp-*
 
 # Claude Code / AI
 .claude/
+.serena/
 .aider*
 .cursor/
 .continue/
