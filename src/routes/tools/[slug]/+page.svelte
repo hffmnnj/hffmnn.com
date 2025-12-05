@@ -4,6 +4,7 @@
 	import { HugeiconsIcon } from "@hugeicons/svelte";
 	import { ArrowLeft01Icon, GithubIcon } from "@hugeicons/core-free-icons";
 	import { parseMarkdown } from "$lib/utils/markdown";
+	import { browser } from "$app/environment";
 
 	let { data } = $props();
 
@@ -15,6 +16,28 @@
 				})
 			: null
 	);
+
+	// Determine back link based on referrer
+	let backLink = $state({ href: "/tools", label: "Back to Tools" });
+
+	$effect(() => {
+		if (browser) {
+			const referrer = document.referrer;
+			if (referrer) {
+				try {
+					const url = new URL(referrer);
+					// Check if referrer is from same origin
+					if (url.origin === window.location.origin) {
+						if (url.pathname === "/" || url.pathname === "") {
+							backLink = { href: "/", label: "Back to Home" };
+						}
+					}
+				} catch {
+					// Invalid URL, keep default
+				}
+			}
+		}
+	});
 </script>
 
 <svelte:head>
@@ -25,9 +48,9 @@
 <div class="pt-24 pb-16 px-6">
 	<div class="max-w-4xl mx-auto">
 		<nav class="mb-8 animate-fade-in">
-			<Button href="/tools" variant="ghost" class="text-muted-foreground hover:text-white">
+			<Button href={backLink.href} variant="ghost" class="text-muted-foreground hover:text-white">
 				<HugeiconsIcon icon={ArrowLeft01Icon} size={16} class="mr-2" />
-				Back to Tools
+				{backLink.label}
 			</Button>
 		</nav>
 
