@@ -3,13 +3,13 @@
 	import { HugeiconsIcon } from "@hugeicons/svelte";
 	import { ArrowRight01Icon, GithubIcon } from "@hugeicons/core-free-icons";
 
-	const birthday = new Date(2004, 3, 1); // April 2004 (month is 0-indexed)
+	const birthYear = 2004;
+	const birthMonth = 3; // April (0-indexed)
 
 	function getAge(): number {
 		const today = new Date();
-		let age = today.getFullYear() - birthday.getFullYear();
-		const monthDiff = today.getMonth() - birthday.getMonth();
-		if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+		let age = today.getFullYear() - birthYear;
+		if (today.getMonth() < birthMonth) {
 			age--;
 		}
 		return age;
