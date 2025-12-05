@@ -38,11 +38,44 @@
 			}
 		}
 	});
+
+	const softwareSchema = $derived({
+		"@context": "https://schema.org",
+		"@type": "SoftwareApplication",
+		name: data.project.title,
+		description: data.project.description,
+		url: `https://hffmnn.com/tools/${data.project.slug}`,
+		applicationCategory: "DeveloperApplication",
+		operatingSystem: "Linux",
+		offers: {
+			"@type": "Offer",
+			price: "0",
+			priceCurrency: "USD"
+		},
+		author: {
+			"@type": "Person",
+			name: "hffmnn",
+			url: "https://hffmnn.com"
+		}
+	});
 </script>
 
 <svelte:head>
 	<title>{data.project.title} - hffmnn</title>
 	<meta name="description" content={data.project.description} />
+
+	<!-- Page-specific Open Graph -->
+	<meta property="og:title" content="{data.project.title} - hffmnn" />
+	<meta property="og:description" content={data.project.description} />
+	<meta property="og:url" content="https://hffmnn.com/tools/{data.project.slug}" />
+	<meta property="og:type" content="article" />
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="{data.project.title} - hffmnn" />
+	<meta name="twitter:description" content={data.project.description} />
+
+	<!-- JSON-LD Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify(softwareSchema)}</script>`}
 </svelte:head>
 
 <div class="pt-24 pb-16 px-6">

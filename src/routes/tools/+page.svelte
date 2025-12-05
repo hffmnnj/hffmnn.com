@@ -1,6 +1,23 @@
 <script lang="ts">
 	import ProjectCard from "$lib/components/tools/ProjectCard.svelte";
 	import { projects } from "$lib/data/projects";
+
+	const collectionSchema = {
+		"@context": "https://schema.org",
+		"@type": "CollectionPage",
+		name: "Tools",
+		description: "Privacy-focused tools and projects by hffmnn",
+		url: "https://hffmnn.com/tools",
+		mainEntity: {
+			"@type": "ItemList",
+			itemListElement: projects.map((p, i) => ({
+				"@type": "ListItem",
+				position: i + 1,
+				url: `https://hffmnn.com/tools/${p.slug}`,
+				name: p.title
+			}))
+		}
+	};
 </script>
 
 <svelte:head>
@@ -15,6 +32,9 @@
 	<!-- Twitter -->
 	<meta name="twitter:title" content="Tools & Projects | hffmnn" />
 	<meta name="twitter:description" content="Open-source projects focused on privacy, productivity, and beautiful design." />
+
+	<!-- JSON-LD Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify(collectionSchema)}</script>`}
 </svelte:head>
 
 <div class="pt-24 pb-16 px-6">
