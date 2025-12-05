@@ -154,7 +154,7 @@
 					class="glass-button px-6 py-3 rounded-xl h-auto"
 				>
 					Visit getpulsyn.com
-					<HugeiconsIcon icon={ArrowRight01Icon} size={16} class="ml-2" />
+					<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
 				</Button>
 				<Button
 					href="https://getpulsyn.com/pricing"
@@ -193,7 +193,7 @@
 				{#each features as feature, i}
 					<div class="glass-card p-6 animate-fade-up" style="animation-delay: {(i + 2) * 100}ms">
 						<div class="w-12 h-12 rounded-xl bg-pulsyn/10 border border-pulsyn/20 flex items-center justify-center mb-4">
-							<HugeiconsIcon icon={feature.icon} size={24} class="text-pulsyn" />
+							<HugeiconsIcon icon={feature.icon} size={24} color="var(--pulsyn)" />
 						</div>
 						<h3 class="font-display text-lg font-semibold mb-2">{feature.title}</h3>
 						<p class="text-sm text-muted-foreground">{feature.description}</p>
@@ -214,7 +214,7 @@
 				{#each valueProps as prop, i}
 					<div class="glass-card p-8 animate-fade-up" style="animation-delay: {(i + 2) * 100}ms">
 						<div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center mb-4">
-							<HugeiconsIcon icon={prop.icon} size={28} class="text-white/70" />
+							<HugeiconsIcon icon={prop.icon} size={28} color="rgba(255,255,255,0.7)" />
 						</div>
 						<h3 class="font-display text-xl font-semibold mb-2">{prop.title}</h3>
 						<Badge variant="secondary" class="bg-pulsyn/10 border-pulsyn/20 text-pulsyn mb-4">
@@ -223,7 +223,7 @@
 						<ul class="space-y-3">
 							{#each prop.points as point}
 								<li class="flex items-start gap-2 text-sm text-muted-foreground">
-									<HugeiconsIcon icon={Tick01Icon} size={16} class="text-pulsyn mt-0.5 shrink-0" />
+									<span class="mt-0.5 shrink-0"><HugeiconsIcon icon={Tick01Icon} size={16} color="var(--pulsyn)" /></span>
 									<span>{point}</span>
 								</li>
 							{/each}
@@ -259,7 +259,7 @@
 					class="px-8 py-4 rounded-xl bg-pulsyn/15 border border-pulsyn/30 text-pulsyn font-medium hover:bg-pulsyn/25 hover:border-pulsyn/50 transition-all duration-300 h-auto"
 				>
 					Pre-order Now
-					<HugeiconsIcon icon={ArrowRight01Icon} size={16} class="ml-2" />
+					<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
 				</Button>
 			</div>
 		</section>

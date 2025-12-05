@@ -37,14 +37,14 @@
 		<div class="flex items-center justify-center gap-4 flex-wrap animate-fade-up delay-400">
 			<Button href="/tools" class="glass-button px-6 py-3 rounded-xl h-auto">
 				View Projects
-				<HugeiconsIcon icon={ArrowRight01Icon} size={16} class="ml-2" />
+				<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
 			</Button>
 			<Button
 				href="https://github.com/hffmnnj"
 				variant="ghost"
 				class="text-muted-foreground hover:text-white h-auto px-6 py-3"
 			>
-				<HugeiconsIcon icon={GithubIcon} size={16} class="mr-2" />
+				<span class="mr-2"><HugeiconsIcon icon={GithubIcon} size={16} /></span>
 				GitHub
 			</Button>
 		</div>

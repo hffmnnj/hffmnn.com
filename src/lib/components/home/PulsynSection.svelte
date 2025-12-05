@@ -34,25 +34,25 @@
 					<div class="grid grid-cols-2 gap-4 mb-8">
 						<div class="flex items-center gap-3">
 							<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-								<HugeiconsIcon icon={MoonCloudIcon} size={20} class="text-white/70" />
+								<HugeiconsIcon icon={MoonCloudIcon} size={20} color="rgba(255,255,255,0.7)" />
 							</div>
 							<span class="text-sm text-white/80">Sleep Tracking</span>
 						</div>
 						<div class="flex items-center gap-3">
 							<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-								<HugeiconsIcon icon={HeartCheckIcon} size={20} class="text-white/70" />
+								<HugeiconsIcon icon={HeartCheckIcon} size={20} color="rgba(255,255,255,0.7)" />
 							</div>
 							<span class="text-sm text-white/80">Heart Health</span>
 						</div>
 						<div class="flex items-center gap-3">
 							<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-								<HugeiconsIcon icon={Activity01Icon} size={20} class="text-white/70" />
+								<HugeiconsIcon icon={Activity01Icon} size={20} color="rgba(255,255,255,0.7)" />
 							</div>
 							<span class="text-sm text-white/80">Activity Tracking</span>
 						</div>
 						<div class="flex items-center gap-3">
 							<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-								<HugeiconsIcon icon={SmartWatch01Icon} size={20} class="text-white/70" />
+								<HugeiconsIcon icon={SmartWatch01Icon} size={20} color="rgba(255,255,255,0.7)" />
 							</div>
 							<span class="text-sm text-white/80">7-60 Day Battery</span>
 						</div>
@@ -66,7 +66,7 @@
 							class="glass-button px-6 py-3 rounded-xl h-auto"
 						>
 							Visit getpulsyn.com
-							<HugeiconsIcon icon={ArrowRight01Icon} size={16} class="ml-2" />
+							<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
 						</Button>
 					</div>
 				</div>

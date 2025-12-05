@@ -17,7 +17,7 @@
 		<div class="grid md:grid-cols-3 gap-8">
 			<div class="glass-card p-8 text-center animate-fade-up delay-100">
 				<div class="icon-box mx-auto mb-4">
-					<HugeiconsIcon icon={Shield01Icon} size={24} class="text-white/70" />
+					<HugeiconsIcon icon={Shield01Icon} size={24} color="rgba(255,255,255,0.7)" />
 				</div>
 				<h3 class="font-display text-xl font-semibold mb-2">Privacy First</h3>
 				<p class="text-muted-foreground text-sm leading-relaxed">
@@ -27,7 +27,7 @@
 
 			<div class="glass-card p-8 text-center animate-fade-up delay-200">
 				<div class="icon-box mx-auto mb-4">
-					<HugeiconsIcon icon={ComputerTerminal01Icon} size={24} class="text-white/70" />
+					<HugeiconsIcon icon={ComputerTerminal01Icon} size={24} color="rgba(255,255,255,0.7)" />
 				</div>
 				<h3 class="font-display text-xl font-semibold mb-2">Open Source</h3>
 				<p class="text-muted-foreground text-sm leading-relaxed">
@@ -37,7 +37,7 @@
 
 			<div class="glass-card p-8 text-center animate-fade-up delay-300">
 				<div class="icon-box mx-auto mb-4">
-					<HugeiconsIcon icon={SparklesIcon} size={24} class="text-white/70" />
+					<HugeiconsIcon icon={SparklesIcon} size={24} color="rgba(255,255,255,0.7)" />
 				</div>
 				<h3 class="font-display text-xl font-semibold mb-2">Delightful UX</h3>
 				<p class="text-muted-foreground text-sm leading-relaxed">

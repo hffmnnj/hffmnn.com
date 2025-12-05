@@ -73,7 +73,7 @@
 	<div class="max-w-4xl mx-auto">
 		<nav class="mb-8 animate-fade-in">
 			<Button href={backLink.href} variant="ghost" class="text-muted-foreground hover:text-white">
-				<HugeiconsIcon icon={ArrowLeft01Icon} size={16} class="mr-2" />
+				<span class="mr-2"><HugeiconsIcon icon={ArrowLeft01Icon} size={16} /></span>
 				{backLink.label}
 			</Button>
 		</nav>
@@ -86,7 +86,7 @@
 				<div class="flex items-center gap-2">
 					{#if data.lastCommit}
 						<div class="flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white/60">
-							<HugeiconsIcon icon={RefreshIcon} size={14} class="text-white/40" />
+							<HugeiconsIcon icon={RefreshIcon} size={14} color="rgba(255,255,255,0.4)" />
 							<span>{formatRelativeTime(data.lastCommit.date)}</span>
 						</div>
 					{/if}
@@ -118,7 +118,7 @@
 				<p class="text-muted-foreground mb-4">{data.error}</p>
 				<Button href={data.project.githubUrl} target="_blank" rel="noopener noreferrer">
 					View on GitHub
-					<HugeiconsIcon icon={GithubIcon} size={16} class="ml-2" />
+					<span class="ml-2"><HugeiconsIcon icon={GithubIcon} size={16} /></span>
 				</Button>
 			</div>
 		{:else if renderedHtml}

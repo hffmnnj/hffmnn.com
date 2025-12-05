@@ -33,7 +33,7 @@
 			</div>
 			<Button href="/tools" variant="ghost" class="hidden md:inline-flex text-muted-foreground hover:text-white">
 				View all
-				<HugeiconsIcon icon={ArrowRight01Icon} size={16} class="ml-2" />
+				<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
 			</Button>
 		</div>
 
@@ -49,7 +49,7 @@
 							<div class="flex items-center gap-2">
 								{#if lastCommit}
 									<div class="flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white/60">
-										<HugeiconsIcon icon={RefreshIcon} size={14} class="text-white/40" />
+										<HugeiconsIcon icon={RefreshIcon} size={14} color="rgba(255,255,255,0.4)" />
 										<span>{formatRelativeTime(lastCommit.date)}</span>
 									</div>
 								{/if}
@@ -87,7 +87,7 @@
 		<div class="mt-8 text-center md:hidden">
 			<Button href="/tools" variant="ghost" class="text-muted-foreground hover:text-white">
 				View all projects
-				<HugeiconsIcon icon={ArrowRight01Icon} size={16} class="ml-2" />
+				<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
 			</Button>
 		</div>
 	</div>

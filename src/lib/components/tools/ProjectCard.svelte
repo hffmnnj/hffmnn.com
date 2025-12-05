@@ -34,7 +34,7 @@
 			<div class="flex items-center gap-2">
 				{#if lastCommit}
 					<div class="flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white/60">
-						<HugeiconsIcon icon={RefreshIcon} size={14} class="text-white/40" />
+						<HugeiconsIcon icon={RefreshIcon} size={14} color="rgba(255,255,255,0.4)" />
 						<span>{formatRelativeTime(lastCommit.date)}</span>
 					</div>
 				{/if}
@@ -63,7 +63,7 @@
 		<ul class="space-y-2">
 			{#each features as feature}
 				<li class="text-sm text-muted-foreground flex items-start gap-2">
-					<HugeiconsIcon icon={Tick01Icon} size={16} class="text-white/40 flex-shrink-0 mt-0.5" />
+					<span class="flex-shrink-0 mt-0.5"><HugeiconsIcon icon={Tick01Icon} size={16} color="rgba(255,255,255,0.4)" /></span>
 					{feature}
 				</li>
 			{/each}
