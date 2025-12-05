@@ -129,6 +129,10 @@
 
 /* Glassmorphism utilities */
 @layer utilities {
+	.glass {
+		@apply bg-black/80 backdrop-blur-xl;
+	}
+
 	.glass-card {
 		@apply bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-2xl;
 	}
