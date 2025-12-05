@@ -1,0 +1,232 @@
+@import "tailwindcss";
+@import "@fontsource-variable/kode-mono";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  DARK-FIRST THEME (Resend.com inspired)
+  Pure black background with subtle grays
+*/
+:root {
+	color-scheme: dark;
+
+	--radius: 0.625rem;
+
+	/* Primary Colors - Pure black base */
+	--background: oklch(0% 0 0);
+	--foreground: oklch(93% 0 0);
+
+	/* Card/Surface - Subtle elevation */
+	--card: oklch(8% 0 0);
+	--card-foreground: oklch(93% 0 0);
+
+	/* Muted elements */
+	--muted: oklch(15% 0 0);
+	--muted-foreground: oklch(55% 0 0);
+
+	/* Primary accent - White for contrast */
+	--primary: oklch(93% 0 0);
+	--primary-foreground: oklch(0% 0 0);
+
+	/* Secondary */
+	--secondary: oklch(15% 0 0);
+	--secondary-foreground: oklch(93% 0 0);
+
+	/* Accent - subtle highlight */
+	--accent: oklch(20% 0 0);
+	--accent-foreground: oklch(93% 0 0);
+
+	/* Borders - very subtle */
+	--border: oklch(100% 0 0 / 8%);
+	--input: oklch(100% 0 0 / 12%);
+	--ring: oklch(50% 0 0);
+
+	/* Destructive */
+	--destructive: oklch(65% 0.2 25);
+
+	/* Popover */
+	--popover: oklch(10% 0 0);
+	--popover-foreground: oklch(93% 0 0);
+
+	/* Pulsyn accent */
+	--pulsyn: oklch(75% 0.18 160);
+}
+
+/* Tailwind v4 theme mapping */
+@theme inline {
+	--font-display: "Kode Mono Variable", system-ui, monospace;
+	--font-body: "Inter Variable", system-ui, sans-serif;
+	--font-sans: "Inter Variable", system-ui, sans-serif;
+
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--radius-2xl: calc(var(--radius) + 8px);
+
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-pulsyn: var(--pulsyn);
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	html {
+		@apply antialiased scroll-smooth;
+	}
+
+	body {
+		@apply bg-background text-foreground font-body min-h-screen;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-display;
+		word-spacing: -0.15em;
+	}
+}
+
+/* Mesh gradient background */
+@layer utilities {
+	.mesh-gradient {
+		background-color: #000;
+		background-image: radial-gradient(
+				at 0% 0%,
+				oklch(18% 0.04 280) 0px,
+				transparent 50%
+			),
+			radial-gradient(at 100% 0%, oklch(15% 0.03 220) 0px, transparent 50%),
+			radial-gradient(at 100% 100%, oklch(12% 0.02 180) 0px, transparent 50%),
+			radial-gradient(at 0% 100%, oklch(14% 0.03 320) 0px, transparent 50%),
+			radial-gradient(at 50% 50%, oklch(8% 0.02 260) 0px, transparent 70%);
+		background-attachment: fixed;
+	}
+}
+
+/* Glassmorphism utilities */
+@layer utilities {
+	.glass-card {
+		@apply bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-2xl;
+	}
+
+	.glass-button {
+		@apply bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 text-white transition-all duration-300;
+	}
+
+	.text-gradient {
+		@apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/70;
+	}
+
+	.glow {
+		box-shadow:
+			0 0 20px rgba(255, 255, 255, 0.1),
+			0 0 40px rgba(255, 255, 255, 0.05);
+	}
+
+	.nav-link {
+		@apply text-sm transition-colors hover:text-white text-muted-foreground;
+	}
+
+	.icon-link {
+		@apply text-muted-foreground hover:text-white transition-colors;
+	}
+
+	.icon-box {
+		@apply w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center;
+	}
+}
+
+/* Load-in animations */
+@keyframes fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-scale {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@layer utilities {
+	.animate-fade-up {
+		animation: fade-up 0.6s ease-out forwards;
+		opacity: 0;
+	}
+
+	.animate-fade-in {
+		animation: fade-in 0.6s ease-out forwards;
+		opacity: 0;
+	}
+
+	.animate-fade-scale {
+		animation: fade-scale 0.5s ease-out forwards;
+		opacity: 0;
+	}
+
+	.delay-100 {
+		animation-delay: 100ms;
+	}
+	.delay-200 {
+		animation-delay: 200ms;
+	}
+	.delay-300 {
+		animation-delay: 300ms;
+	}
+	.delay-400 {
+		animation-delay: 400ms;
+	}
+	.delay-500 {
+		animation-delay: 500ms;
+	}
+	.delay-600 {
+		animation-delay: 600ms;
+	}
+	.delay-700 {
+		animation-delay: 700ms;
+	}
+}
