@@ -108,6 +108,31 @@
 		@apply font-display;
 		word-spacing: -0.15em;
 	}
+
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgb(255 255 255 / 0.15);
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: rgb(255 255 255 / 0.25);
+	}
+
+	/* Firefox scrollbar */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+	}
 }
 
 /* Mesh gradient background */
