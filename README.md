@@ -34,6 +34,9 @@ Privacy-focused personal portfolio website showcasing open-source projects. Buil
 ### Venture Page
 ![Venture page](docs/images/venture.png)
 
+### Mobile
+![Mobile view](docs/images/mobile.png)
+
 ## Tech Stack
 
 | Category | Technology |
