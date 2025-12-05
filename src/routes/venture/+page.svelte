@@ -80,6 +80,37 @@
 			]
 		}
 	];
+
+	const productSchema = {
+		"@context": "https://schema.org",
+		"@type": "Product",
+		name: "Pulsyn Smart Ring",
+		description:
+			"Premium smart ring with clinical-grade sensors for health tracking at half the price of competitors",
+		url: "https://hffmnn.com/venture",
+		brand: {
+			"@type": "Brand",
+			name: "Pulsyn"
+		},
+		category: "Wearable Electronics",
+		offers: {
+			"@type": "Offer",
+			price: "149",
+			priceCurrency: "USD",
+			availability: "https://schema.org/PreOrder",
+			url: "https://getpulsyn.com/pricing"
+		},
+		manufacturer: {
+			"@type": "Organization",
+			name: "Pulsyn",
+			address: {
+				"@type": "PostalAddress",
+				addressLocality: "Phoenix",
+				addressRegion: "AZ",
+				addressCountry: "US"
+			}
+		}
+	};
 </script>
 
 <svelte:head>
@@ -94,6 +125,9 @@
 	<!-- Twitter -->
 	<meta name="twitter:title" content="Pulsyn Smart Ring | hffmnn" />
 	<meta name="twitter:description" content="Premium smart ring with clinical-grade sensors at half the price." />
+
+	<!-- JSON-LD Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify(productSchema)}</script>`}
 </svelte:head>
 
 <div class="pt-24 pb-16 px-6">
