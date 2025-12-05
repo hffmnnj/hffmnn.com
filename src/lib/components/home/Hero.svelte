@@ -2,18 +2,35 @@
 	import { Button } from "$lib/components/ui/button";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
 	import { ArrowRight01Icon, GithubIcon } from "@hugeicons/core-free-icons";
+
+	const birthday = new Date(2004, 3, 1); // April 2004 (month is 0-indexed)
+
+	function getAge(): number {
+		const today = new Date();
+		let age = today.getFullYear() - birthday.getFullYear();
+		const monthDiff = today.getMonth() - birthday.getMonth();
+		if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+			age--;
+		}
+		return age;
+	}
+
+	const age = getAge();
 </script>
 
 <section class="min-h-[70vh] flex items-center justify-center px-6 pt-16">
 	<div class="max-w-4xl text-center">
-		<h1 class="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-up">
+		<p class="text-muted-foreground mb-4 animate-fade-up">
+			Hi, I'm <span class="text-white font-medium">James Hoffmann</span> · {age} y/o developer, sysadmin & privacy advocate
+		</p>
+		<h1 class="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-up delay-100">
 			<span class="text-gradient">Building tools</span>
 			<br />
 			<span class="text-muted-foreground">for privacy & productivity</span>
 		</h1>
 
 		<p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up delay-200">
-			Developer focused on creating elegant, privacy-respecting software.
+			Creating elegant, privacy-respecting software.
 			From desktop environments to AI-powered tools.
 		</p>
 
