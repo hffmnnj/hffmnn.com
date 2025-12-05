@@ -141,13 +141,13 @@
 		background-color: #000;
 		background-image: radial-gradient(
 				at 0% 0%,
-				oklch(18% 0.04 280) 0px,
+				oklch(18% 0.04 220) 0px,
 				transparent 50%
 			),
-			radial-gradient(at 100% 0%, oklch(15% 0.03 220) 0px, transparent 50%),
-			radial-gradient(at 100% 100%, oklch(12% 0.02 180) 0px, transparent 50%),
-			radial-gradient(at 0% 100%, oklch(14% 0.03 320) 0px, transparent 50%),
-			radial-gradient(at 50% 50%, oklch(8% 0.02 260) 0px, transparent 70%);
+			radial-gradient(at 100% 0%, oklch(15% 0.03 200) 0px, transparent 50%),
+			radial-gradient(at 100% 100%, oklch(12% 0.02 210) 0px, transparent 50%),
+			radial-gradient(at 0% 100%, oklch(14% 0.03 230) 0px, transparent 50%),
+			radial-gradient(at 50% 50%, oklch(8% 0.02 215) 0px, transparent 70%);
 		background-attachment: fixed;
 	}
 }
