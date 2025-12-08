@@ -2,7 +2,7 @@
 	import { Badge } from "$lib/components/ui/badge";
 	import { Button } from "$lib/components/ui/button";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { ArrowLeft01Icon, GithubIcon, RefreshIcon } from "@hugeicons/core-free-icons";
+	import { ArrowLeft01Icon, GithubIcon, GitCommitIcon } from "@hugeicons/core-free-icons";
 	import { formatRelativeTime } from "$lib/utils/github";
 	import { parseMarkdown } from "$lib/utils/markdown";
 	import { afterNavigate } from "$app/navigation";
@@ -86,8 +86,8 @@
 				<div class="flex items-center gap-2">
 					{#if data.lastCommit}
 						<div class="flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white/60">
-							<HugeiconsIcon icon={RefreshIcon} size={14} color="rgba(255,255,255,0.4)" />
-							<span>{formatRelativeTime(data.lastCommit.date)}</span>
+							<HugeiconsIcon icon={GitCommitIcon} size={14} color="rgba(255,255,255,0.4)" />
+							<span>Last changes: {formatRelativeTime(data.lastCommit.date)}</span>
 						</div>
 					{/if}
 					<a
