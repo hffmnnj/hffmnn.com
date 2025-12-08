@@ -1,29 +1,47 @@
+import commitCache from '$lib/data/commit-cache.json';
+
 export interface CommitInfo {
 	date: string;
 	message: string;
 	sha: string;
 }
 
+interface CommitCache {
+	_note: string;
+	_updated: string;
+	commits: Record<string, CommitInfo>;
+}
+
+const cache = commitCache as CommitCache;
+
 export async function fetchLatestCommit(
 	owner: string,
 	repo: string,
-	fetch: typeof globalThis.fetch = globalThis.fetch
+	fetch: typeof globalThis.fetch = globalThis.fetch,
+	token?: string
 ): Promise<CommitInfo | null> {
+	const cacheKey = `${owner}/${repo}`;
+
 	try {
 		const url = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
-		const response = await fetch(url, {
-			headers: {
-				Accept: 'application/vnd.github.v3+json'
-			}
-		});
+		const headers: HeadersInit = {
+			Accept: 'application/vnd.github.v3+json'
+		};
+
+		// Use GitHub token if provided (for higher rate limits)
+		if (token) {
+			headers['Authorization'] = `Bearer ${token}`;
+		}
+
+		const response = await fetch(url, { headers });
 
 		if (!response.ok) {
-			console.error(`GitHub API error: ${response.status}`);
-			return null;
+			// Fall back to cache on API error (rate limiting, etc.)
+			return getCachedCommit(cacheKey);
 		}
 
 		const commits = await response.json();
-		if (commits.length === 0) return null;
+		if (commits.length === 0) return getCachedCommit(cacheKey);
 
 		const commit = commits[0];
 		return {
@@ -31,10 +49,18 @@ export async function fetchLatestCommit(
 			message: commit.commit.message.split('\n')[0],
 			sha: commit.sha.substring(0, 7)
 		};
-	} catch (err) {
-		console.error(`Failed to fetch commit for ${owner}/${repo}:`, err);
-		return null;
+	} catch {
+		// Fall back to cache on error
+		return getCachedCommit(cacheKey);
 	}
+}
+
+function getCachedCommit(key: string): CommitInfo | null {
+	const cached = cache.commits[key];
+	if (cached) {
+		return cached;
+	}
+	return null;
 }
 
 export function formatRelativeTime(dateString: string): string {

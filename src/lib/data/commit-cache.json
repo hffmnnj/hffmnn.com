@@ -1,0 +1,31 @@
+{
+  "_note": "Auto-generated cache of last known commit times. Fallback when GitHub API is unavailable.",
+  "_updated": "2025-12-08T06:34:17.336Z",
+  "commits": {
+    "hffmnnj/me-and-my-friends": {
+      "date": "2025-12-05T05:18:44Z",
+      "message": "docs(readme): improve human-readable explanations",
+      "sha": "089025b"
+    },
+    "hffmnnj/Vibearchy": {
+      "date": "2025-12-08T05:40:07Z",
+      "message": "feat(helium): add Helium Browser as secondary Chromium browser",
+      "sha": "559bc34"
+    },
+    "Capyseo/capyseo-core": {
+      "date": "2025-12-08T06:09:28Z",
+      "message": "docs: add contact email to support section",
+      "sha": "9aa5092"
+    },
+    "Capyseo/capyseo-cli": {
+      "date": "2025-12-08T06:09:30Z",
+      "message": "docs: add support section with contact email",
+      "sha": "c6a9668"
+    },
+    "Capyseo/capyseo-sveltekit": {
+      "date": "2025-12-08T06:09:40Z",
+      "message": "docs: add support section with contact email",
+      "sha": "7387171"
+    }
+  }
+}

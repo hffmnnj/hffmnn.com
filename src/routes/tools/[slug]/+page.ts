@@ -1,18 +1,21 @@
 import { error } from '@sveltejs/kit';
-import { getProjectBySlug, projects } from '$lib/data/projects';
+import { getProjectBySlug, getCapyseoProjectBySlug, projects, capyseoProjects } from '$lib/data/projects';
 import { fetchLatestCommit } from '$lib/utils/github';
 import type { PageLoad, EntryGenerator } from './$types';
 
-export const load: PageLoad = async ({ params, fetch }) => {
-	const project = getProjectBySlug(params.slug);
+export const load: PageLoad = async ({ params, fetch, data }) => {
+	const project = getProjectBySlug(params.slug) ?? getCapyseoProjectBySlug(params.slug);
 
 	if (!project) {
 		throw error(404, 'Project not found');
 	}
 
+	// Get token from server data (if available)
+	const token = data?.githubToken;
+
 	const [markdownResult, lastCommit] = await Promise.all([
 		fetchMarkdown(project, fetch),
-		fetchLatestCommit(project.githubOwner, project.githubRepo, fetch)
+		fetchLatestCommit(project.githubOwner, project.githubRepo, fetch, token)
 	]);
 
 	return {
@@ -44,5 +47,6 @@ async function fetchMarkdown(
 }
 
 export const entries: EntryGenerator = () => {
-	return projects.map((p) => ({ slug: p.slug }));
+	const allProjects = [...projects, ...capyseoProjects];
+	return allProjects.map((p) => ({ slug: p.slug }));
 };
