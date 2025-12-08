@@ -24,7 +24,8 @@ const config = {
 					return;
 				}
 				throw new Error(message);
-			}
+			},
+			handleMissingId: 'ignore' // README content may have internal anchor links
 		}
 	}
 };
