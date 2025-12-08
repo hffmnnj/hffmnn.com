@@ -2,7 +2,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Badge } from "$lib/components/ui/badge";
 	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { ArrowRight01Icon, SmartWatch01Icon, HeartCheckIcon, MoonCloudIcon, Activity01Icon } from "@hugeicons/core-free-icons";
+	import { ArrowRight01Icon, BatteryFullIcon, HeartCheckIcon, MoonCloudIcon, Activity01Icon } from "@hugeicons/core-free-icons";
 </script>
 
 <section class="py-16 px-6 border-t border-white/5">
@@ -52,7 +52,7 @@
 						</div>
 						<div class="flex items-center gap-3">
 							<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-								<HugeiconsIcon icon={SmartWatch01Icon} size={20} color="rgba(255,255,255,0.7)" />
+								<HugeiconsIcon icon={BatteryFullIcon} size={20} color="rgba(255,255,255,0.7)" />
 							</div>
 							<span class="text-sm text-white/80">7-60 Day Battery</span>
 						</div>
