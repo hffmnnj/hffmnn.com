@@ -115,7 +115,7 @@
 
 <svelte:head>
 	<title>Venture - Pulsyn Smart Ring | hffmnn</title>
-	<meta name="description" content="Pulsyn - Building a premium smart ring that makes health tracking accessible. Clinical-grade sensors at half the price." />
+	<meta name="description" content="Pulsyn - Building a premium smart ring that makes health tracking accessible. Clinical-grade sensors at half the price of competitors, starting at $149." />
 
 	<!-- Open Graph -->
 	<meta property="og:title" content="Pulsyn Smart Ring | hffmnn" />

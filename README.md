@@ -8,6 +8,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Bun](https://img.shields.io/badge/Bun-Runtime-000000?logo=bun&logoColor=white)](https://bun.sh)
 [![Static Site](https://img.shields.io/badge/Type-Static_Site-green)](https://kit.svelte.dev/docs/adapter-static)
+[![SEO by Capyseo](https://img.shields.io/badge/SEO-Capyseo-FF6B35?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+)](https://github.com/Capyseo)
 
 Privacy-focused personal portfolio website showcasing open-source projects. Built with SvelteKit 5 and Tailwind CSS v4.
 
@@ -47,6 +48,7 @@ Privacy-focused personal portfolio website showcasing open-source projects. Buil
 | Icons | [Hugeicons](https://hugeicons.com) (Svelte) |
 | Fonts | [Inter](https://rsms.me/inter/) + [Kode Mono](https://fonts.google.com/specimen/Kode+Mono) via @fontsource |
 | Markdown | [Marked](https://marked.js.org) |
+| SEO | [Capyseo](https://github.com/Capyseo) (build-time + dev-time analysis) |
 | Deployment | Static adapter (any static host) |
 
 ## GitHub README Auto-Fetch
@@ -169,6 +171,29 @@ bun build
 # Preview production build
 bun preview
 ```
+
+## SEO Analysis
+
+This site uses [Capyseo](https://github.com/Capyseo) for SEO quality assurance:
+
+- **During development**: SEO issues appear in terminal as you browse (`bun dev`)
+- **After build**: Run `bun seo` to analyze all pages
+
+### Available Commands
+
+```bash
+bun seo      # Analyze build for SEO issues
+bun seo:ai   # Analyze with AI-powered suggestions (requires GEMINI_API_KEY)
+```
+
+### Enable AI Suggestions
+
+```bash
+export GEMINI_API_KEY=your-key-here
+bun seo:ai
+```
+
+AI will suggest meta descriptions and alt text for pages with issues.
 
 ## Build Output
 

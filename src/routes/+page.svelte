@@ -9,7 +9,7 @@
 
 <svelte:head>
 	<title>hffmnn - Developer & Privacy Advocate</title>
-	<meta name="description" content="Personal portfolio showcasing privacy-focused tools and projects. Building elegant, privacy-respecting software." />
+	<meta name="description" content="Personal portfolio showcasing privacy-focused tools and projects. Building elegant, privacy-respecting software for developers who value security and simplicity." />
 
 	<!-- Open Graph -->
 	<meta property="og:title" content="hffmnn - Developer & Privacy Advocate" />

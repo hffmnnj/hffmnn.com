@@ -32,7 +32,7 @@ export const projects: Project[] = [
 	},
 	{
 		slug: 'vibearchy',
-		title: 'Vibearchy',
+		title: 'Vibearchy Desktop Environment',
 		description:
 			'A privacy-first Arch Linux + Hyprland desktop environment with seamless AI integration. Built for developers who want a beautiful, functional workspace without compromising on privacy.',
 		shortDescription:
@@ -55,7 +55,7 @@ export const projects: Project[] = [
 export const capyseoProjects: Project[] = [
 	{
 		slug: 'capyseo-core',
-		title: '@capyseo/core',
+		title: '@capyseo/core - SEO Analysis Engine',
 		description:
 			'Framework-agnostic SEO analysis engine with 50+ rules and multi-provider AI integration. Build custom SEO tools or integrate into your CI/CD pipeline.',
 		shortDescription: 'Core SEO analysis engine with 50+ rules and AI suggestions.',
@@ -72,7 +72,7 @@ export const capyseoProjects: Project[] = [
 	},
 	{
 		slug: 'capyseo-cli',
-		title: '@capyseo/cli',
+		title: '@capyseo/cli - SEO Command Line Tool',
 		description:
 			'Powerful command-line SEO analyzer for any website or static site. Get AI-powered suggestions for meta descriptions, alt text, and content improvements.',
 		shortDescription: 'CLI tool for SEO analysis of any website with AI suggestions.',
@@ -89,9 +89,9 @@ export const capyseoProjects: Project[] = [
 	},
 	{
 		slug: 'capyseo-sveltekit',
-		title: '@capyseo/sveltekit',
+		title: '@capyseo/sveltekit - SvelteKit SEO Plugin',
 		description:
-			'Deep SvelteKit integration with Vite plugin and real-time dev-time SEO feedback. Get instant SEO analysis as you develop.',
+			'Deep SvelteKit integration with Vite plugin and real-time dev-time SEO feedback. Get instant SEO analysis as you develop with AI-powered suggestions.',
 		shortDescription: 'SvelteKit Vite plugin for dev-time SEO analysis.',
 		tags: ['SvelteKit', 'Vite', 'SEO', 'TypeScript'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-sveltekit',

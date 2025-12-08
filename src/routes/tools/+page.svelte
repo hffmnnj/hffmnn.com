@@ -22,8 +22,8 @@
 </script>
 
 <svelte:head>
-	<title>Tools - hffmnn</title>
-	<meta name="description" content="Privacy-focused tools and projects by hffmnn. Explore Vibearchy desktop environment and Me and My Friends AI advisor." />
+	<title>Tools & Open Source Projects - hffmnn</title>
+	<meta name="description" content="Privacy-focused tools and open source projects by hffmnn. Explore Vibearchy desktop environment, Me and My Friends AI advisor, and Capyseo SEO toolkit." />
 
 	<!-- Open Graph -->
 	<meta property="og:title" content="Tools & Projects | hffmnn" />
