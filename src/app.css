@@ -51,6 +51,9 @@
 
 	/* Pulsyn accent */
 	--pulsyn: oklch(75% 0.18 160);
+
+	/* Capyseo accent - warm capybara brown */
+	--capybara: oklch(55% 0.11 42);
 }
 
 /* Tailwind v4 theme mapping */
@@ -84,6 +87,7 @@
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 	--color-pulsyn: var(--pulsyn);
+	--color-capybara: var(--capybara);
 }
 
 @layer base {
