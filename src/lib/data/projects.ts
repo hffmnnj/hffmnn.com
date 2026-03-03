@@ -8,6 +8,7 @@ export interface Project {
 	githubOwner: string;
 	githubRepo: string;
 	features: string[];
+	websiteUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -48,6 +49,66 @@ export const projects: Project[] = [
 			'119 handpicked wallpapers with smooth transitions',
 			'Custom Rofi menu ecosystem',
 			'Zen Browser integration with privacy extensions'
+		]
+	},
+	{
+		slug: 'enclave-mail',
+		title: 'Enclave Mail',
+		description:
+			'A self-hosted, end-to-end encrypted email server with a zero-knowledge design — your keys stay in your browser and the server never sees plaintext.',
+		shortDescription:
+			'Self-hosted E2E encrypted email server with zero-knowledge design — keys stay in your browser, server never sees plaintext.',
+		tags: ['TypeScript', 'Privacy', 'Self-hosted', 'Encryption', 'Email'],
+		githubUrl: 'https://github.com/hffmnnj/enclave-mail',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'enclave-mail',
+		features: [
+			'Zero-knowledge design — server never sees plaintext',
+			'Argon2id key derivation with X25519/Ed25519 encryption',
+			'SRP authentication — password never leaves your device',
+			'Haraka SMTP + IMAP server for full email compatibility',
+			'Astro-powered webmail client included',
+			'One-command deployment with Docker Compose'
+		]
+	},
+	{
+		slug: 'opencode-goopspec',
+		title: 'GoopSpec — OpenCode Plugin',
+		description:
+			'A spec-driven development plugin for OpenCode that enforces a structured 5-phase workflow and coordinates 15 specialized AI agents to build software with precision.',
+		shortDescription:
+			'Spec-driven development plugin for OpenCode with a structured 5-phase workflow and 15 specialized AI agents.',
+		tags: ['TypeScript', 'OpenCode', 'AI', 'Developer Tools', 'Plugin'],
+		githubUrl: 'https://github.com/hffmnnj/opencode-goopspec',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'opencode-goopspec',
+		features: [
+			'5-phase spec-driven workflow (Discuss → Plan → Execute → Audit → Confirm)',
+			'15 specialized AI agents for every phase of development',
+			'Locked specifications as an immutable development contract',
+			'Wave-based execution with dependency management',
+			'Persistent memory across sessions',
+			'Mandatory acceptance gate before any feature ships'
+		]
+	},
+	{
+		slug: 'nano-banana-cli',
+		title: 'Nano Banana CLI',
+		description:
+			'A terminal image generator powered by Gemini AI that requires no API key — just your Google account. Generate images in parallel from the command line.',
+		shortDescription:
+			'Terminal image generator using Gemini AI — no API key required, just your Google account.',
+		tags: ['CLI', 'TypeScript', 'Bun', 'Gemini', 'AI'],
+		githubUrl: 'https://github.com/hffmnnj/nano-banana-cli',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'nano-banana-cli',
+		features: [
+			'No API key required — authenticates via your Google account',
+			'Parallel image generation for multiple prompts at once',
+			'Custom output paths and filename control',
+			'Session persistence — no repeated logins',
+			'Headed mode for debugging browser automation',
+			'Zero-config via npx or bunx'
 		]
 	}
 ];
@@ -107,10 +168,58 @@ export const capyseoProjects: Project[] = [
 	}
 ];
 
+export const reinsProjects: Project[] = [
+	{
+		slug: 'reins-core',
+		title: 'Reins — AI Assistant',
+		description:
+			'An open-source, privacy-first AI assistant that runs on your device. Connects to 30+ apps, works offline, and deploys across desktop, mobile, and browser without sending your data to the cloud.',
+		shortDescription:
+			'Open-source AI assistant that runs on your device — offline-capable, privacy-first, and integrates with 30+ apps.',
+		tags: ['AI', 'Privacy', 'TypeScript', 'Open Source', 'Multi-platform'],
+		githubUrl: 'https://github.com/reins-ai/reins-core',
+		githubOwner: 'reins-ai',
+		githubRepo: 'reins-core',
+		websiteUrl: 'https://reinsbot.com',
+		features: [
+			'Open source under MIT — full transparency, no lock-in',
+			'On-device AI processing — your data never leaves your machine',
+			'30+ app integrations across productivity, communication, and dev tools',
+			'Offline support — works without an internet connection',
+			'Runs on Desktop, Mobile, and Browser from a single codebase',
+			'Three deployment modes: local, self-hosted, and cloud'
+		]
+	},
+	{
+		slug: 'reins-mobile',
+		title: 'Reins Mobile',
+		description:
+			'The native iOS and Android companion to Reins. Brings on-device AI to your pocket with push notifications, voice input, and seamless sync with your desktop.',
+		shortDescription:
+			'Native iOS and Android app for the Reins AI assistant — on-device AI in your pocket.',
+		tags: ['Mobile', 'iOS', 'Android', 'AI', 'React Native'],
+		githubUrl: 'https://github.com/reins-ai/reins-mobile',
+		githubOwner: 'reins-ai',
+		githubRepo: 'reins-mobile',
+		websiteUrl: 'https://reinsbot.com',
+		features: [
+			'Native iOS and Android built with React Native',
+			'Push notifications for AI responses and workflow completions',
+			'Voice input for hands-free AI interaction',
+			'Seamless sync with your Reins desktop instance',
+			'On-device processing for sensitive queries'
+		]
+	}
+];
+
 export function getProjectBySlug(slug: string): Project | undefined {
 	return projects.find((p) => p.slug === slug);
 }
 
 export function getCapyseoProjectBySlug(slug: string): Project | undefined {
 	return capyseoProjects.find((p) => p.slug === slug);
+}
+
+export function getReinsProjectBySlug(slug: string): Project | undefined {
+	return reinsProjects.find((p) => p.slug === slug);
 }
