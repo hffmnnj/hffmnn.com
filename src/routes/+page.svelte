@@ -24,6 +24,6 @@
 <div>
 	<Hero />
 	<About />
-	<FeaturedProjects commits={data.commits} />
+	<FeaturedProjects />
 	<PulsynSection />
 </div>
