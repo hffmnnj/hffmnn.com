@@ -8,26 +8,48 @@ export interface Project {
 	githubOwner: string;
 	githubRepo: string;
 	features: string[];
+	websiteUrl?: string;
 }
 
 export const projects: Project[] = [
 	{
-		slug: 'me-and-my-friends',
-		title: 'Me and My Friends (MAMF)',
+		slug: 'enclave-mail',
+		title: 'Enclave Mail',
 		description:
-			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
-		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
-		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
-		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
+			'A self-hosted, end-to-end encrypted email server with a zero-knowledge design — your keys stay in your browser and the server never sees plaintext.',
+		shortDescription:
+			'Self-hosted E2E encrypted email server with zero-knowledge design — keys stay in your browser, server never sees plaintext.',
+		tags: ['TypeScript', 'Privacy', 'Self-hosted', 'Encryption', 'Email'],
+		githubUrl: 'https://github.com/hffmnnj/enclave-mail',
 		githubOwner: 'hffmnnj',
-		githubRepo: 'me-and-my-friends',
+		githubRepo: 'enclave-mail',
 		features: [
-			'Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)',
-			'RAG/knowledge base integration with Qdrant',
-			'Beautiful terminal UI with Ratatui',
-			'Council-style multi-advisor discussions',
-			'Living Council mode with consensus detection',
-			'Session history and export to Markdown'
+			'Zero-knowledge design — server never sees plaintext',
+			'Argon2id key derivation with X25519/Ed25519 encryption',
+			'SRP authentication — password never leaves your device',
+			'Haraka SMTP + IMAP server for full email compatibility',
+			'Astro-powered webmail client included',
+			'One-command deployment with Docker Compose'
+		]
+	},
+	{
+		slug: 'opencode-goopspec',
+		title: 'GoopSpec — OpenCode Plugin',
+		description:
+			'A spec-driven development plugin for OpenCode that enforces a structured 5-phase workflow and coordinates 15 specialized AI agents to build software with precision.',
+		shortDescription:
+			'Spec-driven development plugin for OpenCode with a structured 5-phase workflow and 15 specialized AI agents.',
+		tags: ['TypeScript', 'OpenCode', 'AI', 'Developer Tools', 'Plugin'],
+		githubUrl: 'https://github.com/hffmnnj/opencode-goopspec',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'opencode-goopspec',
+		features: [
+			'5-phase spec-driven workflow (Discuss → Plan → Execute → Audit → Confirm)',
+			'15 specialized AI agents for every phase of development',
+			'Locked specifications as an immutable development contract',
+			'Wave-based execution with dependency management',
+			'Persistent memory across sessions',
+			'Mandatory acceptance gate before any feature ships'
 		]
 	},
 	{
@@ -48,6 +70,45 @@ export const projects: Project[] = [
 			'119 handpicked wallpapers with smooth transitions',
 			'Custom Rofi menu ecosystem',
 			'Zen Browser integration with privacy extensions'
+		]
+	},
+	{
+		slug: 'me-and-my-friends',
+		title: 'Me and My Friends (MAMF)',
+		description:
+			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
+		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
+		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
+		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'me-and-my-friends',
+		features: [
+			'Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)',
+			'RAG/knowledge base integration with Qdrant',
+			'Beautiful terminal UI with Ratatui',
+			'Council-style multi-advisor discussions',
+			'Living Council mode with consensus detection',
+			'Session history and export to Markdown'
+		]
+	},
+	{
+		slug: 'nano-banana-cli',
+		title: 'Nano Banana CLI',
+		description:
+			'A terminal image generator powered by Gemini AI that requires no API key — just your Google account. Generate images in parallel from the command line.',
+		shortDescription:
+			'Terminal image generator using Gemini AI — no API key required, just your Google account.',
+		tags: ['CLI', 'TypeScript', 'Bun', 'Gemini', 'AI'],
+		githubUrl: 'https://github.com/hffmnnj/nano-banana-cli',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'nano-banana-cli',
+		features: [
+			'No API key required — authenticates via your Google account',
+			'Parallel image generation for multiple prompts at once',
+			'Custom output paths and filename control',
+			'Session persistence — no repeated logins',
+			'Headed mode for debugging browser automation',
+			'Zero-config via npx or bunx'
 		]
 	}
 ];
@@ -107,10 +168,59 @@ export const capyseoProjects: Project[] = [
 	}
 ];
 
+export const reinsProjects: Project[] = [
+	{
+		slug: 'reins-tui',
+		title: 'Reins TUI',
+		description:
+			'A keyboard-driven terminal interface for the Reins AI assistant. Run privacy-first AI workflows directly from your shell — no browser, no GUI, no cloud required.',
+		shortDescription:
+			'Keyboard-driven terminal UI for the Reins AI assistant — privacy-first AI in your shell.',
+		tags: ['TUI', 'Terminal', 'AI', 'Privacy', 'Rust'],
+		githubUrl: 'https://github.com/reins-ai/reins-tui',
+		githubOwner: 'reins-ai',
+		githubRepo: 'reins-tui',
+		websiteUrl: 'https://reinsbot.com',
+		features: [
+			'Full keyboard navigation — mouse-free, distraction-free',
+			'On-device AI processing — no cloud calls, no data leakage',
+			'Integrates with the Reins Core runtime for 30+ app connections',
+			'Session history with searchable conversation log',
+			'Scriptable via stdin/stdout for shell pipeline integration',
+			'Lightweight — runs on any machine with a terminal'
+		]
+	},
+	{
+		slug: 'reins-core',
+		title: 'Reins Core',
+		description:
+			'An open-source, privacy-first AI assistant that runs on your device. Connects to 30+ apps, works offline, and deploys across desktop, mobile, and browser without sending your data to the cloud.',
+		shortDescription:
+			'Open-source AI assistant that runs on your device — offline-capable, privacy-first, and integrates with 30+ apps.',
+		tags: ['AI', 'Privacy', 'TypeScript', 'Open Source', 'Multi-platform'],
+		githubUrl: 'https://github.com/reins-ai/reins-core',
+		githubOwner: 'reins-ai',
+		githubRepo: 'reins-core',
+		websiteUrl: 'https://reinsbot.com',
+		features: [
+			'Open source under MIT — full transparency, no lock-in',
+			'On-device AI processing — your data never leaves your machine',
+			'30+ app integrations across productivity, communication, and dev tools',
+			'Offline support — works without an internet connection',
+			'Runs on Desktop, Mobile, and Browser from a single codebase',
+			'Three deployment modes: local, self-hosted, and cloud'
+		]
+	}
+];
+
 export function getProjectBySlug(slug: string): Project | undefined {
 	return projects.find((p) => p.slug === slug);
 }
 
 export function getCapyseoProjectBySlug(slug: string): Project | undefined {
 	return capyseoProjects.find((p) => p.slug === slug);
+}
+
+export function getReinsProjectBySlug(slug: string): Project | undefined {
+	return reinsProjects.find((p) => p.slug === slug);
 }

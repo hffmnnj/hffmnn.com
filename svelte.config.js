@@ -23,6 +23,11 @@ const config = {
 				if (path === '/favicon.ico') {
 					return;
 				}
+				// Ignore GitHub-internal asset paths surfaced from rendered README content
+				// (e.g. .github/assets/banner.png linked relative to /tools/[slug])
+				if (path.includes('/.github/')) {
+					return;
+				}
 				throw new Error(message);
 			},
 			handleMissingId: 'ignore' // README content may have internal anchor links
