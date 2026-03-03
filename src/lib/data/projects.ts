@@ -13,45 +13,6 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		slug: 'me-and-my-friends',
-		title: 'Me and My Friends (MAMF)',
-		description:
-			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
-		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
-		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
-		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
-		githubOwner: 'hffmnnj',
-		githubRepo: 'me-and-my-friends',
-		features: [
-			'Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)',
-			'RAG/knowledge base integration with Qdrant',
-			'Beautiful terminal UI with Ratatui',
-			'Council-style multi-advisor discussions',
-			'Living Council mode with consensus detection',
-			'Session history and export to Markdown'
-		]
-	},
-	{
-		slug: 'vibearchy',
-		title: 'Vibearchy Desktop Environment',
-		description:
-			'A privacy-first Arch Linux + Hyprland desktop environment with seamless AI integration. Built for developers who want a beautiful, functional workspace without compromising on privacy.',
-		shortDescription:
-			'Privacy-first Arch + Hyprland desktop environment with AI integration and beautiful aesthetics.',
-		tags: ['Arch Linux', 'Hyprland', 'AI', 'Privacy', 'Dotfiles'],
-		githubUrl: 'https://github.com/hffmnnj/Vibearchy',
-		githubOwner: 'hffmnnj',
-		githubRepo: 'Vibearchy',
-		features: [
-			'20+ carefully curated dotfile packages',
-			'AI menu system with privacy-first design',
-			'3 beautiful color themes (Celestial, Midnight, Dawn)',
-			'119 handpicked wallpapers with smooth transitions',
-			'Custom Rofi menu ecosystem',
-			'Zen Browser integration with privacy extensions'
-		]
-	},
-	{
 		slug: 'enclave-mail',
 		title: 'Enclave Mail',
 		description:
@@ -89,6 +50,45 @@ export const projects: Project[] = [
 			'Wave-based execution with dependency management',
 			'Persistent memory across sessions',
 			'Mandatory acceptance gate before any feature ships'
+		]
+	},
+	{
+		slug: 'vibearchy',
+		title: 'Vibearchy Desktop Environment',
+		description:
+			'A privacy-first Arch Linux + Hyprland desktop environment with seamless AI integration. Built for developers who want a beautiful, functional workspace without compromising on privacy.',
+		shortDescription:
+			'Privacy-first Arch + Hyprland desktop environment with AI integration and beautiful aesthetics.',
+		tags: ['Arch Linux', 'Hyprland', 'AI', 'Privacy', 'Dotfiles'],
+		githubUrl: 'https://github.com/hffmnnj/Vibearchy',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'Vibearchy',
+		features: [
+			'20+ carefully curated dotfile packages',
+			'AI menu system with privacy-first design',
+			'3 beautiful color themes (Celestial, Midnight, Dawn)',
+			'119 handpicked wallpapers with smooth transitions',
+			'Custom Rofi menu ecosystem',
+			'Zen Browser integration with privacy extensions'
+		]
+	},
+	{
+		slug: 'me-and-my-friends',
+		title: 'Me and My Friends (MAMF)',
+		description:
+			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
+		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
+		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
+		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
+		githubOwner: 'hffmnnj',
+		githubRepo: 'me-and-my-friends',
+		features: [
+			'Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)',
+			'RAG/knowledge base integration with Qdrant',
+			'Beautiful terminal UI with Ratatui',
+			'Council-style multi-advisor discussions',
+			'Living Council mode with consensus detection',
+			'Session history and export to Markdown'
 		]
 	},
 	{
@@ -170,8 +170,29 @@ export const capyseoProjects: Project[] = [
 
 export const reinsProjects: Project[] = [
 	{
+		slug: 'reins-tui',
+		title: 'Reins TUI',
+		description:
+			'A keyboard-driven terminal interface for the Reins AI assistant. Run privacy-first AI workflows directly from your shell — no browser, no GUI, no cloud required.',
+		shortDescription:
+			'Keyboard-driven terminal UI for the Reins AI assistant — privacy-first AI in your shell.',
+		tags: ['TUI', 'Terminal', 'AI', 'Privacy', 'Rust'],
+		githubUrl: 'https://github.com/reins-ai/reins-tui',
+		githubOwner: 'reins-ai',
+		githubRepo: 'reins-tui',
+		websiteUrl: 'https://reinsbot.com',
+		features: [
+			'Full keyboard navigation — mouse-free, distraction-free',
+			'On-device AI processing — no cloud calls, no data leakage',
+			'Integrates with the Reins Core runtime for 30+ app connections',
+			'Session history with searchable conversation log',
+			'Scriptable via stdin/stdout for shell pipeline integration',
+			'Lightweight — runs on any machine with a terminal'
+		]
+	},
+	{
 		slug: 'reins-core',
-		title: 'Reins — AI Assistant',
+		title: 'Reins Core',
 		description:
 			'An open-source, privacy-first AI assistant that runs on your device. Connects to 30+ apps, works offline, and deploys across desktop, mobile, and browser without sending your data to the cloud.',
 		shortDescription:
@@ -188,26 +209,6 @@ export const reinsProjects: Project[] = [
 			'Offline support — works without an internet connection',
 			'Runs on Desktop, Mobile, and Browser from a single codebase',
 			'Three deployment modes: local, self-hosted, and cloud'
-		]
-	},
-	{
-		slug: 'reins-mobile',
-		title: 'Reins Mobile',
-		description:
-			'The native iOS and Android companion to Reins. Brings on-device AI to your pocket with push notifications, voice input, and seamless sync with your desktop.',
-		shortDescription:
-			'Native iOS and Android app for the Reins AI assistant — on-device AI in your pocket.',
-		tags: ['Mobile', 'iOS', 'Android', 'AI', 'React Native'],
-		githubUrl: 'https://github.com/reins-ai/reins-mobile',
-		githubOwner: 'reins-ai',
-		githubRepo: 'reins-mobile',
-		websiteUrl: 'https://reinsbot.com',
-		features: [
-			'Native iOS and Android built with React Native',
-			'Push notifications for AI responses and workflow completions',
-			'Voice input for hands-free AI interaction',
-			'Seamless sync with your Reins desktop instance',
-			'On-device processing for sensitive queries'
 		]
 	}
 ];

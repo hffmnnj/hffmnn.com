@@ -37,7 +37,7 @@
 
 		<div class="grid md:grid-cols-2 gap-6 items-stretch">
 			{#each projects as project, i}
-				<a href="/tools/{project.slug}" class="flex flex-col glass-card p-8 group hover:border-white/15 transition-all duration-500 animate-fade-up relative h-full {i === 0 ? 'delay-100' : 'delay-200'}">
+				<a href="/tools/{project.slug}" class="flex flex-col glass-card p-8 group hover:border-white/15 transition-all duration-500 animate-fade-up relative h-full {i === 0 ? 'md:col-span-2 delay-100' : i === 1 ? 'delay-200' : i === 2 ? 'delay-300' : i === 3 ? 'delay-400' : 'delay-500'}">
 					<article class="flex-1">
 						<div class="flex items-start justify-between mb-4">
 							<h3 class="font-display text-2xl font-semibold">
