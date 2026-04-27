@@ -30,8 +30,9 @@
 	"dependencies": {
 		"@capyseo/core": "^0.1.2",
 		"@capyseo/sveltekit": "^0.1.2",
-		"@fontsource-variable/inter": "^5.2.8",
-		"@fontsource-variable/kode-mono": "^5.2.8",
+		"@fontsource-variable/fraunces": "^5.2.9",
+		"@fontsource-variable/geist-mono": "^5.2.7",
+		"@fontsource-variable/newsreader": "^5.2.10",
 		"@google/generative-ai": "^0.24.1",
 		"@hugeicons/core-free-icons": "^2.0.0",
 		"@hugeicons/svelte": "^1.0.2",

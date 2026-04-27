@@ -3,8 +3,8 @@
 	import About from "$lib/components/home/About.svelte";
 	import FeaturedProjects from "$lib/components/home/FeaturedProjects.svelte";
 	import PulsynSection from "$lib/components/home/PulsynSection.svelte";
-
-	let { data } = $props();
+	import { RunningHeader } from "$lib/components/editorial";
+	// Note: data prop intentionally not destructured — no page-level data needed
 </script>
 
 <svelte:head>
@@ -21,9 +21,8 @@
 	<meta name="twitter:description" content="Personal portfolio showcasing privacy-focused tools and projects." />
 </svelte:head>
 
-<div>
-	<Hero />
-	<About />
-	<FeaturedProjects />
-	<PulsynSection />
-</div>
+<RunningHeader />
+<Hero />
+<About />
+<FeaturedProjects />
+<PulsynSection />

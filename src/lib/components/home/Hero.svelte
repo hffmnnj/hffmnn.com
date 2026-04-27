@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { ArrowRight01Icon, GithubIcon } from "@hugeicons/core-free-icons";
+	import { Kicker, DropCap } from "$lib/components/editorial";
+	import { onMount } from "svelte";
 
 	const birthYear = 2004;
 	const birthMonth = 3; // April (0-indexed)
@@ -16,37 +15,105 @@
 	}
 
 	const age = getAge();
+
+	const tickerTerms = [
+		"SvelteKit",
+		"Rust",
+		"Privacy-First",
+		"TypeScript",
+		"Open Source",
+		"Linux",
+		"Hyprland",
+		"AI Tooling",
+		"SEO",
+		"System Admin",
+		"Smart Ring",
+		"Pulsyn",
+	];
+
+	onMount(() => {
+		const els = document.querySelectorAll(".reveal-clip");
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (e.isIntersecting) {
+						e.target.classList.add("is-visible");
+						io.unobserve(e.target);
+					}
+				}
+			},
+			{ threshold: 0.1 },
+		);
+		els.forEach((el) => io.observe(el));
+		return () => io.disconnect();
+	});
 </script>
 
-<section class="min-h-[70vh] flex items-center justify-center px-6 pt-16">
-	<div class="max-w-4xl text-center">
-		<p class="text-muted-foreground mb-4 animate-fade-up">
-			Hi, I'm <span class="text-white font-medium">James Hoffmann</span> · {age} y/o developer, sysadmin & privacy advocate
-		</p>
-		<h1 class="font-display text-5xl md:text-7xl font-bold mb-6 animate-fade-up delay-100">
-			<span class="text-gradient">Building tools</span>
-			<br />
-			<span class="text-muted-foreground">for privacy & productivity</span>
-		</h1>
+<section
+	id="hero-section"
+	class="section-counter pt-16 md:pt-28 pb-16 md:pb-24 px-6"
+	data-n="01"
+>
+	<div class="max-w-6xl mx-auto">
+		<Kicker label="FEATURE  ·  PORTFOLIO  ·  ISSUE 04" showRule={true} />
 
-		<p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up delay-200">
-			Creating elegant, privacy-respecting software.
-			From desktop environments to AI-powered tools.
-		</p>
+		<div class="animate-fade-up">
+			<p class="editorial-byline text-sm mb-5">
+				By <span class="text-ink not-italic font-medium">James Hoffmann</span>
+				&nbsp;·&nbsp; {age} y/o developer, sysadmin &amp; privacy advocate
+			</p>
 
-		<div class="flex items-center justify-center gap-4 flex-wrap animate-fade-up delay-400">
-			<Button href="/tools" class="glass-button px-6 py-3 rounded-xl h-auto">
-				View Projects
-				<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
-			</Button>
-			<Button
-				href="https://github.com/hffmnnj"
-				variant="ghost"
-				class="text-muted-foreground hover:text-white h-auto px-6 py-3"
+			<h1
+				class="font-display fraunces-hover text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
+				style="text-wrap: balance;"
 			>
-				<span class="mr-2"><HugeiconsIcon icon={GithubIcon} size={16} /></span>
+				Building tools for privacy &amp; productivity.
+			</h1>
+		</div>
+
+		<div class="md:columns-2 gap-12 max-w-5xl animate-fade-up delay-100">
+			<DropCap>
+				<p
+					class="font-body text-lg md:text-xl leading-[1.65] text-ink-soft mb-4"
+					style="text-wrap: pretty;"
+				>
+					Creating elegant, privacy-respecting software. From desktop environments to AI-powered tools, every project is built with attention to detail and a commitment to user sovereignty.
+				</p>
+			</DropCap>
+
+			<p
+				class="font-body text-base md:text-lg leading-[1.65] text-ink-soft"
+				style="text-wrap: pretty;"
+			>
+				Currently building Pulsyn, a premium smart ring that makes health tracking accessible at half the cost. Previously, open-source tools for SEO analysis, multi-LLM council discussions, and a privacy-first Linux desktop environment.
+			</p>
+		</div>
+
+		<div
+			class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium animate-fade-up delay-200"
+		>
+			<a href="/tools" class="editorial-link inline-flex items-center gap-2">
+				View Projects <span aria-hidden="true">&rarr;</span>
+			</a>
+			<a
+				href="https://github.com/hffmnnj"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="editorial-link inline-flex items-center gap-2 text-ink-soft hover:text-ink"
+			>
 				GitHub
-			</Button>
+			</a>
+		</div>
+	</div>
+
+	<!-- Ticker below hero -->
+	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip">
+		<div class="ticker-track" aria-hidden="true">
+			{#each [0, 1] as loop (loop)}
+				{#each tickerTerms as term (`${loop}-${term}`)}
+					<span class="ticker-item">{term}</span>
+				{/each}
+			{/each}
 		</div>
 	</div>
 </section>

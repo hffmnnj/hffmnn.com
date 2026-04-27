@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Badge } from "$lib/components/ui/badge";
-	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import { GithubIcon, ArrowRight01Icon, Tick01Icon } from "@hugeicons/core-free-icons";
+	import { Byline } from "$lib/components/editorial";
+	import { cn } from "$lib/utils/cn";
 
 	interface Props {
 		slug: string;
@@ -13,54 +13,59 @@
 		class?: string;
 	}
 
-	let { slug, title, description, tags, githubUrl, features, class: className }: Props = $props();
-
-	function handleGithubClick(e: MouseEvent) {
-		e.preventDefault();
-		e.stopPropagation();
-		window.open(githubUrl, '_blank', 'noopener,noreferrer');
-	}
+	let {
+		slug,
+		title,
+		description,
+		tags,
+		features,
+		class: className = "",
+	}: Props = $props();
 </script>
 
-<a href="/tools/{slug}" class="flex flex-col glass-card p-8 group hover:border-white/15 transition-all duration-500 relative h-full {className}">
-	<article class="flex-1">
-		<div class="flex items-start justify-between mb-6">
-			<h3 class="font-display text-2xl font-semibold">
-				{title}
-			</h3>
-			<button
-				onclick={handleGithubClick}
-				class="p-2 rounded-lg glass-button opacity-60 hover:opacity-100 hover:scale-110 transition-all"
-				aria-label="View on GitHub"
-			>
-				<HugeiconsIcon icon={GithubIcon} size={20} />
-			</button>
-		</div>
+<a
+	href="/tools/{slug}"
+	class={cn(
+		"group block py-8 px-2 -mx-2 transition-colors hover:bg-paper-elevated/50",
+		className,
+	)}
+>
+	<article>
+		<h3
+			class="font-display text-xl md:text-2xl font-semibold text-ink group-hover:text-accent transition-colors mb-2"
+		>
+			{title}
+		</h3>
 
-		<p class="text-muted-foreground mb-6 leading-relaxed">
+		<Byline class="text-xs mb-4" />
+
+		<p class="font-body text-base text-ink-soft leading-[1.6] mb-4">
 			{description}
 		</p>
 
-		<div class="flex flex-wrap gap-2 mb-6">
-			{#each tags as tag}
-				<Badge variant="secondary" class="bg-white/5 border-white/10 text-white/70">
-					{tag}
-				</Badge>
+		<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4">
+			{#each tags as tag (tag)}
+				<Badge variant="kicker">{tag}</Badge>
 			{/each}
 		</div>
 
-		<ul class="space-y-2">
-			{#each features as feature}
-				<li class="text-sm text-muted-foreground flex items-start gap-2">
-					<span class="flex-shrink-0 mt-0.5"><HugeiconsIcon icon={Tick01Icon} size={16} color="rgba(255,255,255,0.4)" /></span>
-					{feature}
-				</li>
-			{/each}
-		</ul>
-	</article>
+		{#if features.length > 0}
+			<ul class="space-y-1.5 mb-5">
+				{#each features as feature (feature)}
+					<li
+						class="font-body text-sm text-ink-soft leading-[1.5] flex gap-2"
+					>
+						<span class="text-ink-faint shrink-0" aria-hidden="true">·</span>
+						<span>{feature}</span>
+					</li>
+				{/each}
+			</ul>
+		{/if}
 
-	<!-- Arrow indicator -->
-	<div class="absolute bottom-8 right-8 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-		<HugeiconsIcon icon={ArrowRight01Icon} size={24} />
-	</div>
+		<span
+			class="editorial-link text-sm inline-flex items-center gap-2 text-ink-soft group-hover:text-accent"
+		>
+			Read more <span aria-hidden="true">&rarr;</span>
+		</span>
+	</article>
 </a>

@@ -33,21 +33,21 @@
 	}: Props = $props();
 
 	const baseStyles =
-		"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
+		"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
 
 	const variantStyles: Record<Variant, string> = {
-		default: "bg-primary text-primary-foreground hover:bg-primary/90",
-		destructive: "bg-destructive text-white hover:bg-destructive/90",
-		outline: "border border-white/20 bg-transparent hover:bg-white/10 hover:border-white/30",
-		secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-		ghost: "border border-white/15 bg-transparent hover:bg-white/10 hover:border-white/25",
-		link: "text-primary underline-offset-4 hover:underline",
+		default: "bg-ink text-paper hover:bg-ink/90 rounded-sm",
+		destructive: "bg-destructive text-paper hover:bg-destructive/90 rounded-sm",
+		outline: "border border-ink bg-transparent text-ink hover:bg-paper-elevated rounded-sm",
+		secondary: "bg-paper-elevated text-ink hover:bg-rule rounded-sm",
+		ghost: "text-ink hover:text-accent rounded-none editorial-link",
+		link: "text-ink-soft hover:text-ink underline-offset-4 hover:underline",
 	};
 
 	const sizeStyles: Record<Size, string> = {
 		default: "h-10 px-4 py-2",
-		sm: "h-9 rounded-md px-3",
-		lg: "h-11 rounded-md px-8",
+		sm: "h-9 px-3",
+		lg: "h-11 px-6",
 		icon: "h-10 w-10",
 	};
 
