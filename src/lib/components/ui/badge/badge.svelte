@@ -21,7 +21,7 @@
 	let { variant = "default", class: className, children, ...restProps }: Props = $props();
 
 	const baseStyles =
-		"inline-flex items-center text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2";
+		"inline-flex items-center text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
 	const variantStyles: Record<Variant, string> = {
 		default: "bg-ink text-paper px-2.5 py-0.5 rounded-sm border-transparent",
