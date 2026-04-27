@@ -134,6 +134,10 @@
 </article>
 
 <style>
+	:global(.readme-content) {
+		overflow-wrap: anywhere;
+	}
+
 	:global(.readme-content h1:first-child) {
 		display: none;
 	}
@@ -222,7 +226,9 @@
 		color: var(--ink);
 	}
 	:global(.readme-content table) {
+		display: block;
 		width: 100%;
+		overflow-x: auto;
 		border-collapse: collapse;
 		margin-bottom: 1.25rem;
 		font-size: 0.9375rem;
