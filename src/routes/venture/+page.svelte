@@ -1,48 +1,29 @@
 <script lang="ts">
+	import { Kicker, IssueTag, Byline } from "$lib/components/editorial";
 	import { Badge } from "$lib/components/ui/badge";
-	import { Button } from "$lib/components/ui/button";
-	import { HugeiconsIcon } from "@hugeicons/svelte";
-	import {
-		ArrowRight01Icon,
-		Award01Icon,
-		LockIcon,
-		FlashIcon,
-		WaterEnergyIcon,
-		Analytics01Icon,
-		HeartCheckIcon,
-		DollarCircleIcon,
-		Shield01Icon,
-		Tick01Icon
-	} from "@hugeicons/core-free-icons";
 
 	const features = [
 		{
-			icon: Award01Icon,
 			title: "Premium Quality",
 			description: "Titanium construction with medical-grade materials for all-day comfort"
 		},
 		{
-			icon: FlashIcon,
 			title: "Up to 60-Day Battery",
 			description: "Up to 60-day battery with charging case (7 days per charge)"
 		},
 		{
-			icon: WaterEnergyIcon,
 			title: "5ATM Waterproofing",
 			description: "Swim, shower, and sweat worry-free with full water resistance"
 		},
 		{
-			icon: LockIcon,
 			title: "Encrypted & Private",
 			description: "Your health data stays secure with end-to-end encryption"
 		},
 		{
-			icon: Analytics01Icon,
 			title: "Clinical-Grade Sensors",
 			description: "Advanced optical sensors deliver medical-grade accuracy"
 		},
 		{
-			icon: HeartCheckIcon,
 			title: "1-Year Warranty",
 			description: "Free 1-year warranty on all pre-orders, backed by our guarantee"
 		}
@@ -50,7 +31,6 @@
 
 	const valueProps = [
 		{
-			icon: DollarCircleIcon,
 			title: "Fair Pricing",
 			callout: "Early Bird: $149",
 			points: [
@@ -60,7 +40,6 @@
 			]
 		},
 		{
-			icon: LockIcon,
 			title: "Privacy First",
 			callout: "Finland-Hosted",
 			points: [
@@ -70,7 +49,6 @@
 			]
 		},
 		{
-			icon: Shield01Icon,
 			title: "Full Control",
 			callout: "Founder-Owned",
 			points: [
@@ -130,100 +108,99 @@
 	{@html `<script type="application/ld+json">${JSON.stringify(productSchema)}</script>`}
 </svelte:head>
 
-<div class="pt-24 pb-16 px-6">
+<div class="px-6 py-12 md:py-16">
 	<div class="max-w-5xl mx-auto">
-		<div class="text-center mb-16 animate-fade-up">
-			<Badge variant="secondary" class="bg-pulsyn/10 border-pulsyn/20 text-pulsyn mb-6">
-				Current Venture
-			</Badge>
-			<h1 class="font-display text-4xl md:text-6xl font-bold mb-6">
+		<!-- Lede -->
+		<header class="mb-12 md:mb-16 animate-fade-up">
+			<Kicker label="DEPARTMENT  ·  VENTURE  ·  ISSUE 04" showRule={true} />
+			<IssueTag type="current" value="VENTURE" accent={true} class="mb-4" />
+
+			<h1 class="font-display text-5xl md:text-7xl font-semibold tracking-[-0.02em] text-ink mb-4 leading-[1.0]">
 				Pulsyn
 			</h1>
-			<p class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-4">
+			<p class="font-display text-xl md:text-3xl text-ink-soft max-w-3xl mb-4 leading-[1.2]">
 				Premium Smart Ring. Half the Price.
 			</p>
-			<p class="text-muted-foreground max-w-2xl mx-auto mb-8">
+			<p class="font-body text-base md:text-lg text-ink-soft max-w-2xl leading-[1.6] mb-6">
 				Track sleep, fitness, and recovery with clinical-grade sensors for $149 — save $200+ vs. Oura Ring.
 				All essential health tracking included free forever.
 			</p>
-			<div class="flex flex-wrap justify-center gap-4 mb-12">
-				<Button
+			<Byline location="Phoenix, AZ" class="text-xs mb-8" />
+
+			<div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium">
+				<a
 					href="https://getpulsyn.com"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="glass-button px-6 py-3 rounded-xl h-auto"
+					class="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-paper rounded-sm hover:bg-ink/90 transition-colors"
 				>
-					Visit getpulsyn.com
-					<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
-				</Button>
-				<Button
+					Visit getpulsyn.com <span aria-hidden="true">&rarr;</span>
+				</a>
+				<a
 					href="https://getpulsyn.com/pricing"
 					target="_blank"
 					rel="noopener noreferrer"
-					variant="ghost"
-					class="text-pulsyn hover:opacity-80 h-auto px-6 py-3"
+					class="editorial-link text-accent hover:text-accent/80 inline-flex items-center gap-2"
 				>
 					Pre-order for $149
-				</Button>
+				</a>
 			</div>
+		</header>
 
-			<div class="flex justify-center animate-fade-scale delay-200">
-				<picture>
-					<source srcset="/images/rings1.webp" type="image/webp" />
-					<img
-						src="/images/rings1.png"
-						alt="Pulsyn Smart Ring - Available in Gold, Black, and Silver"
-						class="w-full max-w-lg h-auto drop-shadow-2xl animate-float"
-						width="512"
-						height="512"
-					/>
-				</picture>
-			</div>
+		<!-- Hero image -->
+		<div class="my-12 md:my-16 bg-paper-elevated border border-rule p-12 md:p-16 flex justify-center animate-fade-up delay-100">
+			<picture>
+				<source srcset="/images/rings1.webp" type="image/webp" />
+				<img
+					src="/images/rings1.png"
+					alt="Pulsyn Smart Ring - Available in Gold, Black, and Silver"
+					class="w-full max-w-md h-auto mix-blend-multiply"
+					width="512"
+					height="512"
+				/>
+			</picture>
 		</div>
 
-		<!-- Features Grid -->
-		<section class="mb-20">
-			<h2 class="font-display text-2xl md:text-3xl font-bold text-center mb-4 animate-fade-up">
+		<!-- Features -->
+		<section class="my-16 md:my-20">
+			<Kicker label="ENGINEERING" showRule={true} />
+			<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3">
 				Built for Precision
 			</h2>
-			<p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto animate-fade-up delay-100">
+			<p class="font-body text-base text-ink-soft max-w-2xl mb-10 leading-[1.6]">
 				Every detail engineered for accuracy, durability, and comfort.
 			</p>
-			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-				{#each features as feature, i}
-					<div class="glass-card p-6 animate-fade-up" style="animation-delay: {(i + 2) * 100}ms">
-						<div class="w-12 h-12 rounded-xl bg-pulsyn/10 border border-pulsyn/20 flex items-center justify-center mb-4">
-							<HugeiconsIcon icon={feature.icon} size={24} color="var(--pulsyn)" />
-						</div>
-						<h3 class="font-display text-lg font-semibold mb-2">{feature.title}</h3>
-						<p class="text-sm text-muted-foreground">{feature.description}</p>
+
+			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
+				{#each features as feature, i (feature.title)}
+					<div class="border-t border-ink pt-4 animate-fade-up" style="animation-delay: {(i + 1) * 80}ms">
+						<span class="editorial-mono text-xs text-ink-faint mb-2 block">{String(i + 1).padStart(2, "0")}</span>
+						<h3 class="font-display text-lg font-semibold text-ink mb-2">{feature.title}</h3>
+						<p class="font-body text-sm text-ink-soft leading-[1.6]">{feature.description}</p>
 					</div>
 				{/each}
 			</div>
 		</section>
 
 		<!-- Why Pulsyn -->
-		<section class="mb-20">
-			<h2 class="font-display text-2xl md:text-3xl font-bold text-center mb-4 animate-fade-up">
+		<section class="my-16 md:my-20 pt-12 border-t border-rule-strong">
+			<Kicker label="POSITIONING" showRule={true} />
+			<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3">
 				Why Choose Pulsyn?
 			</h2>
-			<p class="text-muted-foreground text-center mb-12 max-w-2xl mx-auto animate-fade-up delay-100">
+			<p class="font-body text-base text-ink-soft max-w-2xl mb-10 leading-[1.6]">
 				From founders frustrated by $400+ smart rings and privacy concerns.
 			</p>
-			<div class="grid md:grid-cols-3 gap-6">
-				{#each valueProps as prop, i}
-					<div class="glass-card p-8 animate-fade-up" style="animation-delay: {(i + 2) * 100}ms">
-						<div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center mb-4">
-							<HugeiconsIcon icon={prop.icon} size={28} color="rgba(255,255,255,0.7)" />
-						</div>
-						<h3 class="font-display text-xl font-semibold mb-2">{prop.title}</h3>
-						<Badge variant="secondary" class="bg-pulsyn/10 border-pulsyn/20 text-pulsyn mb-4">
-							{prop.callout}
-						</Badge>
+
+			<div class="grid md:grid-cols-3 gap-0 md:divide-x md:divide-rule border border-rule">
+				{#each valueProps as prop, i (prop.title)}
+					<div class="p-6 md:p-8 animate-fade-up" style="animation-delay: {(i + 1) * 100}ms">
+						<h3 class="font-display text-xl font-semibold text-ink mb-3">{prop.title}</h3>
+						<Badge variant="accent" class="mb-5">{prop.callout}</Badge>
 						<ul class="space-y-3">
-							{#each prop.points as point}
-								<li class="flex items-start gap-2 text-sm text-muted-foreground">
-									<span class="mt-0.5 shrink-0"><HugeiconsIcon icon={Tick01Icon} size={16} color="var(--pulsyn)" /></span>
+							{#each prop.points as point (point)}
+								<li class="flex items-start gap-3 text-sm text-ink-soft leading-[1.6]">
+									<span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" aria-hidden="true"></span>
 									<span>{point}</span>
 								</li>
 							{/each}
@@ -233,34 +210,35 @@
 			</div>
 		</section>
 
-		<!-- Phoenix Note -->
-		<section class="mb-16">
-			<div class="glass-card p-8 text-center animate-fade-up">
-				<p class="text-muted-foreground">
-					<strong class="text-white">Made in America:</strong> Designed, assembled, packaged, and shipped from Phoenix, Arizona.
+		<!-- Phoenix note -->
+		<section class="my-16 md:my-20">
+			<div class="border-t border-b border-rule py-8 md:py-12 text-center animate-fade-up">
+				<p class="font-body text-base md:text-lg text-ink leading-[1.6] max-w-2xl mx-auto">
+					<strong class="font-display font-semibold">Made in America:</strong> Designed, assembled, packaged, and shipped from Phoenix, Arizona.
 				</p>
-				<p class="text-xs text-muted-foreground/60 mt-3">
+				<p class="editorial-byline text-xs mt-3 max-w-xl mx-auto">
 					Ring hardware crafted by expert manufacturing partners with 8+ years of wearable technology expertise.
 				</p>
 			</div>
 		</section>
 
-		<section class="text-center">
-			<div class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 px-6 sm:px-10 py-6 glass-card animate-fade-scale">
+		<!-- Bottom CTA -->
+		<section class="my-16 md:my-20 text-center">
+			<Kicker label="ORDER" showRule={true} class="text-center" />
+			<div class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-10 px-8 sm:px-12 py-8 border border-ink animate-fade-up">
 				<div class="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
-					<span class="text-sm text-pulsyn font-medium">Starting at</span>
-					<span class="font-display text-4xl sm:text-5xl font-bold text-white">$149</span>
-					<span class="text-xs text-muted-foreground">No subscription required</span>
+					<span class="editorial-mono text-xs text-ink-faint">Starting at</span>
+					<span class="font-display text-5xl sm:text-6xl font-bold text-ink">$149</span>
+					<span class="editorial-byline text-xs">No subscription required</span>
 				</div>
-				<Button
+				<a
 					href="https://getpulsyn.com/pricing"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="px-8 py-4 rounded-xl bg-pulsyn/15 border border-pulsyn/30 text-pulsyn font-medium hover:bg-pulsyn/25 hover:border-pulsyn/50 transition-all duration-300 h-auto"
+					class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-paper rounded-sm font-medium hover:bg-accent/90 transition-colors"
 				>
-					Pre-order Now
-					<span class="ml-2"><HugeiconsIcon icon={ArrowRight01Icon} size={16} /></span>
-				</Button>
+					Pre-order Now <span aria-hidden="true">&rarr;</span>
+				</a>
 			</div>
 		</section>
 	</div>

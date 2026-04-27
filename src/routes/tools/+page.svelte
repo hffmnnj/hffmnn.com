@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ProjectCard from "$lib/components/tools/ProjectCard.svelte";
+	import { Kicker, Byline } from "$lib/components/editorial";
 	import { projects, capyseoProjects } from "$lib/data/projects";
 
 	const allProjects = [...projects, ...capyseoProjects];
@@ -38,20 +39,22 @@
 	{@html `<script type="application/ld+json">${JSON.stringify(collectionSchema)}</script>`}
 </svelte:head>
 
-<div class="pt-24 pb-16 px-6">
+<div class="px-6 py-12 md:py-16">
 	<div class="max-w-6xl mx-auto">
-		<header class="mb-16 text-center animate-fade-up">
-			<h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
-				Tools & Projects
+		<header class="mb-12 md:mb-16 animate-fade-up">
+			<Kicker label="DEPARTMENT  ·  TOOLS  ·  ISSUE 04" showRule={true} />
+			<h1 class="font-display text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-ink mb-3">
+				Tools &amp; Projects
 			</h1>
-			<p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-				Open-source projects focused on privacy, productivity, and beautiful design.
+			<p class="font-body text-lg text-ink-soft max-w-2xl leading-[1.6]">
+				Open-source projects focused on privacy, productivity, and beautiful design. Each is a study in restraint.
 			</p>
+			<Byline class="mt-4 text-xs" />
 		</header>
 
-		<div class="grid md:grid-cols-2 gap-8 items-stretch">
-			{#each projects as project, i}
-				<div class="animate-fade-up h-full {i === 0 ? 'delay-100' : i === 1 ? 'delay-200' : i === 2 ? 'delay-300' : 'delay-400'}">
+		<!-- Main projects (ledger style) -->
+		<div class="divide-y divide-rule animate-fade-up delay-100">
+			{#each projects as project (project.slug)}
 				<ProjectCard
 					slug={project.slug}
 					title={project.title}
@@ -60,30 +63,28 @@
 					githubUrl={project.githubUrl}
 					features={project.features}
 				/>
-				</div>
 			{/each}
 		</div>
 
-		<!-- Capyseo Section -->
-		<section class="mt-20 animate-fade-up delay-300">
-			<div class="flex items-center gap-3 mb-8">
-				<div class="w-1 h-8 bg-capybara rounded-full"></div>
-				<h2 class="font-display text-2xl md:text-3xl font-bold">Capyseo</h2>
-				<span class="text-muted-foreground text-sm">AI-powered SEO toolkit</span>
+		<!-- Capyseo sub-department -->
+		<section class="mt-16 md:mt-20 pt-12 border-t border-rule-strong animate-fade-up delay-200">
+			<Kicker label="SUB-DEPARTMENT  ·  CAPYSEO" showRule={true} />
+			<div class="flex items-baseline justify-between mb-8">
+				<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink">
+					Capyseo
+				</h2>
+				<span class="editorial-byline text-sm hidden md:block">AI-powered SEO toolkit</span>
 			</div>
-
-			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-				{#each capyseoProjects as project, i}
-					<div class="animate-fade-up h-full {i === 0 ? 'delay-400' : i === 1 ? 'delay-500' : 'delay-600'}">
-						<ProjectCard
-							slug={project.slug}
-							title={project.title}
-							description={project.description}
-							tags={project.tags}
-							githubUrl={project.githubUrl}
-							features={project.features}
-						/>
-					</div>
+			<div class="divide-y divide-rule">
+				{#each capyseoProjects as project (project.slug)}
+					<ProjectCard
+						slug={project.slug}
+						title={project.title}
+						description={project.description}
+						tags={project.tags}
+						githubUrl={project.githubUrl}
+						features={project.features}
+					/>
 				{/each}
 			</div>
 		</section>
