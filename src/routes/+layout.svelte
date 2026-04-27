@@ -43,9 +43,11 @@
 
 	<!-- JSON-LD Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify(websiteSchema)}</script>`}
+
+	{@html `<style>html { scroll-behavior: smooth; }</style>`}
 </svelte:head>
 
-<div class="min-h-screen flex flex-col bg-paper text-ink">
+<div class="min-h-screen flex flex-col bg-paper text-ink paper-texture">
 	<Header />
 	<main class="flex-1">
 		{@render children()}

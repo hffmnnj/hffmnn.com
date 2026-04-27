@@ -17,19 +17,22 @@
 	});
 </script>
 
-<header class="sticky top-0 z-50 bg-paper border-b border-ink">
+<header class="sticky top-0 z-50 bg-paper border-b-2 border-ink">
 	<div class="max-w-6xl mx-auto px-6">
 		<!-- Top row: nameplate + dateline -->
-		<div class="flex items-baseline justify-between py-4">
+		<div class="flex items-baseline justify-between py-4 md:py-5">
 			<a
 				href="/"
-				class="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-ink hover:text-accent transition-colors"
+				class="font-display fraunces-hover text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-ink hover:text-accent transition-colors"
 			>
 				hffmnn
 			</a>
-			<span class="hidden sm:block editorial-mono text-xs text-ink-faint">
-				PHOENIX, AZ &nbsp;·&nbsp; {date}
-			</span>
+			<div class="hidden sm:flex items-center gap-3">
+				<span class="w-px h-3 bg-rule-strong opacity-60" aria-hidden="true"></span>
+				<span class="editorial-mono text-xs text-ink-faint">
+					PHOENIX, AZ &nbsp;·&nbsp; {date}
+				</span>
+			</div>
 		</div>
 
 		<!-- Bottom row: vol/issue + nav -->
@@ -42,7 +45,10 @@
 			<nav class="hidden md:flex items-center gap-6 text-sm">
 				<a
 					href="/"
-					class={cn("editorial-link", page.url.pathname === "/" && "text-ink font-medium")}
+					class={cn(
+						"editorial-link",
+						page.url.pathname === "/" && "text-ink font-medium nav-active",
+					)}
 				>
 					Home
 				</a>
@@ -50,7 +56,7 @@
 					href="/tools"
 					class={cn(
 						"editorial-link",
-						page.url.pathname.startsWith("/tools") && "text-ink font-medium",
+						page.url.pathname.startsWith("/tools") && "text-ink font-medium nav-active",
 					)}
 				>
 					Tools
@@ -59,7 +65,7 @@
 					href="/venture"
 					class={cn(
 						"editorial-link",
-						page.url.pathname === "/venture" && "text-ink font-medium",
+						page.url.pathname === "/venture" && "text-ink font-medium nav-active",
 					)}
 				>
 					Venture

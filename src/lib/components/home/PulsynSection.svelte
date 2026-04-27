@@ -1,36 +1,68 @@
 <script lang="ts">
 	import { Kicker, IssueTag } from "$lib/components/editorial";
+
+	const features: ReadonlyArray<readonly [string, boolean]> = [
+		["Sleep Tracking", true],
+		["Heart Health", true],
+		["Activity Tracking", false],
+		["7-60 Day Battery", false],
+	];
 </script>
 
-<section class="py-16 md:py-24 px-6 border-t border-rule-strong">
+<section
+	id="venture-section"
+	class="section-counter py-20 md:py-28 px-6 border-t border-rule-strong"
+	data-n="04"
+>
 	<div class="max-w-6xl mx-auto">
+		<div class="ornament-break mb-10" aria-hidden="true">
+			<span class="editorial-mono text-xs text-ink-faint" style="letter-spacing: 0.2em;"
+				>&#10022;</span
+			>
+		</div>
+
 		<Kicker label="DEPARTMENT  ·  VENTURE" showRule={true} />
 
-		<div class="flex items-end justify-between mb-10 animate-fade-up">
+		<div
+			class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 animate-fade-up"
+		>
 			<div>
 				<IssueTag type="current" value="VENTURE" accent={true} class="mb-4" />
 				<h2
-					class="font-display text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-ink mb-2"
+					class="font-display fraunces-hover text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] text-ink leading-[0.93] mb-4"
 				>
 					Pulsyn
 				</h2>
-				<p class="font-body text-lg text-ink-soft max-w-2xl leading-[1.6]">
+				<p class="font-body text-lg text-ink-soft max-w-xl leading-[1.6]">
 					Building a premium smart ring that makes health tracking accessible. Clinical-grade sensors at half the price of competitors.
 				</p>
 			</div>
+			<div class="shrink-0 text-right">
+				<span class="editorial-mono text-xs text-ink-faint block mb-1">Starting at</span>
+				<span
+					class="font-display fraunces-hover font-bold text-6xl md:text-8xl tracking-[-0.04em] text-ink leading-none"
+				>
+					$149
+				</span>
+				<span class="editorial-mono text-xs text-ink-faint block mt-1"
+					>USD &middot; No subscription</span
+				>
+			</div>
 		</div>
 
-		<div class="grid md:grid-cols-2 border border-rule animate-fade-up delay-200">
+		<div
+			class="grid md:grid-cols-2 border border-rule shadow-[0_2px_0_0_var(--ink)] animate-fade-up delay-200"
+		>
 			<!-- Image side -->
 			<div
-				class="bg-paper-elevated p-8 md:p-12 flex items-center justify-center"
+				class="bg-paper-elevated p-10 md:p-14 flex items-center justify-center min-h-[280px]"
 			>
 				<picture>
 					<source srcset="/images/ring_black.webp" type="image/webp" />
 					<img
 						src="/images/ring_black.png"
 						alt="Pulsyn Smart Ring"
-						class="w-44 md:w-56 h-auto mix-blend-multiply"
+						class="w-44 md:w-60 h-auto mix-blend-multiply transition-transform duration-700 hover:scale-105"
 						width="256"
 						height="256"
 					/>
@@ -44,51 +76,34 @@
 				>
 					Premium Smart Ring. Half the Price.
 				</h3>
-				<p class="font-body text-base text-ink-soft mb-6 leading-[1.6]">
+				<p class="font-body text-base text-ink-soft mb-6 leading-[1.65]">
 					Track sleep, fitness, and recovery with clinical-grade sensors for $149 — save $200+ vs. Oura Ring. All essential health tracking included free forever.
 				</p>
 
-				<ul class="space-y-3 mb-8">
-					<li class="flex items-center gap-3 text-sm text-ink">
-						<span
-							class="w-1.5 h-1.5 rounded-full bg-accent shrink-0"
-							aria-hidden="true"
-						></span>
-						Sleep Tracking
-					</li>
-					<li class="flex items-center gap-3 text-sm text-ink">
-						<span
-							class="w-1.5 h-1.5 rounded-full bg-accent shrink-0"
-							aria-hidden="true"
-						></span>
-						Heart Health
-					</li>
-					<li class="flex items-center gap-3 text-sm text-ink">
-						<span
-							class="w-1.5 h-1.5 rounded-full bg-accent shrink-0"
-							aria-hidden="true"
-						></span>
-						Activity Tracking
-					</li>
-					<li class="flex items-center gap-3 text-sm text-ink">
-						<span
-							class="w-1.5 h-1.5 rounded-full bg-accent shrink-0"
-							aria-hidden="true"
-						></span>
-						7-60 Day Battery
-					</li>
+				<ul class="space-y-2.5 mb-8">
+					{#each features as [label, featured] (label)}
+						<li
+							class="flex items-center gap-3 text-sm {featured
+								? 'text-ink font-medium'
+								: 'text-ink-soft'}"
+						>
+							<span
+								class="w-1.5 h-1.5 rounded-full {featured
+									? 'bg-accent'
+									: 'bg-rule-strong'} shrink-0"
+								aria-hidden="true"
+							></span>
+							{label}
+						</li>
+					{/each}
 				</ul>
 
-				<div class="flex flex-wrap items-baseline gap-x-6 gap-y-3">
-					<div class="flex items-baseline gap-2">
-						<span class="font-display text-3xl md:text-4xl font-bold text-ink">$149</span>
-						<span class="editorial-mono text-xs text-ink-faint">USD</span>
-					</div>
+				<div class="flex flex-wrap items-center gap-x-5 gap-y-3">
 					<a
 						href="https://getpulsyn.com/pricing"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 transition-colors"
+						class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
 					>
 						Pre-order Now <span aria-hidden="true">&rarr;</span>
 					</a>
