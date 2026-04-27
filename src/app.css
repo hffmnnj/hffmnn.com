@@ -467,12 +467,13 @@
 @layer utilities {
   .section-counter {
     position: relative;
+    overflow: hidden; /* contain the counter — prevents bleed behind sticky header */
   }
 
   .section-counter::before {
     content: attr(data-n);
     position: absolute;
-    top: -0.4em;
+    top: 0.1em;      /* was -0.4em — now sits inside the section padding */
     left: -0.05em;
     font-family: var(--font-mono);
     font-size: clamp(72px, 12vw, 180px);
