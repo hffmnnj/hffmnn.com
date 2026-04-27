@@ -1,0 +1,131 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "hffmnn" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e10]: PHOENIX, AZ · APRIL 2026
+      - generic [ref=e11]:
+        - generic [ref=e12]: VOL. I · ISSUE 04
+        - navigation [ref=e13]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+          - link "Tools" [ref=e15] [cursor=pointer]:
+            - /url: /tools
+          - link "Venture" [ref=e16] [cursor=pointer]:
+            - /url: /venture
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]: DEPARTMENT · VENTURE · ISSUE 04
+        - generic [ref=e23]: CURRENT VENTURE
+        - heading "Pulsyn" [level=1] [ref=e24]
+        - paragraph [ref=e25]: Premium Smart Ring. Half the Price.
+        - paragraph [ref=e26]: Track sleep, fitness, and recovery with clinical-grade sensors for $149 — save $200+ vs. Oura Ring. All essential health tracking included free forever.
+        - paragraph [ref=e27]: By James Hoffmann · Phoenix, AZ
+        - generic [ref=e28]:
+          - link "Visit getpulsyn.com" [ref=e29] [cursor=pointer]:
+            - /url: https://getpulsyn.com
+            - text: Visit getpulsyn.com
+            - generic [ref=e30]: →
+          - link "Pre-order for $149" [ref=e31] [cursor=pointer]:
+            - /url: https://getpulsyn.com/pricing
+      - img "Pulsyn Smart Ring - Available in Gold, Black, and Silver" [ref=e34]
+      - generic [ref=e35]:
+        - generic [ref=e36]: ENGINEERING
+        - heading "Built for Precision" [level=2] [ref=e38]
+        - paragraph [ref=e39]: Every detail engineered for accuracy, durability, and comfort.
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: "01"
+            - heading "Premium Quality" [level=3] [ref=e43]
+            - paragraph [ref=e44]: Titanium construction with medical-grade materials for all-day comfort
+          - generic [ref=e45]:
+            - generic [ref=e46]: "02"
+            - heading "Up to 60-Day Battery" [level=3] [ref=e47]
+            - paragraph [ref=e48]: Up to 60-day battery with charging case (7 days per charge)
+          - generic [ref=e49]:
+            - generic [ref=e50]: "03"
+            - heading "5ATM Waterproofing" [level=3] [ref=e51]
+            - paragraph [ref=e52]: Swim, shower, and sweat worry-free with full water resistance
+          - generic [ref=e53]:
+            - generic [ref=e54]: "04"
+            - heading "Encrypted & Private" [level=3] [ref=e55]
+            - paragraph [ref=e56]: Your health data stays secure with end-to-end encryption
+          - generic [ref=e57]:
+            - generic [ref=e58]: "05"
+            - heading "Clinical-Grade Sensors" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Advanced optical sensors deliver medical-grade accuracy
+          - generic [ref=e61]:
+            - generic [ref=e62]: "06"
+            - heading "1-Year Warranty" [level=3] [ref=e63]
+            - paragraph [ref=e64]: Free 1-year warranty on all pre-orders, backed by our guarantee
+      - generic [ref=e65]:
+        - generic [ref=e66]: POSITIONING
+        - heading "Why Choose Pulsyn?" [level=2] [ref=e68]
+        - paragraph [ref=e69]: From founders frustrated by $400+ smart rings and privacy concerns.
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - heading "Fair Pricing" [level=3] [ref=e72]
+            - generic [ref=e73]: "Early Bird: $149"
+            - list [ref=e74]:
+              - listitem [ref=e75]:
+                - generic [ref=e77]: Save $200+ vs $349-499 competitors
+              - listitem [ref=e78]:
+                - generic [ref=e80]: No subscription required for core features
+              - listitem [ref=e81]:
+                - generic [ref=e83]: Everything competitors offer without monthly fees
+          - generic [ref=e84]:
+            - heading "Privacy First" [level=3] [ref=e85]
+            - generic [ref=e86]: Finland-Hosted
+            - list [ref=e87]:
+              - listitem [ref=e88]:
+                - generic [ref=e90]: No government partnerships or defense contractors
+              - listitem [ref=e91]:
+                - generic [ref=e93]: Your data is never sold or shared with third parties
+              - listitem [ref=e94]:
+                - generic [ref=e96]: World-class EU privacy laws with GDPR protection
+          - generic [ref=e97]:
+            - heading "Full Control" [level=3] [ref=e98]
+            - generic [ref=e99]: Founder-Owned
+            - list [ref=e100]:
+              - listitem [ref=e101]:
+                - generic [ref=e103]: Direct decision-making, no intermediaries
+              - listitem [ref=e104]:
+                - generic [ref=e106]: Bootstrapped and user-funded
+              - listitem [ref=e107]:
+                - generic [ref=e109]: No insurance company data sharing
+      - generic [ref=e111]:
+        - paragraph [ref=e112]:
+          - strong [ref=e113]: "Made in America:"
+          - text: Designed, assembled, packaged, and shipped from Phoenix, Arizona.
+        - paragraph [ref=e114]: Ring hardware crafted by expert manufacturing partners with 8+ years of wearable technology expertise.
+      - generic [ref=e115]:
+        - generic [ref=e116]: ORDER
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - generic [ref=e120]: Starting at
+            - generic [ref=e121]: $149
+            - generic [ref=e122]: No subscription required
+          - link "Pre-order Now" [ref=e123] [cursor=pointer]:
+            - /url: https://getpulsyn.com/pricing
+            - text: Pre-order Now
+            - generic [ref=e124]: →
+  - contentinfo [ref=e125]:
+    - generic [ref=e126]:
+      - generic [ref=e128]: ✦
+      - paragraph [ref=e129]: COLOPHON · VOL. I · ISSUE 04
+      - link "hffmnn" [ref=e130] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e132]: ✦
+      - paragraph [ref=e133]: Typeset in Fraunces and Newsreader. Built with SvelteKit. Printed on the internet.
+      - paragraph [ref=e134]: PHOENIX, ARIZONA · © 2026 HFFMNN
+      - generic [ref=e135]:
+        - link "GitHub" [ref=e136] [cursor=pointer]:
+          - /url: https://github.com/hffmnnj
+        - link "X" [ref=e137] [cursor=pointer]:
+          - /url: https://x.com/hffmnnj
+        - link "Threads" [ref=e138] [cursor=pointer]:
+          - /url: https://threads.net/@hffmnnj
+        - link "Email" [ref=e139] [cursor=pointer]:
+          - /url: mailto:hffmnnj@tuta.io

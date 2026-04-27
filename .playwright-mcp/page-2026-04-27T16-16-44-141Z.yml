@@ -1,0 +1,216 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "hffmnn" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e10]: PHOENIX, AZ · APRIL 2026
+      - generic [ref=e11]:
+        - generic [ref=e12]: VOL. I · ISSUE 04
+        - navigation [ref=e13]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+          - link "Tools" [ref=e15] [cursor=pointer]:
+            - /url: /tools
+          - link "Venture" [ref=e16] [cursor=pointer]:
+            - /url: /venture
+  - main [ref=e17]:
+    - generic:
+      - generic: Front Page
+    - generic [ref=e18]:
+      - text: "01"
+      - generic [ref=e19]:
+        - generic [ref=e20]: FEATURE · PORTFOLIO · ISSUE 04
+        - generic [ref=e22]:
+          - paragraph [ref=e23]: By James Hoffmann · 22 y/o developer, sysadmin & privacy advocate
+          - heading "Building tools for privacy & productivity." [level=1] [ref=e24]
+        - generic [ref=e25]:
+          - paragraph [ref=e27]: Creating elegant, privacy-respecting software. From desktop environments to AI-powered tools, every project is built with attention to detail and a commitment to user sovereignty.
+          - paragraph [ref=e28]: Currently building Pulsyn, a premium smart ring that makes health tracking accessible at half the cost. Previously, open-source tools for SEO analysis, multi-LLM council discussions, and a privacy-first Linux desktop environment.
+        - generic [ref=e29]:
+          - link "View Projects" [ref=e30] [cursor=pointer]:
+            - /url: /tools
+            - text: View Projects
+            - generic [ref=e31]: →
+          - link "GitHub" [ref=e32] [cursor=pointer]:
+            - /url: https://github.com/hffmnnj
+      - generic [ref=e34]:
+        - generic [ref=e35]: SvelteKit ·
+        - generic [ref=e36]: Rust ·
+        - generic [ref=e37]: Privacy-First ·
+        - generic [ref=e38]: TypeScript ·
+        - generic [ref=e39]: Open Source ·
+        - generic [ref=e40]: Linux ·
+        - generic [ref=e41]: Hyprland ·
+        - generic [ref=e42]: AI Tooling ·
+        - generic [ref=e43]: SEO ·
+        - generic [ref=e44]: System Admin ·
+        - generic [ref=e45]: Smart Ring ·
+        - generic [ref=e46]: Pulsyn ·
+        - generic [ref=e47]: SvelteKit ·
+        - generic [ref=e48]: Rust ·
+        - generic [ref=e49]: Privacy-First ·
+        - generic [ref=e50]: TypeScript ·
+        - generic [ref=e51]: Open Source ·
+        - generic [ref=e52]: Linux ·
+        - generic [ref=e53]: Hyprland ·
+        - generic [ref=e54]: AI Tooling ·
+        - generic [ref=e55]: SEO ·
+        - generic [ref=e56]: System Admin ·
+        - generic [ref=e57]: Smart Ring ·
+        - generic [ref=e58]: Pulsyn ·
+    - generic [ref=e59]:
+      - text: "02"
+      - generic [ref=e60]:
+        - generic [ref=e61]: ABOUT
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - paragraph [ref=e66]: I build software that starts with privacy and ends with delight. Every tool is a small act of resistance against surveillance capitalism.
+            - blockquote [ref=e67]:
+              - text: “
+              - paragraph [ref=e68]: Software should respect the person using it — full stop.
+            - paragraph [ref=e69]: Open source, always. The code is available, the decisions are auditable, and the direction is user-funded.
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - heading "Privacy First" [level=3] [ref=e72]
+              - paragraph [ref=e73]: Every tool I build starts with privacy as a core principle, not an afterthought.
+            - generic [ref=e74]:
+              - heading "Open Source" [level=3] [ref=e75]
+              - paragraph [ref=e76]: Transparency and collaboration drive better software. All my projects are open source.
+            - generic [ref=e77]:
+              - heading "Delightful UX" [level=3] [ref=e78]
+              - paragraph [ref=e79]: Software should be beautiful and functional. Great design enhances productivity.
+    - generic [ref=e80]:
+      - text: "03"
+      - generic [ref=e81]:
+        - generic [ref=e82]: DEPARTMENT · TOOLS
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - heading "Featured Projects" [level=2] [ref=e86]
+            - paragraph [ref=e87]: Open source tools for privacy and productivity
+          - link "View all" [ref=e88] [cursor=pointer]:
+            - /url: /tools
+            - text: View all
+            - generic [ref=e89]: →
+        - generic [ref=e90]:
+          - link "Me and My Friends (MAMF) By James Hoffmann Rust TUI for multi-advisor AI council discussions with RAG integration. Rust TUI AI Ratatui Multi-LLM Read more" [ref=e91] [cursor=pointer]:
+            - /url: /tools/me-and-my-friends
+            - generic [ref=e92]:
+              - heading "Me and My Friends (MAMF)" [level=3] [ref=e93]
+              - paragraph [ref=e94]: By James Hoffmann
+            - generic [ref=e95]:
+              - paragraph [ref=e96]: Rust TUI for multi-advisor AI council discussions with RAG integration.
+              - generic [ref=e97]:
+                - generic [ref=e98]: Rust
+                - generic [ref=e99]: TUI
+                - generic [ref=e100]: AI
+                - generic [ref=e101]: Ratatui
+                - generic [ref=e102]: Multi-LLM
+            - generic [ref=e104]:
+              - text: Read more
+              - generic [ref=e105]: →
+          - link "Vibearchy By James Hoffmann Privacy-first Arch + Hyprland desktop environment with AI integration and beautiful aesthetics. Arch Linux Hyprland AI Privacy Dotfiles Read more" [ref=e106] [cursor=pointer]:
+            - /url: /tools/vibearchy
+            - generic [ref=e107]:
+              - heading "Vibearchy" [level=3] [ref=e108]
+              - paragraph [ref=e109]: By James Hoffmann
+            - generic [ref=e110]:
+              - paragraph [ref=e111]: Privacy-first Arch + Hyprland desktop environment with AI integration and beautiful aesthetics.
+              - generic [ref=e112]:
+                - generic [ref=e113]: Arch Linux
+                - generic [ref=e114]: Hyprland
+                - generic [ref=e115]: AI
+                - generic [ref=e116]: Privacy
+                - generic [ref=e117]: Dotfiles
+            - generic [ref=e119]:
+              - text: Read more
+              - generic [ref=e120]: →
+        - generic [ref=e122]: ✦
+        - generic [ref=e123]:
+          - generic [ref=e124]: SUB-DEPARTMENT · CAPYSEO
+          - generic [ref=e125]:
+            - heading "Capyseo" [level=3] [ref=e126]
+            - generic [ref=e127]: AI-powered SEO toolkit
+          - generic [ref=e128]:
+            - link "@capyseo/core Core SEO analysis engine with 50+ rules and AI suggestions. TypeScript SEO AI Read more" [ref=e129] [cursor=pointer]:
+              - /url: /tools/capyseo-core
+              - heading "@capyseo/core" [level=4] [ref=e130]
+              - paragraph [ref=e131]: Core SEO analysis engine with 50+ rules and AI suggestions.
+              - generic [ref=e132]:
+                - generic [ref=e133]: TypeScript
+                - generic [ref=e134]: SEO
+                - generic [ref=e135]: AI
+              - generic [ref=e136]:
+                - text: Read more
+                - generic [ref=e137]: →
+            - link "@capyseo/cli CLI tool for SEO analysis of any website with AI suggestions. CLI SEO AI Read more" [ref=e138] [cursor=pointer]:
+              - /url: /tools/capyseo-cli
+              - heading "@capyseo/cli" [level=4] [ref=e139]
+              - paragraph [ref=e140]: CLI tool for SEO analysis of any website with AI suggestions.
+              - generic [ref=e141]:
+                - generic [ref=e142]: CLI
+                - generic [ref=e143]: SEO
+                - generic [ref=e144]: AI
+              - generic [ref=e145]:
+                - text: Read more
+                - generic [ref=e146]: →
+            - link "@capyseo/sveltekit SvelteKit Vite plugin for dev-time SEO analysis. SvelteKit Vite SEO Read more" [ref=e147] [cursor=pointer]:
+              - /url: /tools/capyseo-sveltekit
+              - heading "@capyseo/sveltekit" [level=4] [ref=e148]
+              - paragraph [ref=e149]: SvelteKit Vite plugin for dev-time SEO analysis.
+              - generic [ref=e150]:
+                - generic [ref=e151]: SvelteKit
+                - generic [ref=e152]: Vite
+                - generic [ref=e153]: SEO
+              - generic [ref=e154]:
+                - text: Read more
+                - generic [ref=e155]: →
+    - generic [ref=e156]:
+      - text: "04"
+      - generic [ref=e157]:
+        - generic [ref=e159]: ✦
+        - generic [ref=e160]: DEPARTMENT · VENTURE
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - generic [ref=e164]: CURRENT VENTURE
+            - heading "Pulsyn" [level=2] [ref=e165]
+            - paragraph [ref=e166]: Building a premium smart ring that makes health tracking accessible. Clinical-grade sensors at half the price of competitors.
+          - generic [ref=e167]:
+            - generic [ref=e168]: Starting at
+            - text: $149
+            - generic [ref=e169]: USD · No subscription
+        - generic [ref=e170]:
+          - img "Pulsyn Smart Ring" [ref=e173]
+          - generic [ref=e174]:
+            - heading "Premium Smart Ring. Half the Price." [level=3] [ref=e175]
+            - paragraph [ref=e176]: Track sleep, fitness, and recovery with clinical-grade sensors for $149 — save $200+ vs. Oura Ring. All essential health tracking included free forever.
+            - list [ref=e177]:
+              - listitem [ref=e178]: Sleep Tracking
+              - listitem [ref=e180]: Heart Health
+              - listitem [ref=e182]: Activity Tracking
+              - listitem [ref=e184]: 7-60 Day Battery
+            - generic [ref=e186]:
+              - link "Pre-order Now" [ref=e187] [cursor=pointer]:
+                - /url: https://getpulsyn.com/pricing
+                - text: Pre-order Now
+                - generic [ref=e188]: →
+              - link "Visit getpulsyn.com" [ref=e189] [cursor=pointer]:
+                - /url: https://getpulsyn.com
+  - contentinfo [ref=e190]:
+    - generic [ref=e191]:
+      - generic [ref=e193]: ✦
+      - paragraph [ref=e194]: COLOPHON · VOL. I · ISSUE 04
+      - link "hffmnn" [ref=e195] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e197]: ✦
+      - paragraph [ref=e198]: Typeset in Fraunces and Newsreader. Built with SvelteKit. Printed on the internet.
+      - paragraph [ref=e199]: PHOENIX, ARIZONA · © 2026 HFFMNN
+      - generic [ref=e200]:
+        - link "GitHub" [ref=e201] [cursor=pointer]:
+          - /url: https://github.com/hffmnnj
+        - link "X" [ref=e202] [cursor=pointer]:
+          - /url: https://x.com/hffmnnj
+        - link "Threads" [ref=e203] [cursor=pointer]:
+          - /url: https://threads.net/@hffmnnj
+        - link "Email" [ref=e204] [cursor=pointer]:
+          - /url: mailto:hffmnnj@tuta.io

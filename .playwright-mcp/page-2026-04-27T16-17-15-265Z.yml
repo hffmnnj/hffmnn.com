@@ -1,0 +1,200 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "hffmnn" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e10]: PHOENIX, AZ · APRIL 2026
+      - generic [ref=e11]:
+        - generic [ref=e12]: VOL. I · ISSUE 04
+        - navigation [ref=e13]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+          - link "Tools" [ref=e15] [cursor=pointer]:
+            - /url: /tools
+          - link "Venture" [ref=e16] [cursor=pointer]:
+            - /url: /venture
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]: DEPARTMENT · TOOLS · ISSUE 04
+        - heading "Tools & Projects" [level=1] [ref=e23]
+        - paragraph [ref=e24]: Open-source projects focused on privacy, productivity, and beautiful design. Each is a study in restraint.
+        - paragraph [ref=e25]: By James Hoffmann
+      - generic [ref=e26]:
+        - link [ref=e27] [cursor=pointer]:
+          - /url: /tools/me-and-my-friends
+          - article [ref=e28]:
+            - heading "Me and My Friends (MAMF)" [level=3] [ref=e29]
+            - paragraph [ref=e30]: By James Hoffmann
+            - paragraph [ref=e31]: A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.
+            - generic [ref=e32]:
+              - generic [ref=e33]: Rust
+              - generic [ref=e34]: TUI
+              - generic [ref=e35]: AI
+              - generic [ref=e36]: Ratatui
+              - generic [ref=e37]: Multi-LLM
+            - list [ref=e38]:
+              - listitem [ref=e39]:
+                - generic [ref=e40]: ·
+                - generic [ref=e41]: Multiple LLM providers (Ollama, Gemini, OpenAI, etc.)
+              - listitem [ref=e42]:
+                - generic [ref=e43]: ·
+                - generic [ref=e44]: RAG/knowledge base integration with Qdrant
+              - listitem [ref=e45]:
+                - generic [ref=e46]: ·
+                - generic [ref=e47]: Beautiful terminal UI with Ratatui
+              - listitem [ref=e48]:
+                - generic [ref=e49]: ·
+                - generic [ref=e50]: Council-style multi-advisor discussions
+              - listitem [ref=e51]:
+                - generic [ref=e52]: ·
+                - generic [ref=e53]: Living Council mode with consensus detection
+              - listitem [ref=e54]:
+                - generic [ref=e55]: ·
+                - generic [ref=e56]: Session history and export to Markdown
+            - generic [ref=e57]:
+              - text: Read more
+              - generic [ref=e58]: →
+        - link [ref=e59] [cursor=pointer]:
+          - /url: /tools/vibearchy
+          - article [ref=e60]:
+            - heading "Vibearchy" [level=3] [ref=e61]
+            - paragraph [ref=e62]: By James Hoffmann
+            - paragraph [ref=e63]: A privacy-first Arch Linux + Hyprland desktop environment with seamless AI integration. Built for developers who want a beautiful, functional workspace without compromising on privacy.
+            - generic [ref=e64]:
+              - generic [ref=e65]: Arch Linux
+              - generic [ref=e66]: Hyprland
+              - generic [ref=e67]: AI
+              - generic [ref=e68]: Privacy
+              - generic [ref=e69]: Dotfiles
+            - list [ref=e70]:
+              - listitem [ref=e71]:
+                - generic [ref=e72]: ·
+                - generic [ref=e73]: 20+ carefully curated dotfile packages
+              - listitem [ref=e74]:
+                - generic [ref=e75]: ·
+                - generic [ref=e76]: AI menu system with privacy-first design
+              - listitem [ref=e77]:
+                - generic [ref=e78]: ·
+                - generic [ref=e79]: 3 beautiful color themes (Celestial, Midnight, Dawn)
+              - listitem [ref=e80]:
+                - generic [ref=e81]: ·
+                - generic [ref=e82]: 119 handpicked wallpapers with smooth transitions
+              - listitem [ref=e83]:
+                - generic [ref=e84]: ·
+                - generic [ref=e85]: Custom Rofi menu ecosystem
+              - listitem [ref=e86]:
+                - generic [ref=e87]: ·
+                - generic [ref=e88]: Zen Browser integration with privacy extensions
+            - generic [ref=e89]:
+              - text: Read more
+              - generic [ref=e90]: →
+      - generic [ref=e91]:
+        - generic [ref=e92]: SUB-DEPARTMENT · CAPYSEO
+        - generic [ref=e94]:
+          - heading "Capyseo" [level=2] [ref=e95]
+          - generic [ref=e96]: AI-powered SEO toolkit
+        - generic [ref=e97]:
+          - link [ref=e98] [cursor=pointer]:
+            - /url: /tools/capyseo-core
+            - article [ref=e99]:
+              - heading "@capyseo/core" [level=3] [ref=e100]
+              - paragraph [ref=e101]: By James Hoffmann
+              - paragraph [ref=e102]: Framework-agnostic SEO analysis engine with 50+ rules and multi-provider AI integration. Build custom SEO tools or integrate into your CI/CD pipeline.
+              - generic [ref=e103]:
+                - generic [ref=e104]: TypeScript
+                - generic [ref=e105]: SEO
+                - generic [ref=e106]: AI
+                - generic [ref=e107]: Node.js
+              - list [ref=e108]:
+                - listitem [ref=e109]:
+                  - generic [ref=e110]: ·
+                  - generic [ref=e111]: 50+ SEO rules (meta, images, headings, social, technical)
+                - listitem [ref=e112]:
+                  - generic [ref=e113]: ·
+                  - generic [ref=e114]: Multi-provider AI support (Gemini, OpenAI, Anthropic, Ollama)
+                - listitem [ref=e115]:
+                  - generic [ref=e116]: ·
+                  - generic [ref=e117]: Custom rules support
+                - listitem [ref=e118]:
+                  - generic [ref=e119]: ·
+                  - generic [ref=e120]: Multiple reporters (console, JSON, HTML, CSV, SARIF)
+              - generic [ref=e121]:
+                - text: Read more
+                - generic [ref=e122]: →
+          - link [ref=e123] [cursor=pointer]:
+            - /url: /tools/capyseo-cli
+            - article [ref=e124]:
+              - heading "@capyseo/cli" [level=3] [ref=e125]
+              - paragraph [ref=e126]: By James Hoffmann
+              - paragraph [ref=e127]: Powerful command-line SEO analyzer for any website or static site. Get AI-powered suggestions for meta descriptions, alt text, and content improvements.
+              - generic [ref=e128]:
+                - generic [ref=e129]: CLI
+                - generic [ref=e130]: SEO
+                - generic [ref=e131]: AI
+                - generic [ref=e132]: Node.js
+              - list [ref=e133]:
+                - listitem [ref=e134]:
+                  - generic [ref=e135]: ·
+                  - generic [ref=e136]: Analyze local folders or live URLs
+                - listitem [ref=e137]:
+                  - generic [ref=e138]: ·
+                  - generic [ref=e139]: AI-powered meta description and alt text suggestions
+                - listitem [ref=e140]:
+                  - generic [ref=e141]: ·
+                  - generic [ref=e142]: CI/CD integration with exit codes
+                - listitem [ref=e143]:
+                  - generic [ref=e144]: ·
+                  - generic [ref=e145]: Generate sitemaps, robots.txt, meta tags
+              - generic [ref=e146]:
+                - text: Read more
+                - generic [ref=e147]: →
+          - link [ref=e148] [cursor=pointer]:
+            - /url: /tools/capyseo-sveltekit
+            - article [ref=e149]:
+              - heading "@capyseo/sveltekit" [level=3] [ref=e150]
+              - paragraph [ref=e151]: By James Hoffmann
+              - paragraph [ref=e152]: Deep SvelteKit integration with Vite plugin and real-time dev-time SEO feedback. Get instant SEO analysis as you develop.
+              - generic [ref=e153]:
+                - generic [ref=e154]: SvelteKit
+                - generic [ref=e155]: Vite
+                - generic [ref=e156]: SEO
+                - generic [ref=e157]: TypeScript
+              - list [ref=e158]:
+                - listitem [ref=e159]:
+                  - generic [ref=e160]: ·
+                  - generic [ref=e161]: Vite plugin for build-time analysis
+                - listitem [ref=e162]:
+                  - generic [ref=e163]: ·
+                  - generic [ref=e164]: Server hooks for real-time dev feedback
+                - listitem [ref=e165]:
+                  - generic [ref=e166]: ·
+                  - generic [ref=e167]: AI-powered meta and alt text suggestions
+                - listitem [ref=e168]:
+                  - generic [ref=e169]: ·
+                  - generic [ref=e170]: Zero-config setup with sensible defaults
+                - listitem [ref=e171]:
+                  - generic [ref=e172]: ·
+                  - generic [ref=e173]: Works with SvelteKit 2.x, Svelte 4 & 5
+              - generic [ref=e174]:
+                - text: Read more
+                - generic [ref=e175]: →
+  - contentinfo [ref=e176]:
+    - generic [ref=e177]:
+      - generic [ref=e179]: ✦
+      - paragraph [ref=e180]: COLOPHON · VOL. I · ISSUE 04
+      - link "hffmnn" [ref=e181] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e183]: ✦
+      - paragraph [ref=e184]: Typeset in Fraunces and Newsreader. Built with SvelteKit. Printed on the internet.
+      - paragraph [ref=e185]: PHOENIX, ARIZONA · © 2026 HFFMNN
+      - generic [ref=e186]:
+        - link "GitHub" [ref=e187] [cursor=pointer]:
+          - /url: https://github.com/hffmnnj
+        - link "X" [ref=e188] [cursor=pointer]:
+          - /url: https://x.com/hffmnnj
+        - link "Threads" [ref=e189] [cursor=pointer]:
+          - /url: https://threads.net/@hffmnnj
+        - link "Email" [ref=e190] [cursor=pointer]:
+          - /url: mailto:hffmnnj@tuta.io

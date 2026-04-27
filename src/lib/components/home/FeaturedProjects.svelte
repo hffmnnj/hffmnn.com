@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Kicker, Byline } from "$lib/components/editorial";
 	import { Badge } from "$lib/components/ui/badge";
-<<<<<<< HEAD
 	import { projects, capyseoProjects, reinsProjects } from "$lib/data/projects";
 	import { onMount } from "svelte";
 
@@ -21,66 +20,22 @@
 		els.forEach((el) => io.observe(el));
 		return () => io.disconnect();
 	});
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-	import { projects, capyseoProjects } from "$lib/data/projects";
-=======
-	import { projects, capyseoProjects } from "$lib/data/projects";
-	import { onMount } from "svelte";
-
-	onMount(() => {
-		const els = document.querySelectorAll(".reveal-clip");
-		const io = new IntersectionObserver(
-			(entries) => {
-				for (const e of entries) {
-					if (e.isIntersecting) {
-						e.target.classList.add("is-visible");
-						io.unobserve(e.target);
-					}
-				}
-			},
-			{ threshold: 0.08 },
-		);
-		els.forEach((el) => io.observe(el));
-		return () => io.disconnect();
-	});
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
 </script>
 
-<<<<<<< HEAD
 <section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="03">
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-<section class="py-16 md:py-20 px-6 border-t border-rule">
-=======
-<section
-	id="tools-section"
-	class="section-counter py-20 md:py-28 px-6 border-t border-rule"
-	data-n="03"
->
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="DEPARTMENT  ·  TOOLS" showRule={true} />
 
 		<div class="flex items-end justify-between mb-10 animate-fade-up">
 			<div>
-				<h2
-<<<<<<< HEAD
-					class="font-display text-4xl md:text-6xl font-bold tracking-[-0.03em] text-ink mb-2 fraunces-hover"
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-					class="font-display text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-ink mb-2"
-=======
-					class="font-display fraunces-hover text-4xl md:text-6xl font-bold tracking-[-0.03em] text-ink mb-2"
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-				>
+				<h2 class="font-display text-4xl md:text-6xl font-bold tracking-[-0.03em] text-ink mb-2 fraunces-hover">
 					Featured Projects
 				</h2>
 				<p class="editorial-byline text-base">
 					Open source tools for privacy and productivity
 				</p>
 			</div>
-			<a
-				href="/tools"
-				class="hidden md:inline-flex editorial-link text-sm items-center gap-2"
-			>
+			<a href="/tools" class="hidden md:inline-flex editorial-link text-sm items-center gap-2">
 				View all <span aria-hidden="true">&rarr;</span>
 			</a>
 		</div>
@@ -89,47 +44,18 @@
 			{#each projects as project, i (project.slug)}
 				<a
 					href="/tools/{project.slug}"
-<<<<<<< HEAD
 					class="ledger-row group grid md:grid-cols-12 gap-4 md:gap-6 py-8 md:py-10 px-2 -mx-2 reveal-clip {i === 0 ? 'border-t-2 border-ink' : 'border-t border-rule'}"
 					style="transition-delay: {i * 80}ms"
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-					class="group grid md:grid-cols-12 gap-4 md:gap-6 py-8 md:py-10"
-=======
-					class="ledger-row group grid md:grid-cols-12 gap-4 md:gap-6 py-8 md:py-10 px-2 -mx-2 reveal-clip {i ===
-					0
-						? 'border-t-2 border-ink'
-						: 'border-t border-rule'}"
-					style="transition-delay: {i * 80}ms"
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
 				>
 					<div class="md:col-span-4">
-						<h3
-<<<<<<< HEAD
-							class="ledger-row-title fraunces-hover font-display {i === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2"
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-							class="font-display text-xl md:text-2xl font-semibold text-ink group-hover:text-accent transition-colors mb-2"
-=======
-							class="ledger-row-title fraunces-hover font-display {i === 0
-								? 'text-2xl md:text-3xl'
-								: 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2"
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-						>
+						<h3 class="ledger-row-title fraunces-hover font-display {i === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h3>
 						<Byline class="text-xs" />
 					</div>
 
 					<div class="md:col-span-6">
-<<<<<<< HEAD
 						<p class="font-body text-base text-ink-soft leading-[1.65] mb-3" style="text-wrap: pretty;">
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-						<p class="font-body text-base text-ink-soft leading-[1.6] mb-3">
-=======
-						<p
-							class="font-body text-base text-ink-soft leading-[1.65] mb-3"
-							style="text-wrap: pretty;"
-						>
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
 							{project.shortDescription}
 						</p>
 						<div class="flex flex-wrap gap-x-4 gap-y-1">
@@ -140,9 +66,7 @@
 					</div>
 
 					<div class="md:col-span-2 md:text-right self-center">
-						<span
-							class="editorial-link text-sm inline-flex items-center gap-2 text-ink-soft group-hover:text-accent"
-						>
+						<span class="editorial-link text-sm inline-flex items-center gap-2 text-ink-soft group-hover:text-accent">
 							Read more <span aria-hidden="true">&rarr;</span>
 						</span>
 					</div>
@@ -150,35 +74,16 @@
 			{/each}
 		</div>
 
-<<<<<<< HEAD
 		<!-- Ornamental break -->
 		<div class="ornament-break my-14" aria-hidden="true">
 			<span class="editorial-mono text-xs text-ink-faint" style="letter-spacing: 0.2em;">&#10022;</span>
 		</div>
 
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-=======
-		<!-- Ornamental break before Capyseo -->
-		<div class="ornament-break my-14" aria-hidden="true">
-			<span class="editorial-mono text-xs text-ink-faint" style="letter-spacing: 0.2em;"
-				>&#10022;</span
-			>
-		</div>
-
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
 		<!-- Capyseo sub-department -->
 		<div class="animate-fade-up delay-300">
 			<Kicker label="SUB-DEPARTMENT  ·  CAPYSEO" />
 			<div class="flex items-baseline justify-between mb-8 mt-2">
-				<h3
-<<<<<<< HEAD
-					class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink fraunces-hover"
-||||||| parent of a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-					class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink"
-=======
-					class="font-display fraunces-hover text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink"
->>>>>>> a4b51fa (style(design): add grain texture, variable-font motion, ticker, ornamental breaks, section counters, colophon upgrade, running header)
-				>
+				<h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink fraunces-hover">
 					Capyseo
 				</h3>
 				<span class="editorial-byline text-sm">AI-powered SEO toolkit</span>
@@ -191,9 +96,7 @@
 						class="group md:px-6 md:first:pl-0 md:last:pr-0 reveal-clip"
 						style="transition-delay: {i * 100}ms"
 					>
-						<h4
-							class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2"
-						>
+						<h4 class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h4>
 						<p class="font-body text-sm text-ink-soft leading-[1.65] mb-3">
@@ -204,9 +107,7 @@
 								<Badge variant="kicker">{tag}</Badge>
 							{/each}
 						</div>
-						<span
-							class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent"
-						>
+						<span class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent">
 							Read more <span aria-hidden="true">&rarr;</span>
 						</span>
 					</a>
@@ -223,9 +124,7 @@
 		<div class="animate-fade-up delay-500">
 			<Kicker label="SUB-DEPARTMENT  ·  REINS" />
 			<div class="flex items-baseline justify-between mb-8 mt-2">
-				<h3
-					class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink fraunces-hover"
-				>
+				<h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink fraunces-hover">
 					Reins
 				</h3>
 				<span class="editorial-byline text-sm">Your AI, your device, your rules</span>
@@ -238,9 +137,7 @@
 						class="group md:px-6 md:first:pl-0 md:last:pr-0 reveal-clip"
 						style="transition-delay: {i * 100}ms"
 					>
-						<h4
-							class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2"
-						>
+						<h4 class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h4>
 						<p class="font-body text-sm text-ink-soft leading-[1.65] mb-3">
@@ -252,21 +149,17 @@
 							{/each}
 						</div>
 						<div class="flex items-center gap-4">
-							<span
-								class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent"
-							>
+							<span class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent">
 								Read more <span aria-hidden="true">&rarr;</span>
 							</span>
 							{#if project.websiteUrl}
-								<a
-									href={project.websiteUrl}
-									target="_blank"
-									rel="noopener noreferrer"
+								<button
+									type="button"
+									onclick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.websiteUrl, '_blank', 'noopener,noreferrer'); }}
 									class="editorial-link text-xs text-ink-faint hover:text-accent"
-									onclick={(e) => e.stopPropagation()}
 								>
 									Website <span aria-hidden="true">&nearr;</span>
-								</a>
+								</button>
 							{/if}
 						</div>
 					</a>
