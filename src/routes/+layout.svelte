@@ -25,8 +25,8 @@
 </script>
 
 <svelte:head>
-	<meta name="theme-color" content="#000000" />
-	<meta name="color-scheme" content="dark" />
+	<meta name="theme-color" content="#f5f3ed" />
+	<meta name="color-scheme" content="light" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<link rel="canonical" href="https://hffmnn.com{page.url.pathname}" />
 
@@ -45,7 +45,7 @@
 	{@html `<script type="application/ld+json">${JSON.stringify(websiteSchema)}</script>`}
 </svelte:head>
 
-<div class="min-h-screen flex flex-col mesh-gradient">
+<div class="min-h-screen flex flex-col bg-paper text-ink">
 	<Header />
 	<main class="flex-1">
 		{@render children()}

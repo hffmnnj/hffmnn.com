@@ -63,3 +63,4 @@ pnpm-debug.log*
 coverage/
 .nyc_output/
 .mcp.json
+.goopspec/
