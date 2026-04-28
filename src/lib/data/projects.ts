@@ -16,9 +16,9 @@ export const projects: Project[] = [
 		slug: 'enclave-mail',
 		title: 'Enclave Mail',
 		description:
-			'A self-hosted, end-to-end encrypted email server with a zero-knowledge design — your keys stay in your browser and the server never sees plaintext.',
+			"I built Enclave Mail after getting tired of email servers that hold the decryption keys. The server never touches plaintext. Keys are derived with Argon2id in your browser, X25519/Ed25519 handle the encryption, and SRP makes sure your password never travels the wire.",
 		shortDescription:
-			'Self-hosted E2E encrypted email server with zero-knowledge design — keys stay in your browser, server never sees plaintext.',
+			'Self-hosted email with zero-knowledge design. Argon2id key derivation, SRP auth, server never sees plaintext.',
 		tags: ['TypeScript', 'Privacy', 'Self-hosted', 'Encryption', 'Email'],
 		githubUrl: 'https://github.com/hffmnnj/enclave-mail',
 		githubOwner: 'hffmnnj',
@@ -36,9 +36,9 @@ export const projects: Project[] = [
 		slug: 'opencode-goopspec',
 		title: 'GoopSpec — OpenCode Plugin',
 		description:
-			'A spec-driven development plugin for OpenCode that enforces a structured 5-phase workflow and coordinates 15 specialized AI agents to build software with precision.',
+			"I built GoopSpec because AI-assisted development kept shipping the wrong thing. It enforces a 5-phase workflow where specs are locked contracts before any code runs. Fifteen specialized agents handle research, planning, execution, and verification so nothing ships untested.",
 		shortDescription:
-			'Spec-driven development plugin for OpenCode with a structured 5-phase workflow and 15 specialized AI agents.',
+			'Spec-driven OpenCode plugin. 5-phase workflow with locked contracts and 15 specialized AI agents.',
 		tags: ['TypeScript', 'OpenCode', 'AI', 'Developer Tools', 'Plugin'],
 		githubUrl: 'https://github.com/hffmnnj/opencode-goopspec',
 		githubOwner: 'hffmnnj',
@@ -56,9 +56,9 @@ export const projects: Project[] = [
 		slug: 'vibearchy',
 		title: 'Vibearchy Desktop Environment',
 		description:
-			'A privacy-first Arch Linux + Hyprland desktop environment with seamless AI integration. Built for developers who want a beautiful, functional workspace without compromising on privacy.',
+			"Vibearchy is my Arch Linux + Hyprland daily driver, open-sourced. Comes with 20+ dotfile packages, 119 wallpapers, a custom Rofi menu ecosystem, and an AI menu that keeps processing local. Three color themes, Zen Browser with privacy extensions, zero telemetry.",
 		shortDescription:
-			'Privacy-first Arch + Hyprland desktop environment with AI integration and beautiful aesthetics.',
+			'Arch + Hyprland daily driver, open-sourced. 20+ dotfiles, 119 wallpapers, local AI menu, zero telemetry.',
 		tags: ['Arch Linux', 'Hyprland', 'AI', 'Privacy', 'Dotfiles'],
 		githubUrl: 'https://github.com/hffmnnj/Vibearchy',
 		githubOwner: 'hffmnnj',
@@ -76,8 +76,8 @@ export const projects: Project[] = [
 		slug: 'me-and-my-friends',
 		title: 'Me and My Friends (MAMF)',
 		description:
-			'A Rust-based terminal UI for hosting multi-advisor AI council discussions. Query multiple LLMs simultaneously and get diverse perspectives on any topic.',
-		shortDescription: 'Rust TUI for multi-advisor AI council discussions with RAG integration.',
+			"I wanted to hear multiple AI opinions at once without leaving the terminal. MAMF spins up an AI council in Rust with Ratatui. Multiple LLMs respond in parallel, RAG with Qdrant gives them memory, and Living Council mode detects when they have converged.",
+		shortDescription: 'Rust TUI that runs multiple LLMs as a council. Parallel responses, Qdrant RAG, Living Council consensus detection.',
 		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
 		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
 		githubOwner: 'hffmnnj',
@@ -95,9 +95,9 @@ export const projects: Project[] = [
 		slug: 'nano-banana-cli',
 		title: 'Nano Banana CLI',
 		description:
-			'A terminal image generator powered by Gemini AI that requires no API key — just your Google account. Generate images in parallel from the command line.',
+			"Nano Banana generates images via Gemini without requiring an API key. It authenticates through your Google account using Playwright-driven browser automation, runs multiple prompts in parallel, and exports straight to disk. Zero config, one command.",
 		shortDescription:
-			'Terminal image generator using Gemini AI — no API key required, just your Google account.',
+			'Gemini image generation in the terminal, no API key. Playwright browser auth, parallel generation, zero config.',
 		tags: ['CLI', 'TypeScript', 'Bun', 'Gemini', 'AI'],
 		githubUrl: 'https://github.com/hffmnnj/nano-banana-cli',
 		githubOwner: 'hffmnnj',
@@ -118,8 +118,8 @@ export const capyseoProjects: Project[] = [
 		slug: 'capyseo-core',
 		title: '@capyseo/core - SEO Analysis Engine',
 		description:
-			'Framework-agnostic SEO analysis engine with 50+ rules and multi-provider AI integration. Build custom SEO tools or integrate into your CI/CD pipeline.',
-		shortDescription: 'Core SEO analysis engine with 50+ rules and AI suggestions.',
+			"The core of the CapySEO toolkit. Fifty-plus rules cover meta, images, headings, social tags, and technical SEO. Plug in Gemini, OpenAI, Anthropic, or Ollama for AI suggestions. Outputs console, JSON, HTML, CSV, or SARIF.",
+		shortDescription: 'SEO analysis engine with 50+ rules. Multi-provider AI (Gemini, OpenAI, Anthropic, Ollama), five output formats.',
 		tags: ['TypeScript', 'SEO', 'AI', 'Node.js'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-core',
 		githubOwner: 'Capyseo',
@@ -135,8 +135,8 @@ export const capyseoProjects: Project[] = [
 		slug: 'capyseo-cli',
 		title: '@capyseo/cli - SEO Command Line Tool',
 		description:
-			'Powerful command-line SEO analyzer for any website or static site. Get AI-powered suggestions for meta descriptions, alt text, and content improvements.',
-		shortDescription: 'CLI tool for SEO analysis of any website with AI suggestions.',
+			"Analyze any website or local folder from the command line. CapySEO CLI checks 50+ SEO rules, suggests AI-generated meta descriptions and alt text, and exits with codes that plug into CI/CD. Ships sitemaps and robots.txt too.",
+		shortDescription: 'CLI SEO analyzer for live URLs and local builds. AI suggestions, CI/CD-compatible exit codes, sitemap generation.',
 		tags: ['CLI', 'SEO', 'AI', 'Node.js'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-cli',
 		githubOwner: 'Capyseo',
@@ -152,8 +152,8 @@ export const capyseoProjects: Project[] = [
 		slug: 'capyseo-sveltekit',
 		title: '@capyseo/sveltekit - SvelteKit SEO Plugin',
 		description:
-			'Deep SvelteKit integration with Vite plugin and real-time dev-time SEO feedback. Get instant SEO analysis as you develop with AI-powered suggestions.',
-		shortDescription: 'SvelteKit Vite plugin for dev-time SEO analysis.',
+			"SvelteKit Vite plugin that surfaces SEO issues as you develop. The server hook catches problems at request time during dev, AI suggests meta descriptions and alt text, and the build-time check runs before your CI does.",
+		shortDescription: 'SvelteKit Vite plugin for dev-time SEO analysis. AI suggestions on save, build-time checks, zero config.',
 		tags: ['SvelteKit', 'Vite', 'SEO', 'TypeScript'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-sveltekit',
 		githubOwner: 'Capyseo',
@@ -173,9 +173,9 @@ export const reinsProjects: Project[] = [
 		slug: 'reins-tui',
 		title: 'Reins TUI',
 		description:
-			'A keyboard-driven terminal interface for the Reins AI assistant. Run privacy-first AI workflows directly from your shell — no browser, no GUI, no cloud required.',
+			"The terminal frontend for Reins. Full keyboard navigation, no mouse needed. On-device AI processing via the Reins Core runtime, 30+ app integrations without cloud calls. Session history is searchable and the whole thing is scriptable through stdin/stdout.",
 		shortDescription:
-			'Keyboard-driven terminal UI for the Reins AI assistant — privacy-first AI in your shell.',
+			'Keyboard-driven terminal for Reins AI. On-device processing, 30+ app integrations, fully scriptable via stdin/stdout.',
 		tags: ['TUI', 'Terminal', 'AI', 'Privacy', 'Rust'],
 		githubUrl: 'https://github.com/reins-ai/reins-tui',
 		githubOwner: 'reins-ai',
@@ -194,9 +194,9 @@ export const reinsProjects: Project[] = [
 		slug: 'reins-core',
 		title: 'Reins Core',
 		description:
-			'An open-source, privacy-first AI assistant that runs on your device. Connects to 30+ apps, works offline, and deploys across desktop, mobile, and browser without sending your data to the cloud.',
+			"Reins is a privacy-first AI assistant that runs on your device. MIT licensed, offline-capable, 30+ integrations across productivity and dev tools. One codebase covers desktop, mobile, and browser. Your data stays on your machine by default.",
 		shortDescription:
-			'Open-source AI assistant that runs on your device — offline-capable, privacy-first, and integrates with 30+ apps.',
+			'Open-source AI assistant for desktop, mobile, and browser. Offline-capable, 30+ integrations, MIT licensed.',
 		tags: ['AI', 'Privacy', 'TypeScript', 'Open Source', 'Multi-platform'],
 		githubUrl: 'https://github.com/reins-ai/reins-core',
 		githubOwner: 'reins-ai',

@@ -3,6 +3,10 @@ export const socials = {
 		url: 'https://github.com/hffmnnj',
 		label: 'GitHub'
 	},
+	x: {
+		url: 'https://x.com/hffmnnj',
+		label: 'X'
+	},
 	email: {
 		address: 'hffmnnj@tuta.io',
 		url: 'mailto:hffmnnj@tuta.io',
@@ -17,8 +21,12 @@ export const externalLinks = {
 	}
 } as const;
 
+export const writingLinks = {
+	pulsynAnnouncement: 'https://getpulsyn.com/blog/introducing-pulsyn'
+} as const;
+
 export const siteConfig = {
 	name: 'hffmnn',
 	url: 'https://hffmnn.com',
-	description: 'Personal portfolio showcasing privacy-focused tools and projects.'
+	description: 'James Hoffmann. Founder of Pulsyn, building the Rune 1 smart ring and PRANA 0.7B on-device AI from Phoenix, AZ.'
 } as const;
