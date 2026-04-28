@@ -94,7 +94,6 @@
   /* Brand colors retained */
   --pulsyn: oklch(75% 0.18 160);
   --capybara: oklch(55% 0.11 42);
-  --reins: oklch(65% 0.15 270);
 }
 
 @theme inline {
@@ -139,7 +138,6 @@
   --color-ring: var(--ring);
   --color-pulsyn: var(--pulsyn);
   --color-capybara: var(--capybara);
-  --color-reins: var(--reins);
 }
 
 @layer base {
@@ -671,7 +669,7 @@
 
   .ledger-row:hover,
   .ledger-row:focus-within {
-    background-color: color-mix(in oklch, var(--paper) 80%, var(--ink));
+    background-color: color-mix(in oklch, var(--paper) 96%, var(--ink));
   }
 
   .ledger-row-title {

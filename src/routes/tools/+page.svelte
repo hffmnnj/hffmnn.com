@@ -24,16 +24,16 @@
 
 <svelte:head>
 	<title>Open Source Work — hffmnn</title>
-	<meta name="description" content="Ten open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, Reins, and more. Privacy tools, AI infrastructure, developer utilities." />
+	<meta name="description" content="Eight open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, and more. Privacy tools, AI infrastructure, developer utilities." />
 
 	<!-- Open Graph -->
 	<meta property="og:title" content="Open Source Work — hffmnn" />
-	<meta property="og:description" content="Ten open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, Reins, and more. Privacy tools, AI infrastructure, developer utilities." />
+	<meta property="og:description" content="Eight open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, and more. Privacy tools, AI infrastructure, developer utilities." />
 	<meta property="og:url" content="https://hffmnn.com/tools" />
 
 	<!-- Twitter -->
 	<meta name="twitter:title" content="Open Source Work — hffmnn" />
-	<meta name="twitter:description" content="Ten open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, Reins, and more. Privacy tools, AI infrastructure, developer utilities." />
+	<meta name="twitter:description" content="Eight open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, and more. Privacy tools, AI infrastructure, developer utilities." />
 
 	<!-- JSON-LD Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify(collectionSchema)}</script>`}
@@ -46,10 +46,10 @@
 			<h1 class="font-display text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-ink mb-3">
 				Open Source Work
 			</h1>
-			<p class="font-body text-lg text-ink-soft max-w-2xl leading-[1.6]">
-				Ten projects across privacy infrastructure, AI tooling, and developer utilities. All open source.
-			</p>
-			<Byline class="mt-4 text-xs" />
+		<p class="font-body text-lg text-ink-soft max-w-2xl leading-[1.6]">
+			Eight projects across privacy infrastructure, AI tooling, and developer utilities. All open source.
+		</p>
+			<Byline author="James Hoffmann" class="mt-4 text-xs" />
 		</header>
 
 		<!-- Main projects (ledger style) -->

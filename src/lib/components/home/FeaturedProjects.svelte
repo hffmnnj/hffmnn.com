@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Kicker, Byline } from "$lib/components/editorial";
 	import { Badge } from "$lib/components/ui/badge";
-	import { projects, capyseoProjects, reinsProjects } from "$lib/data/projects";
+	import { projects, capyseoProjects } from "$lib/data/projects";
 	import { reveal, countUp } from "$lib/actions";
 </script>
 
@@ -15,7 +15,7 @@
 					The Work
 				</h2>
 				<p class="editorial-byline text-base">
-					Ten open source projects across privacy, on-device AI, and developer tooling.
+					Eight open source projects across privacy, on-device AI, and developer tooling.
 				</p>
 			</div>
 			<a href="/tools" class="hidden md:inline-flex editorial-link text-sm items-center gap-2">
@@ -32,15 +32,10 @@
 					style="transition-delay: {i * 80}ms"
 				>
 					<div class="md:col-span-4">
-						<h3 class="ledger-row-title fraunces-hover font-display {i === 0 ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2">
+						<h3 class="ledger-row-title fraunces-hover font-display text-xl md:text-2xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h3>
-						{#if i === 0}
-							<p class="editorial-byline text-sm text-ink-soft leading-[1.55] mt-1 mb-2 max-w-xs" style="text-wrap: pretty;">
-								{project.shortDescription.split('.')[0]}.
-							</p>
-						{/if}
-						<Byline class="text-xs" />
+						<Byline author="hffmnnj" class="text-xs" />
 					</div>
 
 					<div class="md:col-span-6">
@@ -114,66 +109,6 @@
 						<span class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent">
 							Read more <span aria-hidden="true">&rarr;</span>
 						</span>
-					</a>
-				{/each}
-			</div>
-		</div>
-
-		<!-- Ornamental break -->
-		<div class="ornament-break my-14" aria-hidden="true">
-			<span class="editorial-mono text-xs text-ink-faint" style="letter-spacing: 0.2em;">&#10022;</span>
-		</div>
-
-		<!-- Reins sub-department -->
-		<div class="animate-fade-up delay-500">
-			<Kicker label="SUB-DEPARTMENT  ·  REINS" />
-			<div class="flex items-baseline justify-between mb-8 mt-2">
-				<h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink fraunces-hover">
-					Reins
-				</h3>
-				<span class="editorial-byline text-sm">Your AI, your device, your rules</span>
-			</div>
-
-			<div class="grid md:grid-cols-2 gap-8 md:divide-x md:divide-rule">
-				{#each reinsProjects as project, i (project.slug)}
-					<a
-						href="/tools/{project.slug}"
-						class="group md:px-6 md:first:pl-0 md:last:pr-0 reveal-clip"
-						use:reveal={{ threshold: 0.05 }}
-						style="transition-delay: {i * 100}ms"
-					>
-						<h4 class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
-							{project.title}
-						</h4>
-						<p class="font-body text-sm text-ink-soft leading-[1.65] mb-3">
-							{project.shortDescription}
-						</p>
-						<div class="flex flex-wrap gap-x-3 gap-y-1 mb-2">
-							{#each project.tags.slice(0, 3) as tag (tag)}
-								<Badge variant="kicker">{tag}</Badge>
-							{/each}
-						</div>
-						{#if project.tags.length > 3}
-							<div class="adaptive-meta flex flex-wrap gap-x-2 gap-y-1 mb-2">
-								{#each project.tags.slice(3) as tag (tag)}
-									<Badge variant="kicker">{tag}</Badge>
-								{/each}
-							</div>
-						{/if}
-						<div class="flex items-center gap-4 mt-1">
-							<span class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent">
-								Read more <span aria-hidden="true">&rarr;</span>
-							</span>
-							{#if project.websiteUrl}
-								<button
-									type="button"
-									onclick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.websiteUrl!, '_blank', 'noopener,noreferrer'); }}
-									class="editorial-link text-xs text-ink-faint hover:text-accent"
-								>
-									Website <span aria-hidden="true">&nearr;</span>
-								</button>
-							{/if}
-						</div>
 					</a>
 				{/each}
 			</div>

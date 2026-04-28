@@ -9,7 +9,7 @@
 	}
 
 	let {
-		author = "James Hoffmann",
+		author = "hffmnnj",
 		location,
 		date,
 		class: className = "",
