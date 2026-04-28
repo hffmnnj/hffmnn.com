@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Kicker, DropCap } from "$lib/components/editorial";
+	import { reveal, countUp } from "$lib/actions";
 	import { onMount } from "svelte";
 
 	const birthYear = 2004;
@@ -31,28 +32,41 @@
 		"Local-First",
 	];
 
+	let h1El: HTMLElement | undefined;
+
 	onMount(() => {
-		const els = document.querySelectorAll(".reveal-clip");
-		const io = new IntersectionObserver(
-			(entries) => {
-				for (const e of entries) {
-					if (e.isIntersecting) {
-						e.target.classList.add("is-visible");
-						io.unobserve(e.target);
-					}
+		// Word-split h1 for per-word variable-font animation (MH3).
+		// SSR-safe: original text remains in static HTML; spans only appear post-mount.
+		if (h1El) {
+			const fullText = (h1El.textContent ?? "").trim();
+			h1El.setAttribute("aria-label", fullText);
+			// Clear and rebuild with word spans, preserving whitespace as text nodes.
+			h1El.textContent = "";
+			let wordIndex = 0;
+			const tokens = fullText.split(/(\s+)/);
+			for (const token of tokens) {
+				if (token.length === 0) continue;
+				if (/^\s+$/.test(token)) {
+					h1El.appendChild(document.createTextNode(token));
+				} else {
+					const span = document.createElement("span");
+					span.className = "word";
+					span.setAttribute("aria-hidden", "true");
+					span.style.setProperty("--word-delay", `${wordIndex * 80}ms`);
+					span.textContent = token;
+					h1El.appendChild(span);
+					wordIndex++;
 				}
-			},
-			{ threshold: 0.1 },
-		);
-		els.forEach((el) => io.observe(el));
-		return () => io.disconnect();
+			}
+		}
 	});
 </script>
 
 <section
 	id="hero-section"
 	class="section-counter pt-16 md:pt-28 pb-16 md:pb-24 px-6"
-	data-n="01"
+	data-n="00"
+	use:countUp={{ target: 1 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="FEATURE  ·  PORTFOLIO  ·  ISSUE 04" showRule={true} />
@@ -65,7 +79,8 @@
 			</p>
 
 			<h1
-				class="font-display fraunces-hover text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
+				bind:this={h1El}
+				class="font-display fraunces-hover word-split text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
 				I run Pulsyn. Building hardware that thinks on-device.
@@ -86,7 +101,7 @@
 				class="font-body text-base md:text-lg leading-[1.65] text-ink-soft"
 				style="text-wrap: pretty;"
 			>
-				Twenty-two years old, writing Flutter and SvelteKit by day, training a small language model on two million rows of biometric data by night. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
+				I spend most of my time curating the best datasets possible for health and wellness. When the data I need does not exist, I build synthetic datasets to fill the gaps. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
 			</p>
 		</div>
 
@@ -108,13 +123,19 @@
 	</div>
 
 	<!-- Ticker below hero -->
-	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip">
-		<div class="ticker-track" aria-hidden="true">
-			{#each [0, 1] as loop (loop)}
-				{#each tickerTerms as term (`${loop}-${term}`)}
-					<span class="ticker-item">{term}</span>
+	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip" use:reveal>
+		<span class="ticker-live" aria-hidden="true">
+			<span class="ticker-live-dot"></span>
+			<span>LIVE</span>
+		</span>
+		<div class="flex-1 overflow-hidden">
+			<div class="ticker-track" aria-hidden="true">
+				{#each [0, 1] as loop (loop)}
+					{#each tickerTerms as term (`${loop}-${term}`)}
+						<span class="ticker-item">{term}</span>
+					{/each}
 				{/each}
-			{/each}
+			</div>
 		</div>
 	</div>
 </section>

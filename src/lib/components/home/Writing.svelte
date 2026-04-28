@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Kicker } from "$lib/components/editorial";
+	import { countUp } from "$lib/actions";
 </script>
 
 <section
 	id="writing-section"
 	class="section-counter py-20 md:py-28 px-6 border-t border-rule"
-	data-n="04"
+	data-n="00"
+	use:countUp={{ target: 4 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="RECENT WRITING" showRule={true} />

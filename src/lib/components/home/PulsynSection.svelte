@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Kicker, IssueTag } from "$lib/components/editorial";
 	import { HugeiconsIcon, ArrowUpRight01Icon } from "$lib/icons";
+	import { magnetic, countUp } from "$lib/actions";
 
 	const features: ReadonlyArray<readonly [string, boolean]> = [
 		["Sleep Tracking", true],
@@ -13,7 +14,8 @@
 <section
 	id="venture-section"
 	class="section-counter py-20 md:py-28 px-6 border-t border-rule-strong"
-	data-n="04"
+	data-n="00"
+	use:countUp={{ target: 4 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<div class="ornament-break mb-10" aria-hidden="true">
@@ -51,12 +53,14 @@
 			</div>
 		</div>
 
-		<div
-			class="grid md:grid-cols-2 border border-rule shadow-[0_2px_0_0_var(--ink)] animate-fade-up delay-200"
-		>
-			<!-- Image side — full-bleed editorial photo, no padding -->
-			<div class="overflow-hidden min-h-[320px] md:min-h-[400px]">
-				<picture>
+		<div style="perspective: 1000px">
+			<div
+				class="grid md:grid-cols-2 border border-rule shadow-[0_2px_0_0_var(--ink)] animate-fade-up delay-200 tilt-host"
+				use:magnetic={{ strength: 0, tilt: true, tiltMax: 4, radius: 600 }}
+			>
+				<!-- Image side — full-bleed editorial photo, no padding -->
+				<div class="overflow-hidden min-h-[320px] md:min-h-[400px]">
+					<picture>
 					<source srcset="/images/pulsyn_hero.webp" type="image/webp" />
 					<img
 						src="/images/pulsyn_hero.png"
@@ -65,56 +69,58 @@
 						width="800"
 						height="600"
 					/>
-				</picture>
-			</div>
+					</picture>
+				</div>
 
-			<!-- Copy side -->
-			<div class="p-8 md:p-12 border-t md:border-t-0 md:border-l border-rule">
-				<h3
-					class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.01em] text-ink mb-4"
-				>
-					Premium Smart Ring. Half the Price.
-				</h3>
-				<p class="font-body text-base text-ink-soft mb-6 leading-[1.65]">
-					PPG, SpO2, temperature, and accelerometer. Pre-order ships at $160, retail is $200. Reserve your spot for $10 at getpulsyn.com. Every health metric stays free, forever.
-				</p>
+				<!-- Copy side -->
+				<div class="p-8 md:p-12 border-t md:border-t-0 md:border-l border-rule">
+					<h3
+						class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.01em] text-ink mb-4"
+					>
+						Premium Smart Ring. Half the Price.
+					</h3>
+					<p class="font-body text-base text-ink-soft mb-6 leading-[1.65]">
+						PPG, SpO2, temperature, and accelerometer. Pre-order ships at $160, retail is $200. Reserve your spot for $10 at getpulsyn.com. Every health metric stays free, forever.
+					</p>
 
-				<ul class="space-y-2.5 mb-8">
-					{#each features as [label, featured] (label)}
-						<li
-							class="flex items-center gap-3 text-sm {featured
-								? 'text-ink font-medium'
-								: 'text-ink-soft'}"
+					<ul class="space-y-2.5 mb-8">
+						{#each features as [label, featured] (label)}
+							<li
+								class="flex items-center gap-3 text-sm {featured
+									? 'text-ink font-medium'
+									: 'text-ink-soft'}"
+							>
+								<span
+									class="w-1.5 h-1.5 rounded-full {featured
+										? 'bg-accent'
+										: 'bg-rule-strong'} shrink-0"
+									aria-hidden="true"
+								></span>
+								{label}
+							</li>
+						{/each}
+					</ul>
+
+					<div class="flex flex-wrap items-center gap-x-5 gap-y-3">
+						<a
+							href="https://getpulsyn.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200 tilt-host"
+							use:magnetic={{ strength: 0.4, tilt: true, tiltMax: 6, radius: 140 }}
 						>
-							<span
-								class="w-1.5 h-1.5 rounded-full {featured
-									? 'bg-accent'
-									: 'bg-rule-strong'} shrink-0"
-								aria-hidden="true"
-							></span>
-							{label}
-						</li>
-					{/each}
-				</ul>
-
-				<div class="flex flex-wrap items-center gap-x-5 gap-y-3">
-					<a
-						href="https://getpulsyn.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
-					>
-						Reserve for $10
-						<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
-					</a>
-					<a
-						href="https://getpulsyn.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="editorial-link text-sm text-ink-soft hover:text-ink"
-					>
-						Visit getpulsyn.com
-					</a>
+							Reserve for $10
+							<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
+						</a>
+						<a
+							href="https://getpulsyn.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="editorial-link text-sm text-ink-soft hover:text-ink"
+						>
+							Visit getpulsyn.com
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
