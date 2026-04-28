@@ -593,9 +593,10 @@
 
 @layer utilities {
   .ticker-wrap {
-    overflow: hidden;
     border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
     border-bottom: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+    display: flex;
+    align-items: center;
   }
 
   .ticker-track {
@@ -623,6 +624,11 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ticker-wrap:hover .ticker-item:hover {
+    color: var(--ink);
   }
 
   .ticker-item::after {
@@ -742,6 +748,19 @@
   }
 }
 
+/* J) RunningHeader condensed state — fires when hero scrolls ~80% past viewport.
+   Overrides the inline rotate(180deg) on the editorial-mono span and tightens
+   typography. Transition is declared inline on the element so this class only
+   needs to swap end values. */
+@layer utilities {
+  .is-condensed {
+    font-size: 9px !important;
+    opacity: 0.45 !important;
+    letter-spacing: 0.22em !important;
+    transform: rotate(180deg) translateX(-4px) !important;
+  }
+}
+
 /* Reduced motion — disable non-essential animation */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -806,5 +825,8 @@
   }
   .ticker-live-dot {
     animation: none !important;
+  }
+  .is-condensed {
+    transition: none !important;
   }
 }
