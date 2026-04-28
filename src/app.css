@@ -24,6 +24,33 @@
   initial-value: 600;
 }
 
+/* WOW factor — typed CSS custom properties for tilt/magnetic/parallax transforms. */
+@property --tilt-x {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --tilt-y {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --mag-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --mag-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --parallax-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
 /*
   EDITORIAL NEWSPAPER THEME
   Warm paper substrate, charcoal ink, classic ink-red accent.
@@ -252,6 +279,148 @@
       initial-letter: 3;
       margin-right: 0.5rem;
     }
+  }
+}
+
+/* ============================================================
+   WOW FACTOR UTILITIES — Wave 1 infrastructure
+   ============================================================ */
+
+@keyframes word-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+    --fz-opsz: 72;
+    --fz-soft: 30;
+    --fz-wght: 600;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    --fz-opsz: var(--word-opsz, 110);
+    --fz-soft: var(--word-soft, 45);
+    --fz-wght: var(--word-wght, 680);
+  }
+}
+
+@keyframes border-draw-down {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes ticker-live-pulse {
+  from { transform: scale(1);   opacity: 1;   }
+  to   { transform: scale(1.4); opacity: 0.5; }
+}
+
+@keyframes skill-row-fade {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+/* Tilt/magnetic host — transforms via CSS custom properties only */
+@layer utilities {
+  .tilt-host {
+    transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0)
+               rotateX(var(--tilt-x, 0deg))
+               rotateY(var(--tilt-y, 0deg));
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+  }
+
+  /* Parallax host — vertical translate only */
+  .parallax-host {
+    transform: translate3d(0, var(--parallax-y, 0px), 0);
+    will-change: transform;
+  }
+
+  /* Word-split parent — inline-block children */
+  .word-split {
+    font-variation-settings: "opsz" var(--fz-opsz), "SOFT" var(--fz-soft), "wght" var(--fz-wght);
+  }
+
+  .word-split > span.word {
+    display: inline-block;
+    opacity: 0;
+    animation: word-enter 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--word-delay, 0ms) both;
+    font-variation-settings: "opsz" var(--fz-opsz), "SOFT" var(--fz-soft), "wght" var(--fz-wght);
+  }
+
+  /* nth-child cycling endpoint variants for per-word axis differentiation */
+  .word-split > span.word:nth-child(4n+1) { --word-opsz: 96;  --word-soft: 38; --word-wght: 640; }
+  .word-split > span.word:nth-child(4n+2) { --word-opsz: 130; --word-soft: 50; --word-wght: 700; }
+  .word-split > span.word:nth-child(4n+3) { --word-opsz: 110; --word-soft: 42; --word-wght: 660; }
+  .word-split > span.word:nth-child(4n)   { --word-opsz: 120; --word-soft: 48; --word-wght: 680; }
+
+  /* hover amplify on parent */
+  .word-split.fraunces-hover:hover > span.word,
+  .group:hover .word-split.fraunces-hover > span.word {
+    --fz-opsz: 144;
+    --fz-soft: 50;
+    --fz-wght: 700;
+    transition:
+      --fz-opsz 300ms cubic-bezier(0.16, 1, 0.3, 1),
+      --fz-soft 300ms cubic-bezier(0.16, 1, 0.3, 1),
+      --fz-wght 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Skill row — border-draw entrance */
+  .skill-row {
+    position: relative;
+    padding-left: 1.25rem; /* matches previous pl-5 (5 * 0.25rem = 1.25rem) */
+  }
+
+  .skill-row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--rule);
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .skill-row.accent::before {
+    background: var(--accent);
+  }
+
+  .skill-row.is-visible::before {
+    animation: border-draw-down 400ms cubic-bezier(0.16, 1, 0.3, 1) var(--row-delay, 0ms) forwards;
+  }
+
+  .skill-row-content {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  .skill-row.is-visible .skill-row-content {
+    animation: skill-row-fade 400ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--row-delay, 0ms) + 250ms) both;
+  }
+
+  /* Ticker live indicator */
+  .ticker-live {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-inline: 0.75rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .ticker-live-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: ticker-live-pulse 1.5s ease-in-out infinite alternate;
+    flex-shrink: 0;
   }
 }
 
@@ -569,6 +738,38 @@
     transition: none !important;
   }
   .ticker-track {
+    animation: none !important;
+  }
+
+  /* WOW factor — new animations */
+  .tilt-host {
+    transform: none !important;
+    transition: none !important;
+  }
+  .parallax-host {
+    transform: none !important;
+    will-change: auto !important;
+  }
+  .word-split > span.word {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    --fz-opsz: 96;
+    --fz-soft: 40;
+    --fz-wght: 660;
+  }
+  .skill-row::before {
+    transform: none !important;
+    animation: none !important;
+    transform-origin: top;
+    transform: scaleY(1) !important; /* show at rest */
+  }
+  .skill-row-content {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ticker-live-dot {
     animation: none !important;
   }
 }
