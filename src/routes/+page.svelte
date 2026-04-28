@@ -2,6 +2,7 @@
 	import Hero from "$lib/components/home/Hero.svelte";
 	import About from "$lib/components/home/About.svelte";
 	import FeaturedProjects from "$lib/components/home/FeaturedProjects.svelte";
+	import Writing from "$lib/components/home/Writing.svelte";
 	import PulsynSection from "$lib/components/home/PulsynSection.svelte";
 	import { RunningHeader } from "$lib/components/editorial";
 	// Note: data prop intentionally not destructured — no page-level data needed
@@ -25,4 +26,5 @@
 <Hero />
 <About />
 <FeaturedProjects />
+<Writing />
 <PulsynSection />
