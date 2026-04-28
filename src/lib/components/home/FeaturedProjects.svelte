@@ -8,7 +8,7 @@
 	const iconTags = ['TypeScript', 'Rust', 'Svelte', 'SvelteKit', 'Bun', 'Node.js', 'Vite', 'Arch Linux', 'Astro', 'React', 'Hono', 'Docker', 'Tokio', 'Playwright', 'Anthropic', 'OpenAI', 'Gemini', 'Hyprland', 'Qdrant'];
 </script>
 
-<section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="00" use:countUp={{ target: 3 }}>
+<section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="00" use:countUp={{ target: 4 }}>
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="DEPARTMENT  ·  TOOLS" showRule={true} />
 

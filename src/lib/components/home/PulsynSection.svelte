@@ -15,7 +15,7 @@
 	id="venture-section"
 	class="section-counter py-20 md:py-28 px-6 border-t border-rule-strong"
 	data-n="00"
-	use:countUp={{ target: 4 }}
+	use:countUp={{ target: 5 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<div class="ornament-break mb-10" aria-hidden="true">

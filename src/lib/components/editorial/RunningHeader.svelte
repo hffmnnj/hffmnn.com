@@ -6,6 +6,7 @@
 	const sections: ReadonlyArray<Section> = [
 		{ id: "hero-section", label: "Front Page" },
 		{ id: "about-section", label: "About" },
+		{ id: "writing-section", label: "Writing" },
 		{ id: "tools-section", label: "Tools" },
 		{ id: "venture-section", label: "Venture" },
 	];
