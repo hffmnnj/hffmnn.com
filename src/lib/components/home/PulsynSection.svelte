@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Kicker, IssueTag } from "$lib/components/editorial";
+	import { HugeiconsIcon, ArrowUpRight01Icon } from "$lib/icons";
 
 	const features: ReadonlyArray<readonly [string, boolean]> = [
 		["Sleep Tracking", true],
@@ -34,18 +35,18 @@
 					Pulsyn
 				</h2>
 				<p class="font-body text-lg text-ink-soft max-w-xl leading-[1.6]">
-					Building a premium smart ring that makes health tracking accessible. Clinical-grade sensors at half the price of competitors.
+					I'm building the Rune 1 from Phoenix. PPG, SpO2, skin temperature, and a 6-axis accelerometer. On-device processing, no subscription, ships Q3 2026.
 				</p>
 			</div>
 			<div class="shrink-0 text-right">
-				<span class="editorial-mono text-xs text-ink-faint block mb-1">Starting at</span>
+				<span class="editorial-mono text-xs text-ink-faint block mb-1">Reserve for</span>
 				<span
 					class="font-display fraunces-hover font-bold text-6xl md:text-8xl tracking-[-0.04em] text-ink leading-none"
 				>
-					$149
+					$10
 				</span>
 				<span class="editorial-mono text-xs text-ink-faint block mt-1"
-					>USD &middot; No subscription</span
+					>Ships at $160 &middot; Retail $200</span
 				>
 			</div>
 		</div>
@@ -53,18 +54,16 @@
 		<div
 			class="grid md:grid-cols-2 border border-rule shadow-[0_2px_0_0_var(--ink)] animate-fade-up delay-200"
 		>
-			<!-- Image side -->
-			<div
-				class="bg-paper-elevated p-10 md:p-14 flex items-center justify-center min-h-[280px]"
-			>
+			<!-- Image side — full-bleed editorial photo, no padding -->
+			<div class="overflow-hidden min-h-[320px] md:min-h-[400px]">
 				<picture>
-					<source srcset="/images/ring_black.webp" type="image/webp" />
+					<source srcset="/images/pulsyn_hero.webp" type="image/webp" />
 					<img
-						src="/images/ring_black.png"
-						alt="Pulsyn Smart Ring"
-						class="w-44 md:w-60 h-auto mix-blend-multiply transition-transform duration-700 hover:scale-105"
-						width="256"
-						height="256"
+						src="/images/pulsyn_hero.png"
+						alt="Pulsyn Rune 1 smart ring"
+						class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+						width="800"
+						height="600"
 					/>
 				</picture>
 			</div>
@@ -77,7 +76,7 @@
 					Premium Smart Ring. Half the Price.
 				</h3>
 				<p class="font-body text-base text-ink-soft mb-6 leading-[1.65]">
-					Track sleep, fitness, and recovery with clinical-grade sensors for $149 — save $200+ vs. Oura Ring. All essential health tracking included free forever.
+					PPG, SpO2, temperature, and accelerometer. Pre-order ships at $160, retail is $200. Reserve your spot for $10 at getpulsyn.com. Every health metric stays free, forever.
 				</p>
 
 				<ul class="space-y-2.5 mb-8">
@@ -100,12 +99,13 @@
 
 				<div class="flex flex-wrap items-center gap-x-5 gap-y-3">
 					<a
-						href="https://getpulsyn.com/pricing"
+						href="https://getpulsyn.com"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
 					>
-						Pre-order Now <span aria-hidden="true">&rarr;</span>
+						Reserve for $10
+						<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
 					</a>
 					<a
 						href="https://getpulsyn.com"

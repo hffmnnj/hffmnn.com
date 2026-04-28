@@ -35,7 +35,7 @@
 
 		<!-- Type credits -->
 		<p class="editorial-byline text-sm text-ink-soft mb-2">
-			Typeset in Fraunces and Newsreader. Built with SvelteKit. Printed on the internet.
+			Founder of Pulsyn. Privacy advocate. Building from Phoenix, AZ.
 		</p>
 		<p
 			class="editorial-mono text-xs text-ink-faint mb-10"

@@ -17,18 +17,18 @@
 	const age = getAge();
 
 	const tickerTerms = [
+		"Pulsyn",
+		"Rune 1",
+		"PRANA 0.7B",
+		"On-Device AI",
+		"Privacy-First",
+		"Smart Ring",
+		"Flutter",
 		"SvelteKit",
 		"Rust",
-		"Privacy-First",
-		"TypeScript",
 		"Open Source",
-		"Linux",
-		"Hyprland",
-		"AI Tooling",
-		"SEO",
-		"System Admin",
-		"Smart Ring",
-		"Pulsyn",
+		"Phoenix, AZ",
+		"Local-First",
 	];
 
 	onMount(() => {
@@ -60,14 +60,15 @@
 		<div class="animate-fade-up">
 			<p class="editorial-byline text-sm mb-5">
 				By <span class="text-ink not-italic font-medium">James Hoffmann</span>
-				&nbsp;·&nbsp; {age} y/o developer, sysadmin &amp; privacy advocate
+				&nbsp;·&nbsp; Founder &amp; CEO, Pulsyn
+				&nbsp;·&nbsp; {age} y/o software engineer in Phoenix, AZ
 			</p>
 
 			<h1
 				class="font-display fraunces-hover text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
-				Building tools for privacy &amp; productivity.
+				I run Pulsyn. Building hardware that thinks on-device.
 			</h1>
 		</div>
 
@@ -77,7 +78,7 @@
 					class="font-body text-lg md:text-xl leading-[1.65] text-ink-soft mb-4"
 					style="text-wrap: pretty;"
 				>
-					Creating elegant, privacy-respecting software. From desktop environments to AI-powered tools, every project is built with attention to detail and a commitment to user sovereignty.
+					Pulsyn ships the Rune 1 smart ring with PRANA 0.7B, a 700M-parameter language model that runs on the phone in your pocket. Your heart rate, your sleep, your readiness score, none of it ever leaves your hardware. Privacy as architecture, not as a marketing checkbox.
 				</p>
 			</DropCap>
 
@@ -85,7 +86,7 @@
 				class="font-body text-base md:text-lg leading-[1.65] text-ink-soft"
 				style="text-wrap: pretty;"
 			>
-				Currently building Pulsyn, a premium smart ring that makes health tracking accessible at half the cost. Previously, open-source tools for SEO analysis, multi-LLM council discussions, and a privacy-first Linux desktop environment.
+				Twenty-two years old, writing Flutter and SvelteKit by day, training a small language model on two million rows of biometric data by night. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
 			</p>
 		</div>
 
@@ -93,7 +94,7 @@
 			class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium animate-fade-up delay-200"
 		>
 			<a href="/tools" class="editorial-link inline-flex items-center gap-2">
-				View Projects <span aria-hidden="true">&rarr;</span>
+				See the Work <span aria-hidden="true">&rarr;</span>
 			</a>
 			<a
 				href="https://github.com/hffmnnj"

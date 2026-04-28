@@ -43,24 +43,24 @@
 		},
 		author: {
 			"@type": "Person",
-			name: "hffmnn",
+			name: "James Hoffmann",
 			url: "https://hffmnn.com"
 		}
 	});
 </script>
 
 <svelte:head>
-	<title>{data.project.title} - hffmnn</title>
+	<title>{data.project.title} - James Hoffmann</title>
 	<meta name="description" content={data.project.description} />
 
 	<!-- Page-specific Open Graph -->
-	<meta property="og:title" content="{data.project.title} - hffmnn" />
+	<meta property="og:title" content="{data.project.title} - James Hoffmann" />
 	<meta property="og:description" content={data.project.description} />
 	<meta property="og:url" content="https://hffmnn.com/tools/{data.project.slug}" />
 	<meta property="og:type" content="article" />
 
 	<!-- Twitter -->
-	<meta name="twitter:title" content="{data.project.title} - hffmnn" />
+	<meta name="twitter:title" content="{data.project.title} - James Hoffmann" />
 	<meta name="twitter:description" content={data.project.description} />
 
 	<!-- JSON-LD Structured Data -->

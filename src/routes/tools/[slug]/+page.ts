@@ -42,7 +42,7 @@ async function fetchMarkdown(
 		return { markdown, error: null };
 	} catch (err) {
 		console.error(`Failed to fetch README for ${project.slug}:`, err);
-		return { markdown: null, error: 'Unable to load README content.' };
+		return { markdown: null, error: 'README failed to load.' };
 	}
 }
 

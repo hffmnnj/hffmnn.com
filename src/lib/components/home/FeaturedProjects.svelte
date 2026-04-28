@@ -29,10 +29,10 @@
 		<div class="flex items-end justify-between mb-10 animate-fade-up">
 			<div>
 				<h2 class="font-display text-4xl md:text-6xl font-bold tracking-[-0.03em] text-ink mb-2 fraunces-hover">
-					Featured Projects
+					The Work
 				</h2>
 				<p class="editorial-byline text-base">
-					Open source tools for privacy and productivity
+					Ten open source projects across privacy, on-device AI, and developer tooling.
 				</p>
 			</div>
 			<a href="/tools" class="hidden md:inline-flex editorial-link text-sm items-center gap-2">
@@ -86,7 +86,7 @@
 				<h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink fraunces-hover">
 					Capyseo
 				</h3>
-				<span class="editorial-byline text-sm">AI-powered SEO toolkit</span>
+				<span class="editorial-byline text-sm">50+ rules, four AI providers.</span>
 			</div>
 
 			<div class="grid md:grid-cols-3 gap-8 md:divide-x md:divide-rule">
