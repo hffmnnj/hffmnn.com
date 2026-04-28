@@ -8,17 +8,17 @@
 </script>
 
 <svelte:head>
-	<title>hffmnn - Developer & Privacy Advocate</title>
-	<meta name="description" content="Personal portfolio showcasing privacy-focused tools and projects. Building elegant, privacy-respecting software for developers who value security and simplicity." />
+	<title>James Hoffmann - Founder of Pulsyn</title>
+	<meta name="description" content="James Hoffmann. Founder of Pulsyn, building the Rune 1 smart ring and PRANA 0.7B on-device AI from Phoenix, AZ. Privacy advocate, open source builder." />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="hffmnn - Developer & Privacy Advocate" />
-	<meta property="og:description" content="Personal portfolio showcasing privacy-focused tools and projects. Building elegant, privacy-respecting software." />
+	<meta property="og:title" content="James Hoffmann - Founder of Pulsyn" />
+	<meta property="og:description" content="James Hoffmann. Founder of Pulsyn, building the Rune 1 smart ring and PRANA 0.7B on-device AI from Phoenix, AZ. Privacy advocate, open source builder." />
 	<meta property="og:url" content="https://hffmnn.com" />
 
 	<!-- Twitter -->
-	<meta name="twitter:title" content="hffmnn - Developer & Privacy Advocate" />
-	<meta name="twitter:description" content="Personal portfolio showcasing privacy-focused tools and projects." />
+	<meta name="twitter:title" content="James Hoffmann - Founder of Pulsyn" />
+	<meta name="twitter:description" content="James Hoffmann. Founder of Pulsyn, building the Rune 1 smart ring and PRANA 0.7B on-device AI from Phoenix, AZ. Privacy advocate, open source builder." />
 </svelte:head>
 
 <RunningHeader />
