@@ -84,22 +84,20 @@
 				</div>
 			</div>
 
-			<!-- Right: five proof-of-competence rows (5 cols) -->
+			<!-- Right: four proof-of-competence rows (5 cols) — vertically centered -->
 			<div
-				class="md:col-span-5 animate-fade-up delay-200 flex flex-col gap-8 md:gap-10"
+				class="md:col-span-5 animate-fade-up delay-200 flex flex-col justify-center gap-8 md:gap-10"
 			>
 				<div
-					class="skill-row accent"
+					class="skill-row skill-colored"
 					use:reveal
-					style="--row-delay: 0ms"
+					style="--row-delay: 0ms; --skill-color: oklch(72% 0.14 72);"
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<HugeiconsIcon
-								icon={CpuIcon}
-								size={18}
-								strokeWidth={1.5}
-							/>
+							<span style="color: oklch(72% 0.14 72); display:contents;">
+								<HugeiconsIcon icon={CpuIcon} size={18} strokeWidth={1.5} />
+							</span>
 							<h3
 								class="font-display fraunces-hover text-xl md:text-2xl font-semibold text-ink"
 							>
@@ -113,17 +111,15 @@
 				</div>
 
 				<div
-					class="skill-row"
+					class="skill-row skill-colored"
 					use:reveal
-					style="--row-delay: 100ms"
+					style="--row-delay: 100ms; --skill-color: oklch(58% 0.12 240);"
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<HugeiconsIcon
-								icon={Shield01Icon}
-								size={18}
-								strokeWidth={1.5}
-							/>
+							<span style="color: oklch(58% 0.12 240); display:contents;">
+								<HugeiconsIcon icon={Shield01Icon} size={18} strokeWidth={1.5} />
+							</span>
 							<h3
 								class="font-display fraunces-hover text-xl md:text-2xl font-semibold text-ink"
 							>
@@ -137,17 +133,15 @@
 				</div>
 
 				<div
-					class="skill-row"
+					class="skill-row skill-colored"
 					use:reveal
-					style="--row-delay: 200ms"
+					style="--row-delay: 200ms; --skill-color: oklch(55% 0.09 105);"
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<HugeiconsIcon
-								icon={LockKeyIcon}
-								size={18}
-								strokeWidth={1.5}
-							/>
+							<span style="color: oklch(55% 0.09 105); display:contents;">
+								<HugeiconsIcon icon={LockKeyIcon} size={18} strokeWidth={1.5} />
+							</span>
 							<h3
 								class="font-display fraunces-hover text-xl md:text-2xl font-semibold text-ink"
 							>
@@ -161,17 +155,15 @@
 				</div>
 
 				<div
-					class="skill-row"
+					class="skill-row skill-colored"
 					use:reveal
-					style="--row-delay: 300ms"
+					style="--row-delay: 300ms; --skill-color: oklch(50% 0.18 25);"
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<HugeiconsIcon
-								icon={AiNetworkIcon}
-								size={18}
-								strokeWidth={1.5}
-							/>
+							<span style="color: oklch(50% 0.18 25); display:contents;">
+								<HugeiconsIcon icon={AiNetworkIcon} size={18} strokeWidth={1.5} />
+							</span>
 							<h3
 								class="font-display fraunces-hover text-xl md:text-2xl font-semibold text-ink"
 							>
@@ -190,6 +182,11 @@
 </section>
 
 <style>
+	/* Skill row color — per-entry accent via --skill-color custom property */
+	:global(.skill-row.skill-colored)::before {
+		background: var(--skill-color, var(--accent));
+	}
+
 	/* STANCE manifest — newspaper-style numbered principles.
 	   Reuses border-draw-down animation pattern from skill-row.
 	   All transform/opacity. Reduced-motion safe via global media query. */
