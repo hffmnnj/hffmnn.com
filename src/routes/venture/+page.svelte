@@ -150,7 +150,7 @@
 	<div class="max-w-5xl mx-auto">
 		<!-- Lede -->
 		<header class="mb-12 md:mb-16 animate-fade-up">
-			<Kicker label="DEPARTMENT  ·  VENTURE  ·  ISSUE 04" showRule={true} />
+			<Kicker label="DEPARTMENT  ·  VENTURE" showRule={true} />
 			<IssueTag type="current" value="VENTURE" accent={true} class="mb-4" />
 
 			<h1

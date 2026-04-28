@@ -1,4 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#000"/>
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="#fff" font-family="system-ui" font-size="18" font-weight="700">h</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Squircle clip: rounded square with tight radius matching the site's editorial feel -->
+    <clipPath id="sq">
+      <rect x="0" y="0" width="64" height="64" rx="14" ry="14"/>
+    </clipPath>
+  </defs>
+  <!-- Accent red background -->
+  <rect x="0" y="0" width="64" height="64" rx="14" ry="14" fill="#C0392B"/>
+  <!-- Fraunces-style serif H — hand-crafted paths for a capital H with serifs -->
+  <!-- Left stem -->
+  <rect x="11" y="12" width="9" height="40" rx="1" fill="white"/>
+  <!-- Right stem -->
+  <rect x="44" y="12" width="9" height="40" rx="1" fill="white"/>
+  <!-- Crossbar -->
+  <rect x="11" y="27.5" width="42" height="9" rx="1" fill="white"/>
+  <!-- Left top serif -->
+  <rect x="7"  y="12" width="17" height="3.5" rx="1" fill="white"/>
+  <!-- Left bottom serif -->
+  <rect x="7"  y="48.5" width="17" height="3.5" rx="1" fill="white"/>
+  <!-- Right top serif -->
+  <rect x="40" y="12" width="17" height="3.5" rx="1" fill="white"/>
+  <!-- Right bottom serif -->
+  <rect x="40" y="48.5" width="17" height="3.5" rx="1" fill="white"/>
 </svg>
