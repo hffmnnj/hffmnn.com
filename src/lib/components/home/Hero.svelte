@@ -64,11 +64,24 @@
 
 <section
 	id="hero-section"
-	class="section-counter pt-16 md:pt-28 pb-16 md:pb-24 px-6"
+	class="section-counter hero-has-bg pt-16 md:pt-28 pb-16 md:pb-24 px-6"
 	data-n="00"
 	use:countUp={{ target: 1 }}
 >
-	<div class="max-w-6xl mx-auto">
+	<!-- Background image layer — warm editorial overlay -->
+	<div class="hero-bg-layer" aria-hidden="true">
+		<img
+			src="https://images.unsplash.com/photo-1771814536036-e1a244a6c92b?w=1920&q=80"
+			alt=""
+			class="hero-bg-img"
+			loading="eager"
+			decoding="async"
+			fetchpriority="high"
+		/>
+		<div class="hero-bg-overlay"></div>
+	</div>
+
+	<div class="max-w-6xl mx-auto relative z-10">
 		<Kicker label="FEATURE  ·  PORTFOLIO" showRule={true} />
 
 		<div class="animate-fade-up">
