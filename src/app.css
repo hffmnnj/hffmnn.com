@@ -795,7 +795,7 @@
     transform-origin: center top;
     will-change: transform;
     /* Warm desaturation: pull photo toward paper palette */
-    filter: saturate(0.45) brightness(1.08) sepia(0.12);
+    filter: saturate(0.65) brightness(1.05) sepia(0.08);
     transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -811,18 +811,18 @@
     background:
       linear-gradient(
         to bottom,
-        oklch(97% 0.01 80 / 0.88) 0%,
-        oklch(97% 0.01 80 / 0.60) 30%,
-        oklch(97% 0.01 80 / 0.45) 55%,
-        oklch(97% 0.01 80 / 0.72) 80%,
-        oklch(97% 0.01 80 / 0.92) 100%
+        oklch(97% 0.01 80 / 0.72) 0%,
+        oklch(97% 0.01 80 / 0.30) 30%,
+        oklch(97% 0.01 80 / 0.18) 55%,
+        oklch(97% 0.01 80 / 0.45) 80%,
+        oklch(97% 0.01 80 / 0.82) 100%
       ),
       /* Warm amber ink-wash tint — anchors photo to editorial palette */
       linear-gradient(
         135deg,
-        oklch(80% 0.04 65 / 0.20) 0%,
-        oklch(90% 0.02 80 / 0.08) 60%,
-        oklch(75% 0.06 30 / 0.15) 100%
+        oklch(80% 0.04 65 / 0.12) 0%,
+        oklch(90% 0.02 80 / 0.05) 60%,
+        oklch(75% 0.06 30 / 0.10) 100%
       );
     mix-blend-mode: normal;
   }
