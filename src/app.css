@@ -695,6 +695,35 @@
   }
 }
 
+/* H2) Adaptive card metadata — overflow tags revealed on hover (pointer:fine). */
+@layer utilities {
+  .adaptive-meta {
+    /* Default: shown (mobile / touch / no-hover devices) */
+    opacity: 1;
+    max-height: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .adaptive-meta {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition:
+        opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+        max-height 240ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .group:hover .adaptive-meta,
+    .group:focus-within .adaptive-meta {
+      max-height: 4rem;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 /* I) Active-nav indicator — accent underbar offset below masthead rule. */
 @layer utilities {
   .nav-active {
@@ -734,6 +763,12 @@
   }
   .reveal-clip {
     opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .adaptive-meta {
+    opacity: 1 !important;
+    max-height: none !important;
     transform: none !important;
     transition: none !important;
   }
