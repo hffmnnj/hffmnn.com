@@ -70,14 +70,17 @@
 >
 	<!-- Background image layer — warm editorial overlay -->
 	<div class="hero-bg-layer" aria-hidden="true">
-		<img
-			src="https://images.unsplash.com/photo-1771814536036-e1a244a6c92b?w=1920&q=80"
-			alt=""
-			class="hero-bg-img"
-			loading="eager"
-			decoding="async"
-			fetchpriority="high"
-		/>
+		<picture>
+			<source srcset="/images/hero_bg.webp" type="image/webp" />
+			<img
+				src="/images/hero_bg.jpg"
+				alt=""
+				class="hero-bg-img"
+				loading="eager"
+				decoding="async"
+				fetchpriority="high"
+			/>
+		</picture>
 		<div class="hero-bg-overlay"></div>
 	</div>
 

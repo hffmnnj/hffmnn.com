@@ -36,13 +36,16 @@
 				>
 					<!-- Cover image -->
 					<div class="relative overflow-hidden border border-rule mb-6" style="height: 280px;">
-						<img
-							src="https://images.unsplash.com/photo-1764336222789-28fd1846c6e3?w=1200&q=80"
-							alt="Close-up macro iris — Arizona Mobile ID article cover"
-							class="w-full h-full object-cover object-left transition-transform duration-700 group-hover:scale-[1.03]"
-							loading="lazy"
-							decoding="async"
-						/>
+						<picture>
+							<source srcset="/images/az_mobile_id.webp" type="image/webp" />
+							<img
+								src="/images/az_mobile_id.jpg"
+								alt="Close-up macro iris — Arizona Mobile ID article cover"
+								class="w-full h-full object-cover object-left transition-transform duration-700 group-hover:scale-[1.03]"
+								loading="lazy"
+								decoding="async"
+							/>
+						</picture>
 						<!-- Thin ink-wash gradient so the headline below reads against paper -->
 						<div
 							class="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
