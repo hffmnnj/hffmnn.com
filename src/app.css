@@ -811,11 +811,11 @@
     background:
       linear-gradient(
         to bottom,
-        oklch(97% 0.01 80 / 0.72) 0%,
-        oklch(97% 0.01 80 / 0.30) 30%,
-        oklch(97% 0.01 80 / 0.18) 55%,
-        oklch(97% 0.01 80 / 0.45) 80%,
-        oklch(97% 0.01 80 / 0.82) 100%
+        oklch(97% 0.01 80 / 0.82) 0%,
+        oklch(97% 0.01 80 / 0.52) 30%,
+        oklch(97% 0.01 80 / 0.38) 55%,
+        oklch(97% 0.01 80 / 0.60) 80%,
+        oklch(97% 0.01 80 / 0.88) 100%
       ),
       /* Warm amber ink-wash tint — anchors photo to editorial palette */
       linear-gradient(
