@@ -42,11 +42,11 @@
 
 		<div class="flex flex-wrap justify-center gap-4">
 			<Button href="/" class="glass-button">
-				<span class="mr-2"><HugeiconsIcon icon={Home01Icon} size={16} /></span>
+				<span class="relative -top-[1px] mr-2"><HugeiconsIcon icon={Home01Icon} size={16} /></span>
 				Go Home
 			</Button>
 			<Button href="/tools" variant="ghost" class="text-muted-foreground hover:text-white">
-				<span class="mr-2"><HugeiconsIcon icon={ArrowLeft01Icon} size={16} /></span>
+				<span class="relative -top-[1px] mr-2"><HugeiconsIcon icon={ArrowLeft01Icon} size={16} /></span>
 				View Tools
 			</Button>
 		</div>

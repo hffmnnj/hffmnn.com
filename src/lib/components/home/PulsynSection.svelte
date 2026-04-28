@@ -113,7 +113,7 @@
 							class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
 						>
 							Reserve for $10
-							<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
+							<span class="relative -top-[1px]"><HugeiconsIcon icon={ArrowUpRight01Icon} size={16} /></span>
 						</a>
 						<a
 							href="https://getpulsyn.com"
