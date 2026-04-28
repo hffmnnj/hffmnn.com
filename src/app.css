@@ -763,17 +763,20 @@
    HERO BACKGROUND IMAGE — editorial parallax-ready treatment
    ============================================================ */
 @layer utilities {
-  /* Section host: ensure stacking context for z-index layering */
+  /* Section host — position: relative already set by .section-counter.
+     No isolation: the bg layer sits at z:0, content at z:1. */
   .hero-has-bg {
     position: relative;
-    isolation: isolate;
+    /* override .section-counter overflow:hidden so absolute bg isn't clipped */
+    overflow: visible;
   }
 
-  /* Full-bleed background layer */
+  /* Full-bleed background layer — z:0 so it renders above the section bg
+     but below z:1 content. No negative z-index to avoid stacking-context traps. */
   .hero-bg-layer {
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     overflow: hidden;
     pointer-events: none;
     user-select: none;
@@ -808,18 +811,18 @@
     background:
       linear-gradient(
         to bottom,
-        oklch(97% 0.01 80 / 0.94) 0%,
-        oklch(97% 0.01 80 / 0.78) 30%,
-        oklch(97% 0.01 80 / 0.68) 55%,
-        oklch(97% 0.01 80 / 0.82) 80%,
-        oklch(97% 0.01 80 / 0.96) 100%
+        oklch(97% 0.01 80 / 0.88) 0%,
+        oklch(97% 0.01 80 / 0.60) 30%,
+        oklch(97% 0.01 80 / 0.45) 55%,
+        oklch(97% 0.01 80 / 0.72) 80%,
+        oklch(97% 0.01 80 / 0.92) 100%
       ),
       /* Warm amber ink-wash tint — anchors photo to editorial palette */
       linear-gradient(
         135deg,
-        oklch(80% 0.04 65 / 0.25) 0%,
-        oklch(90% 0.02 80 / 0.10) 60%,
-        oklch(75% 0.06 30 / 0.18) 100%
+        oklch(80% 0.04 65 / 0.20) 0%,
+        oklch(90% 0.02 80 / 0.08) 60%,
+        oklch(75% 0.06 30 / 0.15) 100%
       );
     mix-blend-mode: normal;
   }

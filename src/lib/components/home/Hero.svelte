@@ -81,7 +81,7 @@
 		<div class="hero-bg-overlay"></div>
 	</div>
 
-	<div class="max-w-6xl mx-auto relative z-10">
+	<div class="max-w-6xl mx-auto relative" style="z-index: 1;">
 		<Kicker label="FEATURE  ·  PORTFOLIO" showRule={true} />
 
 		<div class="animate-fade-up">
@@ -136,7 +136,7 @@
 	</div>
 
 	<!-- Ticker below hero -->
-	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip" use:reveal>
+	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip relative" style="z-index: 1;" use:reveal>
 		<span class="ticker-live" aria-hidden="true">
 			<span class="ticker-live-dot"></span>
 			<span>LIVE</span>
