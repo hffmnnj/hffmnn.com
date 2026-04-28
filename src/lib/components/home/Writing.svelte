@@ -32,28 +32,47 @@
 					href="https://getpulsyn.com/blog/reverse-engineering-arizona-mobile-id"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="group block border-t border-rule pt-6"
+					class="group block"
 				>
-					<h3
-						class="font-display fraunces-hover text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] text-ink leading-[1.05] mb-4 group-hover:text-accent transition-colors duration-200"
-					>
-						Reverse-Engineering the Arizona Mobile ID
-						<span
+					<!-- Cover image -->
+					<div class="relative overflow-hidden border border-rule mb-6" style="height: 280px;">
+						<img
+							src="https://images.unsplash.com/photo-1764336222789-28fd1846c6e3?w=1200&q=80"
+							alt="Close-up macro iris — Arizona Mobile ID article cover"
+							class="w-full h-full object-cover object-left transition-transform duration-700 group-hover:scale-[1.03]"
+							loading="lazy"
+							decoding="async"
+						/>
+						<!-- Thin ink-wash gradient so the headline below reads against paper -->
+						<div
+							class="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+							style="background: linear-gradient(to top, var(--paper) 0%, transparent 100%);"
 							aria-hidden="true"
-							class="inline-block ml-2 text-ink-faint group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
-							>&nearr;</span
+						></div>
+					</div>
+
+					<div class="border-t border-rule pt-6">
+						<h3
+							class="font-display fraunces-hover text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] text-ink leading-[1.05] mb-4 group-hover:text-accent transition-colors duration-200"
 						>
-					</h3>
-					<p
-						class="font-body text-base md:text-lg text-ink-soft leading-[1.65] max-w-2xl"
-						style="text-wrap: pretty;"
-					>
-						I decompiled the state's mDL app, traced the ADB data flows,
-						and documented what actually gets stored on the device.
-					</p>
-					<p class="editorial-mono text-xs text-ink-faint mt-5">
-						getpulsyn.com <span aria-hidden="true">&nearr;</span>
-					</p>
+							Reverse-Engineering the Arizona Mobile ID
+							<span
+								aria-hidden="true"
+								class="inline-block ml-2 text-ink-faint group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
+								>&nearr;</span
+							>
+						</h3>
+						<p
+							class="font-body text-base md:text-lg text-ink-soft leading-[1.65] max-w-2xl"
+							style="text-wrap: pretty;"
+						>
+							I decompiled the state's mDL app, traced the ADB data flows,
+							and documented what actually gets stored on the device.
+						</p>
+						<p class="editorial-mono text-xs text-ink-faint mt-5">
+							getpulsyn.com <span aria-hidden="true">&nearr;</span>
+						</p>
+					</div>
 				</a>
 			</div>
 		</div>
