@@ -2,6 +2,7 @@
 	import { page } from "$app/state";
 	import { afterNavigate } from "$app/navigation";
 	import { cn } from "$lib/utils/cn";
+	import { socials } from "$lib/data/socials";
 
 	let isMenuOpen = $state(false);
 
@@ -90,14 +91,22 @@
 				<a href="/" class="editorial-link py-1">Home</a>
 				<a href="/tools" class="editorial-link py-1">Tools</a>
 				<a href="/venture" class="editorial-link py-1">Venture</a>
-				<div class="border-t border-rule pt-3 mt-1">
+				<div class="border-t border-rule pt-3 mt-1 flex items-center gap-4">
 					<a
-						href="https://github.com/hffmnnj"
+						href={socials.github.url}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="editorial-link"
 					>
-						GitHub
+						{socials.github.label}
+					</a>
+					<a
+						href={socials.x.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="editorial-link"
+					>
+						{socials.x.label}
 					</a>
 				</div>
 			</div>
