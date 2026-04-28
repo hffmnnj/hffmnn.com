@@ -32,15 +32,10 @@
 					style="transition-delay: {i * 80}ms"
 				>
 					<div class="md:col-span-4">
-						<h3 class="ledger-row-title fraunces-hover font-display {i === 0 ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2">
+						<h3 class="ledger-row-title fraunces-hover font-display text-xl md:text-2xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h3>
-						{#if i === 0}
-							<p class="editorial-byline text-sm text-ink-soft leading-[1.55] mt-1 mb-2 max-w-xs" style="text-wrap: pretty;">
-								{project.shortDescription.split('.')[0]}.
-							</p>
-						{/if}
-						<Byline class="text-xs" />
+						<Byline author="hffmnnj" class="text-xs" />
 					</div>
 
 					<div class="md:col-span-6">

@@ -49,7 +49,7 @@
 		<p class="font-body text-lg text-ink-soft max-w-2xl leading-[1.6]">
 			Eight projects across privacy infrastructure, AI tooling, and developer utilities. All open source.
 		</p>
-			<Byline class="mt-4 text-xs" />
+			<Byline author="James Hoffmann" class="mt-4 text-xs" />
 		</header>
 
 		<!-- Main projects (ledger style) -->

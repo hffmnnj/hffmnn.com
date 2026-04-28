@@ -124,7 +124,7 @@
 		<p class="font-body text-base md:text-lg text-ink-soft max-w-2xl leading-[1.6] mb-6">
 			PPG, SpO2, skin temperature, accelerometer. On-device AI analysis. Ships at $160, retail $200. Reserve for $10 now.
 		</p>
-			<Byline location="Phoenix, AZ" class="text-xs mb-8" />
+			<Byline author="James Hoffmann" location="Phoenix, AZ" class="text-xs mb-8" />
 
 			<div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium">
 				<a
