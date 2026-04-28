@@ -4,6 +4,7 @@
 	import { formatRelativeTime } from "$lib/utils/github";
 	import { parseMarkdown } from "$lib/utils/markdown";
 	import { afterNavigate } from "$app/navigation";
+	import { onMount } from "svelte";
 
 	let { data } = $props();
 
@@ -26,6 +27,19 @@
 		} else {
 			backLink = { href: "/tools", label: "Back to Tools" };
 		}
+	});
+
+	onMount(() => {
+		if (!renderedHtml?.includes('class="mermaid"')) return;
+
+		const script = document.createElement('script');
+		script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+		script.onload = () => {
+			const mermaid = (window as unknown as { mermaid?: { initialize: (cfg: object) => void; run: (cfg: object) => void } }).mermaid;
+			mermaid?.initialize({ startOnLoad: false });
+			mermaid?.run({ querySelector: '.mermaid' });
+		};
+		document.head.appendChild(script);
 	});
 
 	const softwareSchema = $derived({

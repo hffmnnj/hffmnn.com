@@ -30,6 +30,12 @@ export function parseMarkdown(content: string, repo: RepoInfo): string {
 
 		marked.use({
 			renderer: {
+				code({ text, lang }) {
+					if (lang === 'mermaid') {
+						return `<div class="mermaid">${text}</div>`;
+					}
+					return `<pre><code class="language-${lang || 'text'}">${text}</code></pre>`;
+				},
 				image({ href, title, text }) {
 					const absoluteUrl = transformGitHubImageUrl(href, repo);
 					const titleAttr = title ? ` title="${title}"` : '';
@@ -61,7 +67,8 @@ export function parseMarkdown(content: string, repo: RepoInfo): string {
 		// Sanitize HTML to prevent XSS attacks from external README content
 		return DOMPurify.sanitize(html, {
 			ADD_ATTR: ['target', 'rel', 'loading'],
-			ADD_TAGS: ['img']
+			ADD_TAGS: ['img', 'div'],
+			ALLOWED_ATTR: ['class', 'src', 'alt', 'title', 'href', 'target', 'rel', 'loading']
 		});
 	} catch (error) {
 		console.error('Failed to parse markdown:', error);
