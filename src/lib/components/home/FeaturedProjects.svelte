@@ -2,27 +2,10 @@
 	import { Kicker, Byline } from "$lib/components/editorial";
 	import { Badge } from "$lib/components/ui/badge";
 	import { projects, capyseoProjects, reinsProjects } from "$lib/data/projects";
-	import { onMount } from "svelte";
-
-	onMount(() => {
-		const els = document.querySelectorAll(".reveal-clip");
-		const io = new IntersectionObserver(
-			(entries) => {
-				for (const e of entries) {
-					if (e.isIntersecting) {
-						e.target.classList.add("is-visible");
-						io.unobserve(e.target);
-					}
-				}
-			},
-			{ threshold: 0.08 }
-		);
-		els.forEach((el) => io.observe(el));
-		return () => io.disconnect();
-	});
+	import { reveal, countUp } from "$lib/actions";
 </script>
 
-<section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="03">
+<section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="00" use:countUp={{ target: 3 }}>
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="DEPARTMENT  ·  TOOLS" showRule={true} />
 
@@ -45,12 +28,18 @@
 				<a
 					href="/tools/{project.slug}"
 					class="ledger-row group grid md:grid-cols-12 gap-4 md:gap-6 py-8 md:py-10 px-2 -mx-2 reveal-clip {i === 0 ? 'border-t-2 border-ink' : 'border-t border-rule'}"
+					use:reveal={{ threshold: 0.05 }}
 					style="transition-delay: {i * 80}ms"
 				>
 					<div class="md:col-span-4">
-						<h3 class="ledger-row-title fraunces-hover font-display {i === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2">
+						<h3 class="ledger-row-title fraunces-hover font-display {i === 0 ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'} font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h3>
+						{#if i === 0}
+							<p class="editorial-byline text-sm text-ink-soft leading-[1.55] mt-1 mb-2 max-w-xs" style="text-wrap: pretty;">
+								{project.shortDescription.split('.')[0]}.
+							</p>
+						{/if}
 						<Byline class="text-xs" />
 					</div>
 
@@ -63,6 +52,13 @@
 								<Badge variant="kicker">{tag}</Badge>
 							{/each}
 						</div>
+						{#if project.tags.length > 5}
+							<div class="adaptive-meta mt-2 flex flex-wrap gap-x-3 gap-y-1">
+								{#each project.tags.slice(5) as tag (tag)}
+									<Badge variant="kicker">{tag}</Badge>
+								{/each}
+							</div>
+						{/if}
 					</div>
 
 					<div class="md:col-span-2 md:text-right self-center">
@@ -94,6 +90,7 @@
 					<a
 						href="/tools/{project.slug}"
 						class="group md:px-6 md:first:pl-0 md:last:pr-0 reveal-clip"
+						use:reveal={{ threshold: 0.05 }}
 						style="transition-delay: {i * 100}ms"
 					>
 						<h4 class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
@@ -102,11 +99,18 @@
 						<p class="font-body text-sm text-ink-soft leading-[1.65] mb-3">
 							{project.shortDescription}
 						</p>
-						<div class="flex flex-wrap gap-x-3 gap-y-1 mb-3">
+						<div class="flex flex-wrap gap-x-3 gap-y-1 mb-2">
 							{#each project.tags.slice(0, 3) as tag (tag)}
 								<Badge variant="kicker">{tag}</Badge>
 							{/each}
 						</div>
+						{#if project.tags.length > 3}
+							<div class="adaptive-meta flex flex-wrap gap-x-2 gap-y-1 mb-2">
+								{#each project.tags.slice(3) as tag (tag)}
+									<Badge variant="kicker">{tag}</Badge>
+								{/each}
+							</div>
+						{/if}
 						<span class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent">
 							Read more <span aria-hidden="true">&rarr;</span>
 						</span>
@@ -135,6 +139,7 @@
 					<a
 						href="/tools/{project.slug}"
 						class="group md:px-6 md:first:pl-0 md:last:pr-0 reveal-clip"
+						use:reveal={{ threshold: 0.05 }}
 						style="transition-delay: {i * 100}ms"
 					>
 						<h4 class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
@@ -143,19 +148,26 @@
 						<p class="font-body text-sm text-ink-soft leading-[1.65] mb-3">
 							{project.shortDescription}
 						</p>
-						<div class="flex flex-wrap gap-x-3 gap-y-1 mb-3">
+						<div class="flex flex-wrap gap-x-3 gap-y-1 mb-2">
 							{#each project.tags.slice(0, 3) as tag (tag)}
 								<Badge variant="kicker">{tag}</Badge>
 							{/each}
 						</div>
-						<div class="flex items-center gap-4">
+						{#if project.tags.length > 3}
+							<div class="adaptive-meta flex flex-wrap gap-x-2 gap-y-1 mb-2">
+								{#each project.tags.slice(3) as tag (tag)}
+									<Badge variant="kicker">{tag}</Badge>
+								{/each}
+							</div>
+						{/if}
+						<div class="flex items-center gap-4 mt-1">
 							<span class="editorial-link text-xs inline-flex items-center gap-1 text-ink-soft group-hover:text-accent">
 								Read more <span aria-hidden="true">&rarr;</span>
 							</span>
 							{#if project.websiteUrl}
 								<button
 									type="button"
-									onclick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.websiteUrl, '_blank', 'noopener,noreferrer'); }}
+									onclick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.websiteUrl!, '_blank', 'noopener,noreferrer'); }}
 									class="editorial-link text-xs text-ink-faint hover:text-accent"
 								>
 									Website <span aria-hidden="true">&nearr;</span>
