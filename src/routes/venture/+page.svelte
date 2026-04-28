@@ -85,7 +85,7 @@
 		"@type": "Product",
 		name: "Pulsyn Rune 1",
 		description:
-			"Privacy-first smart ring with on-device AI. Tracks heart rate, HRV, SpO2, sleep, activity, and skin temperature. Gemma-powered on-device AI health assistant Milo. Core features free forever.",
+			"Privacy-first smart ring with on-device AI. Tracks heart rate, HRV, SpO2, sleep, activity, and skin temperature. PRANA 0.7B-powered on-device AI health assistant Milo. Core features free forever.",
 		url: "https://hffmnn.com/venture",
 		brand: {
 			"@type": "Brand",
@@ -102,7 +102,7 @@
 				name: "Sensors",
 				value: "PPG, SpO2, skin temperature, 3-axis accelerometer"
 			},
-			{ "@type": "PropertyValue", name: "AI Processing", value: "On-device (Gemma model)" },
+			{ "@type": "PropertyValue", name: "AI Processing", value: "On-device (PRANA 0.7B)" },
 			{ "@type": "PropertyValue", name: "Connectivity", value: "Bluetooth 5.2 BLE" },
 			{ "@type": "PropertyValue", name: "Warranty", value: "2 years" }
 		],
@@ -164,7 +164,7 @@
 				Privacy-First Smart Ring. On-Device AI.
 			</p>
 			<p class="font-body text-base md:text-lg text-ink-soft max-w-2xl leading-[1.6] mb-6">
-				PPG, SpO2, skin temperature, 3-axis accelerometer. On-device AI runs as Milo, a conversational health assistant built on Gemma. Core tracking is free forever. Retail $200, pre-order for $160. Ships Q3 2026.
+				PPG, SpO2, skin temperature, 3-axis accelerometer. On-device AI runs as Milo, a conversational health assistant built on PRANA 0.7B. Core tracking is free forever. Retail $200, pre-order for $160. Ships Q3 2026.
 			</p>
 			<Byline author="James Hoffmann" location="Phoenix, AZ" class="text-xs mb-8" />
 
@@ -272,12 +272,12 @@
 				Meet Milo
 			</h2>
 			<p class="font-body text-base text-ink-soft max-w-2xl mb-6 leading-[1.6]">
-				Milo is an on-device AI health assistant built on Gemma. It reads your sleep, HRV, and activity data and gives plain-language feedback. No internet required, no data sent out.
+				Milo is an on-device AI health assistant built on PRANA 0.7B, our in-house trained small language model. It reads your sleep, HRV, and activity data and gives plain-language feedback. No internet required, no data sent out.
 			</p>
 			<div class="grid sm:grid-cols-2 gap-8 max-w-2xl">
 				<div class="border-t border-ink pt-4">
 					<span class="editorial-mono text-xs text-ink-faint mb-2 block">FREE TIER</span>
-					<h3 class="font-display text-lg font-semibold text-ink mb-2">On-Device Gemma</h3>
+					<h3 class="font-display text-lg font-semibold text-ink mb-2">On-Device PRANA 0.7B</h3>
 					<p class="font-body text-sm text-ink-soft leading-[1.6]">
 						Runs entirely on your phone. Health insights, sleep breakdowns, readiness scores. No subscription, no cloud, no compromises.
 					</p>

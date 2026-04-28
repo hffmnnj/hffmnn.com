@@ -84,7 +84,7 @@
 						Premium Smart Ring. Half the Price.
 					</h3>
 					<p class="font-body text-base text-ink-soft mb-6 leading-[1.65]">
-						PPG, SpO2, temperature, and a 3-axis accelerometer. Milo, the on-device AI health assistant, runs on a Gemma model with no internet required. Core tracking is free forever. Pre-order ships at $160, retail $200.
+						PPG, SpO2, temperature, and a 3-axis accelerometer. Milo, the on-device AI health assistant, runs on PRANA 0.7B with no internet required. Core tracking is free forever. Pre-order ships at $160, retail $200.
 					</p>
 
 					<ul class="space-y-2.5 mb-8">
@@ -110,8 +110,7 @@
 							href="https://getpulsyn.com"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200 tilt-host"
-							use:magnetic={{ strength: 0.4, tilt: true, tiltMax: 6, radius: 140 }}
+							class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
 						>
 							Pre-order for $160
 							<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
@@ -143,7 +142,7 @@
 					</div>
 					<div class="flex-1 px-4 md:px-6 py-3 text-center">
 						<span class="editorial-mono text-[10px] text-ink-faint block mb-0.5">ON-DEVICE AI</span>
-						<span class="font-display text-xs md:text-sm font-semibold text-ink">Milo · Gemma</span>
+						<span class="font-display text-xs md:text-sm font-semibold text-ink">Milo · PRANA 0.7B</span>
 					</div>
 				</div>
 			</div>
