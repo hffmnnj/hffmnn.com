@@ -23,17 +23,17 @@
 </script>
 
 <svelte:head>
-	<title>Tools & Open Source Projects - hffmnn</title>
-	<meta name="description" content="Privacy-focused tools and open source projects by hffmnn. Explore Vibearchy desktop environment, Me and My Friends AI advisor, and Capyseo SEO toolkit." />
+	<title>Open Source Work — hffmnn</title>
+	<meta name="description" content="Ten open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, Reins, and more. Privacy tools, AI infrastructure, developer utilities." />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Tools & Projects | hffmnn" />
-	<meta property="og:description" content="Open-source projects focused on privacy, productivity, and beautiful design." />
+	<meta property="og:title" content="Open Source Work — hffmnn" />
+	<meta property="og:description" content="Ten open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, Reins, and more. Privacy tools, AI infrastructure, developer utilities." />
 	<meta property="og:url" content="https://hffmnn.com/tools" />
 
 	<!-- Twitter -->
-	<meta name="twitter:title" content="Tools & Projects | hffmnn" />
-	<meta name="twitter:description" content="Open-source projects focused on privacy, productivity, and beautiful design." />
+	<meta name="twitter:title" content="Open Source Work — hffmnn" />
+	<meta name="twitter:description" content="Ten open source projects: Enclave Mail, Vibearchy, GoopSpec, CapySEO, Reins, and more. Privacy tools, AI infrastructure, developer utilities." />
 
 	<!-- JSON-LD Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify(collectionSchema)}</script>`}
@@ -44,10 +44,10 @@
 		<header class="mb-12 md:mb-16 animate-fade-up">
 			<Kicker label="DEPARTMENT  ·  TOOLS  ·  ISSUE 04" showRule={true} />
 			<h1 class="font-display text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-ink mb-3">
-				Tools &amp; Projects
+				Open Source Work
 			</h1>
 			<p class="font-body text-lg text-ink-soft max-w-2xl leading-[1.6]">
-				Open-source projects focused on privacy, productivity, and beautiful design. Each is a study in restraint.
+				Ten projects across privacy infrastructure, AI tooling, and developer utilities. All open source.
 			</p>
 			<Byline class="mt-4 text-xs" />
 		</header>
@@ -73,7 +73,7 @@
 				<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink">
 					Capyseo
 				</h2>
-				<span class="editorial-byline text-sm hidden md:block">AI-powered SEO toolkit</span>
+				<span class="editorial-byline text-sm hidden md:block">50+ SEO rules, multi-provider AI, one toolkit.</span>
 			</div>
 			<div class="divide-y divide-rule">
 				{#each capyseoProjects as project (project.slug)}
