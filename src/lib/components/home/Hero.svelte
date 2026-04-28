@@ -31,21 +31,33 @@
 		"Local-First",
 	];
 
+	let h1El: HTMLElement | undefined;
+
 	onMount(() => {
-		const els = document.querySelectorAll(".reveal-clip");
-		const io = new IntersectionObserver(
-			(entries) => {
-				for (const e of entries) {
-					if (e.isIntersecting) {
-						e.target.classList.add("is-visible");
-						io.unobserve(e.target);
-					}
+		// Word-split h1 for per-word variable-font animation (MH3).
+		// SSR-safe: original text remains in static HTML; spans only appear post-mount.
+		if (h1El) {
+			const fullText = (h1El.textContent ?? "").trim();
+			h1El.setAttribute("aria-label", fullText);
+			// Clear and rebuild with word spans, preserving whitespace as text nodes.
+			h1El.textContent = "";
+			let wordIndex = 0;
+			const tokens = fullText.split(/(\s+)/);
+			for (const token of tokens) {
+				if (token.length === 0) continue;
+				if (/^\s+$/.test(token)) {
+					h1El.appendChild(document.createTextNode(token));
+				} else {
+					const span = document.createElement("span");
+					span.className = "word";
+					span.setAttribute("aria-hidden", "true");
+					span.style.setProperty("--word-delay", `${wordIndex * 80}ms`);
+					span.textContent = token;
+					h1El.appendChild(span);
+					wordIndex++;
 				}
-			},
-			{ threshold: 0.1 },
-		);
-		els.forEach((el) => io.observe(el));
-		return () => io.disconnect();
+			}
+		}
 	});
 </script>
 
@@ -65,7 +77,8 @@
 			</p>
 
 			<h1
-				class="font-display fraunces-hover text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
+				bind:this={h1El}
+				class="font-display fraunces-hover word-split text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
 				I run Pulsyn. Building hardware that thinks on-device.
