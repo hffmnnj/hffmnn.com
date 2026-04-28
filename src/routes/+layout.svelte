@@ -14,12 +14,22 @@
 	const websiteSchema = {
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		name: "hffmnn",
+		name: "James Hoffmann",
 		url: "https://hffmnn.com",
-		description: "Privacy-focused developer portfolio and projects",
+		description: "James Hoffmann. Founder of Pulsyn, building the Rune 1 smart ring and PRANA 0.7B on-device AI from Phoenix, AZ.",
 		author: {
 			"@type": "Person",
-			name: "hffmnn"
+			name: "James Hoffmann",
+			url: "https://hffmnn.com",
+			jobTitle: "Founder & CEO",
+			worksFor: {
+				"@type": "Organization",
+				name: "Pulsyn"
+			},
+			sameAs: [
+				"https://github.com/hffmnnj",
+				"https://x.com/hffmnnj"
+			]
 		}
 	};
 </script>
@@ -39,6 +49,8 @@
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@hffmnnj" />
+	<meta name="twitter:creator" content="@hffmnnj" />
 	<meta name="twitter:image" content="https://hffmnn.com/og-image.png" />
 
 	<!-- JSON-LD Structured Data -->
