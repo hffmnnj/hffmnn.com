@@ -5,56 +5,77 @@
 	const features = [
 		{
 			title: "Premium Quality",
-			description: "Titanium construction with medical-grade materials for all-day comfort"
+			description: "Grade 5 Titanium shell with hypoallergenic resin inner. Weighs 2.4 to 4g depending on size."
 		},
 		{
-			title: "Up to 60-Day Battery",
-			description: "Up to 60-day battery with charging case (7 days per charge)"
+			title: "7-Day Battery",
+			description: "Up to 7 days per charge. The included case extends total battery life to roughly 60 days."
 		},
 		{
-			title: "5ATM Waterproofing",
-			description: "Swim, shower, and sweat worry-free with full water resistance"
+			title: "5ATM Waterproof",
+			description: "Rated to 50 meters. Swim, shower, and train without taking it off."
 		},
-	{
-		title: "Encrypted & Private",
-		description: "SQLCipher AES-256 and local-first storage. Your data never leaves the device unencrypted."
-	},
+		{
+			title: "Encrypted and Private",
+			description: "SQLCipher AES-256 local storage. Health data never leaves the device unencrypted."
+		},
 		{
 			title: "Clinical-Grade Sensors",
-			description: "Advanced optical sensors deliver medical-grade accuracy"
+			description: "PPG, SpO2, skin temperature, and a 3-axis accelerometer. All processed on-device."
 		},
 		{
-			title: "1-Year Warranty",
-			description: "Free 1-year warranty on all pre-orders, backed by our guarantee"
+			title: "2-Year Warranty",
+			description: "2-year warranty on the Rune 1, 1-year on accessories."
+		}
+	];
+
+	const colorVariants = [
+		{
+			name: "Titanium Silver",
+			finish: "BRUSHED FINISH",
+			hex: "#C7C9CC",
+			description: "The everyday default. A clean brushed face that reads understated."
+		},
+		{
+			name: "Obsidian Black",
+			finish: "MATTE FINISH",
+			hex: "#2B2B2B",
+			description: "Flat matte black. Disappears on the finger."
+		},
+		{
+			name: "Champagne Gold",
+			finish: "POLISHED FINISH",
+			hex: "#C9B27A",
+			description: "A warm mirror finish. Catches light without shouting."
 		}
 	];
 
 	const valueProps = [
 		{
 			title: "Fair Pricing",
-			callout: "Reserve for $10",
+			callout: "Pre-order $160",
 			points: [
-				"Ships at $160, retail price is $200",
-				"No subscription required for core features",
-				"Everything competitors offer without monthly fees"
+				"Retail price is $200, pre-order locks in $160",
+				"Core health tracking is free forever",
+				"Optional Pro tier at $6/month for cloud AI and sync"
 			]
 		},
 		{
-			title: "Privacy First",
-			callout: "Finland-Hosted",
+			title: "Privacy by Design",
+			callout: "EU-Hosted",
 			points: [
-				"No government partnerships or defense contractors",
-				"Your data is never sold or shared with third parties",
-				"Strong EU privacy laws with full GDPR protection"
+				"Health data stays on your device by default",
+				"Cloud sync uses zero-knowledge encryption (Frankfurt, Germany)",
+				"Governed under Finnish law with full GDPR protections"
 			]
 		},
 		{
 			title: "Full Control",
 			callout: "Founder-Owned",
 			points: [
-				"Direct decision-making, no intermediaries",
-				"Bootstrapped and user-funded",
-				"No insurance company data sharing"
+				"One founder, no VC money, no data brokerage",
+				"Cancel pre-order anytime before shipment for a full refund",
+				"Pay with cards or crypto. BTCPay supports BTC, ETH, USDT, XMR"
 			]
 		}
 	];
@@ -62,47 +83,64 @@
 	const productSchema = {
 		"@context": "https://schema.org",
 		"@type": "Product",
-		name: "Pulsyn Smart Ring",
+		name: "Pulsyn Rune 1",
 		description:
-			"Premium smart ring with clinical-grade sensors for health tracking at half the price of competitors",
+			"Privacy-first smart ring with on-device AI. Tracks heart rate, HRV, SpO2, sleep, activity, and skin temperature. Gemma-powered on-device AI health assistant Milo. Core features free forever.",
 		url: "https://hffmnn.com/venture",
 		brand: {
 			"@type": "Brand",
 			name: "Pulsyn"
 		},
+		material: "Grade 5 Titanium shell, hypoallergenic resin inner",
 		category: "Wearable Electronics",
+		additionalProperty: [
+			{ "@type": "PropertyValue", name: "Battery Life", value: "Up to 7 days" },
+			{ "@type": "PropertyValue", name: "Battery Life with Case", value: "Up to 60 days" },
+			{ "@type": "PropertyValue", name: "Water Resistance", value: "5ATM (50 meters)" },
+			{
+				"@type": "PropertyValue",
+				name: "Sensors",
+				value: "PPG, SpO2, skin temperature, 3-axis accelerometer"
+			},
+			{ "@type": "PropertyValue", name: "AI Processing", value: "On-device (Gemma model)" },
+			{ "@type": "PropertyValue", name: "Connectivity", value: "Bluetooth 5.2 BLE" },
+			{ "@type": "PropertyValue", name: "Warranty", value: "2 years" }
+		],
 		offers: {
 			"@type": "Offer",
 			price: "160",
 			priceCurrency: "USD",
 			availability: "https://schema.org/PreOrder",
-			url: "https://getpulsyn.com/pricing"
+			url: "https://getpulsyn.com"
 		},
 		manufacturer: {
 			"@type": "Organization",
-			name: "Pulsyn",
-			address: {
-				"@type": "PostalAddress",
-				addressLocality: "Phoenix",
-				addressRegion: "AZ",
-				addressCountry: "US"
-			}
+			name: "Pulsyn"
 		}
 	};
 </script>
 
 <svelte:head>
-	<title>Pulsyn Rune 1 — James Hoffmann</title>
-	<meta name="description" content="Pulsyn Rune 1. A smart ring with on-device AI health intelligence built by James Hoffmann from Phoenix, AZ. Reserve for $10, ships at $160, retail $200." />
+	<title>Pulsyn Rune 1 · James Hoffmann</title>
+	<meta
+		name="description"
+		content="Pulsyn Rune 1. Privacy-first smart ring with on-device AI health intelligence. Core tracking free forever, optional Pro at $6/month. Pre-order for $160, retail $200. Ships Q3 2026."
+	/>
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Pulsyn Rune 1 — James Hoffmann" />
-	<meta property="og:description" content="A smart ring with on-device AI health intelligence. Reserve for $10, ships at $160, no subscription." />
+	<meta property="og:title" content="Pulsyn Rune 1 · James Hoffmann" />
+	<meta
+		property="og:description"
+		content="Privacy-first smart ring with on-device AI health intelligence. Core tracking free forever, optional Pro at $6/month. Pre-order for $160, retail $200."
+	/>
 	<meta property="og:url" content="https://hffmnn.com/venture" />
 
 	<!-- Twitter -->
-	<meta name="twitter:title" content="Pulsyn Rune 1 — James Hoffmann" />
-	<meta name="twitter:description" content="A smart ring with on-device AI health intelligence. Reserve for $10, ships at $160." />
+	<meta name="twitter:title" content="Pulsyn Rune 1 · James Hoffmann" />
+	<meta
+		name="twitter:description"
+		content="Privacy-first smart ring with on-device AI. Core tracking free forever. Pre-order $160, retail $200."
+	/>
 
 	<!-- JSON-LD Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify(productSchema)}</script>`}
@@ -115,15 +153,19 @@
 			<Kicker label="DEPARTMENT  ·  VENTURE  ·  ISSUE 04" showRule={true} />
 			<IssueTag type="current" value="VENTURE" accent={true} class="mb-4" />
 
-			<h1 class="font-display text-5xl md:text-7xl font-semibold tracking-[-0.02em] text-ink mb-4 leading-[1.0]">
+			<h1
+				class="font-display text-5xl md:text-7xl font-semibold tracking-[-0.02em] text-ink mb-4 leading-[1.0]"
+			>
 				Pulsyn
 			</h1>
-			<p class="font-display text-xl md:text-3xl text-ink-soft max-w-3xl mb-4 leading-[1.2]">
-				Premium Smart Ring. Half the Price.
+			<p
+				class="font-display text-xl md:text-3xl text-ink-soft max-w-3xl mb-4 leading-[1.2]"
+			>
+				Privacy-First Smart Ring. On-Device AI.
 			</p>
-		<p class="font-body text-base md:text-lg text-ink-soft max-w-2xl leading-[1.6] mb-6">
-			PPG, SpO2, skin temperature, accelerometer. On-device AI analysis. Ships at $160, retail $200. Reserve for $10 now.
-		</p>
+			<p class="font-body text-base md:text-lg text-ink-soft max-w-2xl leading-[1.6] mb-6">
+				PPG, SpO2, skin temperature, 3-axis accelerometer. On-device AI runs as Milo, a conversational health assistant built on Gemma. Core tracking is free forever. Retail $200, pre-order for $160. Ships Q3 2026.
+			</p>
 			<Byline author="James Hoffmann" location="Phoenix, AZ" class="text-xs mb-8" />
 
 			<div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium">
@@ -133,7 +175,7 @@
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-paper rounded-sm hover:bg-ink/90 transition-colors"
 				>
-					Reserve for $10 <span aria-hidden="true">&rarr;</span>
+					Pre-order at getpulsyn.com <span aria-hidden="true">&rarr;</span>
 				</a>
 				<a
 					href="https://getpulsyn.com"
@@ -146,8 +188,11 @@
 			</div>
 		</header>
 
-		<!-- Hero image — full-bleed editorial, no padding -->
-		<div class="my-12 md:my-16 overflow-hidden border border-rule animate-fade-up delay-100" style="max-height: 520px;">
+		<!-- Hero image -->
+		<div
+			class="my-12 md:my-16 overflow-hidden border border-rule animate-fade-up delay-100"
+			style="max-height: 520px;"
+		>
 			<picture>
 				<source srcset="/images/pulsyn_table.webp" type="image/webp" />
 				<img
@@ -163,7 +208,9 @@
 		<!-- Features -->
 		<section class="my-16 md:my-20">
 			<Kicker label="ENGINEERING" showRule={true} />
-			<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3">
+			<h2
+				class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3"
+			>
 				Built for Precision
 			</h2>
 			<p class="font-body text-base text-ink-soft max-w-2xl mb-10 leading-[1.6]">
@@ -172,8 +219,13 @@
 
 			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
 				{#each features as feature, i (feature.title)}
-					<div class="border-t border-ink pt-4 animate-fade-up" style="animation-delay: {(i + 1) * 80}ms">
-						<span class="editorial-mono text-xs text-ink-faint mb-2 block">{String(i + 1).padStart(2, "0")}</span>
+					<div
+						class="border-t border-ink pt-4 animate-fade-up"
+						style="animation-delay: {(i + 1) * 80}ms"
+					>
+						<span class="editorial-mono text-xs text-ink-faint mb-2 block"
+							>{String(i + 1).padStart(2, "0")}</span
+						>
 						<h3 class="font-display text-lg font-semibold text-ink mb-2">{feature.title}</h3>
 						<p class="font-body text-sm text-ink-soft leading-[1.6]">{feature.description}</p>
 					</div>
@@ -181,10 +233,71 @@
 			</div>
 		</section>
 
+		<!-- Color variants -->
+		<section class="my-16 md:my-20">
+			<Kicker label="FINISHES" showRule={true} />
+			<h2
+				class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3"
+			>
+				Three Finishes
+			</h2>
+			<p class="font-body text-base text-ink-soft max-w-2xl mb-10 leading-[1.6]">
+				Same ring, three characters. Titanium Silver ships brushed. Obsidian Black ships matte. Champagne Gold ships polished.
+			</p>
+			<div class="grid sm:grid-cols-3 gap-0 border border-rule md:divide-x md:divide-rule">
+				{#each colorVariants as variant, i (variant.name)}
+					<div
+						class="p-6 md:p-8 animate-fade-up"
+						style="animation-delay: {(i + 1) * 80}ms"
+					>
+						<div
+							class="w-10 h-10 rounded-full border border-rule mb-4"
+							style="background: {variant.hex};"
+							aria-hidden="true"
+						></div>
+						<h3 class="font-display text-lg font-semibold text-ink mb-1">{variant.name}</h3>
+						<p class="editorial-mono text-xs text-ink-faint mb-2">{variant.finish}</p>
+						<p class="font-body text-sm text-ink-soft leading-[1.6]">{variant.description}</p>
+					</div>
+				{/each}
+			</div>
+		</section>
+
+		<!-- Milo AI -->
+		<section class="my-16 md:my-20 pt-12 border-t border-rule">
+			<Kicker label="INTELLIGENCE" showRule={true} />
+			<h2
+				class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3"
+			>
+				Meet Milo
+			</h2>
+			<p class="font-body text-base text-ink-soft max-w-2xl mb-6 leading-[1.6]">
+				Milo is an on-device AI health assistant built on Gemma. It reads your sleep, HRV, and activity data and gives plain-language feedback. No internet required, no data sent out.
+			</p>
+			<div class="grid sm:grid-cols-2 gap-8 max-w-2xl">
+				<div class="border-t border-ink pt-4">
+					<span class="editorial-mono text-xs text-ink-faint mb-2 block">FREE TIER</span>
+					<h3 class="font-display text-lg font-semibold text-ink mb-2">On-Device Gemma</h3>
+					<p class="font-body text-sm text-ink-soft leading-[1.6]">
+						Runs entirely on your phone. Health insights, sleep breakdowns, readiness scores. No subscription, no cloud, no compromises.
+					</p>
+				</div>
+				<div class="border-t border-ink pt-4">
+					<span class="editorial-mono text-xs text-ink-faint mb-2 block">PRO TIER · $6/MO</span>
+					<h3 class="font-display text-lg font-semibold text-ink mb-2">Cloud AI</h3>
+					<p class="font-body text-sm text-ink-soft leading-[1.6]">
+						Optional. Cloud-enhanced analysis for deeper patterns and cross-device sync. End-to-end encrypted. You hold the keys.
+					</p>
+				</div>
+			</div>
+		</section>
+
 		<!-- Why Pulsyn -->
 		<section class="my-16 md:my-20 pt-12 border-t border-rule-strong">
 			<Kicker label="POSITIONING" showRule={true} />
-			<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3">
+			<h2
+				class="font-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-3"
+			>
 				The Tradeoffs Are Obvious
 			</h2>
 			<p class="font-body text-base text-ink-soft max-w-2xl mb-10 leading-[1.6]">
@@ -193,13 +306,19 @@
 
 			<div class="grid md:grid-cols-3 gap-0 md:divide-x md:divide-rule border border-rule">
 				{#each valueProps as prop, i (prop.title)}
-					<div class="p-6 md:p-8 animate-fade-up" style="animation-delay: {(i + 1) * 100}ms">
+					<div
+						class="p-6 md:p-8 animate-fade-up"
+						style="animation-delay: {(i + 1) * 100}ms"
+					>
 						<h3 class="font-display text-xl font-semibold text-ink mb-3">{prop.title}</h3>
 						<Badge variant="accent" class="mb-5">{prop.callout}</Badge>
 						<ul class="space-y-3">
 							{#each prop.points as point (point)}
 								<li class="flex items-start gap-3 text-sm text-ink-soft leading-[1.6]">
-									<span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" aria-hidden="true"></span>
+									<span
+										class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"
+										aria-hidden="true"
+									></span>
 									<span>{point}</span>
 								</li>
 							{/each}
@@ -209,26 +328,18 @@
 			</div>
 		</section>
 
-		<!-- Phoenix note -->
-		<section class="my-16 md:my-20">
-			<div class="border-t border-b border-rule py-8 md:py-12 text-center animate-fade-up">
-				<p class="font-body text-base md:text-lg text-ink leading-[1.6] max-w-2xl mx-auto">
-					<strong class="font-display font-semibold">Made in America:</strong> Designed, assembled, packaged, and shipped from Phoenix, Arizona.
-				</p>
-				<p class="editorial-byline text-xs mt-3 max-w-xl mx-auto">
-					Hardware manufactured by partners with 8+ years building wearables.
-				</p>
-			</div>
-		</section>
-
 		<!-- Bottom CTA -->
 		<section class="my-16 md:my-20 text-center">
 			<Kicker label="ORDER" showRule={true} class="text-center" />
-			<div class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-10 px-8 sm:px-12 py-8 border border-ink animate-fade-up">
+			<div
+				class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-10 px-8 sm:px-12 py-8 border border-ink animate-fade-up"
+			>
 				<div class="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
-					<span class="editorial-mono text-xs text-ink-faint">Reserve for</span>
-					<span class="font-display text-5xl sm:text-6xl font-bold text-ink">$10</span>
-					<span class="editorial-byline text-xs">Ships at $160 &middot; Retail $200 &middot; No subscription</span>
+					<span class="editorial-mono text-xs text-ink-faint">Pre-order price</span>
+					<span class="font-display text-5xl sm:text-6xl font-bold text-ink">$160</span>
+					<span class="editorial-byline text-xs"
+						>Retail $200 &middot; Core tracking free forever</span
+					>
 				</div>
 				<a
 					href="https://getpulsyn.com"
@@ -236,7 +347,7 @@
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-paper rounded-sm font-medium hover:bg-accent/90 transition-colors"
 				>
-					Reserve at getpulsyn.com <span aria-hidden="true">&rarr;</span>
+					Pre-order at getpulsyn.com <span aria-hidden="true">&rarr;</span>
 				</a>
 			</div>
 		</section>
