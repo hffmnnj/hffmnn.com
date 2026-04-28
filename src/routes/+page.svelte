@@ -25,6 +25,6 @@
 <RunningHeader />
 <Hero />
 <About />
-<FeaturedProjects />
 <Writing />
+<FeaturedProjects />
 <PulsynSection />
