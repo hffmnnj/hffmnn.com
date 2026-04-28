@@ -2,10 +2,10 @@
 	import { Kicker, Byline } from "$lib/components/editorial";
 	import { Badge } from "$lib/components/ui/badge";
 	import { projects, capyseoProjects, reinsProjects } from "$lib/data/projects";
-	import { reveal } from "$lib/actions";
+	import { reveal, countUp } from "$lib/actions";
 </script>
 
-<section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="03">
+<section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="00" use:countUp={{ target: 3 }}>
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="DEPARTMENT  ·  TOOLS" showRule={true} />
 

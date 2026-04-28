@@ -8,13 +8,14 @@
 		AiNetworkIcon,
 		FingerPrintIcon
 	} from "$lib/icons";
-	import { reveal } from "$lib/actions";
+	import { reveal, countUp } from "$lib/actions";
 </script>
 
 <section
 	id="about-section"
 	class="section-counter py-20 md:py-28 px-6 border-t border-rule"
-	data-n="02"
+	data-n="00"
+	use:countUp={{ target: 2 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="ABOUT" showRule={true} />

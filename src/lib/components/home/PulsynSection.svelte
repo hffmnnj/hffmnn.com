@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Kicker, IssueTag } from "$lib/components/editorial";
 	import { HugeiconsIcon, ArrowUpRight01Icon } from "$lib/icons";
-	import { parallax, magnetic } from "$lib/actions";
+	import { parallax, magnetic, countUp } from "$lib/actions";
 
 	const features: ReadonlyArray<readonly [string, boolean]> = [
 		["Sleep Tracking", true],
@@ -14,7 +14,8 @@
 <section
 	id="venture-section"
 	class="section-counter py-20 md:py-28 px-6 border-t border-rule-strong"
-	data-n="04"
+	data-n="00"
+	use:countUp={{ target: 4 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<div class="ornament-break mb-10" aria-hidden="true">
