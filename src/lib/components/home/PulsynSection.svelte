@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Kicker, IssueTag } from "$lib/components/editorial";
+	import { HugeiconsIcon, ArrowUpRight01Icon } from "$lib/icons";
 
 	const features: ReadonlyArray<readonly [string, boolean]> = [
 		["Sleep Tracking", true],
@@ -34,7 +35,7 @@
 					Pulsyn
 				</h2>
 				<p class="font-body text-lg text-ink-soft max-w-xl leading-[1.6]">
-					Building a premium smart ring that makes health tracking accessible. Clinical-grade sensors at half the price of competitors.
+					I'm building the Rune 1 from Phoenix. PPG, SpO2, skin temperature, and a 6-axis accelerometer. On-device processing, no subscription, ships Q3 2026.
 				</p>
 			</div>
 			<div class="shrink-0 text-right">
@@ -61,7 +62,7 @@
 					<source srcset="/images/ring_black.webp" type="image/webp" />
 					<img
 						src="/images/ring_black.png"
-						alt="Pulsyn Smart Ring"
+						alt="Pulsyn Rune 1 Smart Ring in Obsidian Black"
 						class="w-44 md:w-60 h-auto mix-blend-multiply transition-transform duration-700 hover:scale-105"
 						width="256"
 						height="256"
@@ -77,7 +78,7 @@
 					Premium Smart Ring. Half the Price.
 				</h3>
 				<p class="font-body text-base text-ink-soft mb-6 leading-[1.65]">
-					Track sleep, fitness, and recovery with clinical-grade sensors for $149 — save $200+ vs. Oura Ring. All essential health tracking included free forever.
+					PPG, SpO2, temperature, and a 6-axis accelerometer for $149. That's $200+ less than an Oura Ring 4 with no recurring fee. Every health metric stays free, forever.
 				</p>
 
 				<ul class="space-y-2.5 mb-8">
@@ -105,7 +106,8 @@
 						rel="noopener noreferrer"
 						class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
 					>
-						Pre-order Now <span aria-hidden="true">&rarr;</span>
+						Pre-order Now
+						<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
 					</a>
 					<a
 						href="https://getpulsyn.com"
