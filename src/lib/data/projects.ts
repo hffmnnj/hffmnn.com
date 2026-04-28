@@ -19,7 +19,7 @@ export const projects: Project[] = [
 			"I built Enclave Mail after getting tired of email servers that hold the decryption keys. The server never touches plaintext. Keys are derived with Argon2id in your browser, X25519/Ed25519 handle the encryption, and SRP makes sure your password never travels the wire.",
 		shortDescription:
 			'Self-hosted email with zero-knowledge design. Argon2id key derivation, SRP auth, server never sees plaintext.',
-		tags: ['TypeScript', 'Privacy', 'Self-hosted', 'Encryption', 'Email'],
+		tags: ['TypeScript', 'Bun', 'Astro', 'React', 'Hono', 'Docker', 'Privacy', 'Encryption'],
 		githubUrl: 'https://github.com/hffmnnj/enclave-mail',
 		githubOwner: 'hffmnnj',
 		githubRepo: 'enclave-mail',
@@ -39,7 +39,7 @@ export const projects: Project[] = [
 			"I built GoopSpec because AI-assisted development kept shipping the wrong thing. It enforces a 5-phase workflow where specs are locked contracts before any code runs. Fifteen specialized agents handle research, planning, execution, and verification so nothing ships untested.",
 		shortDescription:
 			'Spec-driven OpenCode plugin. 5-phase workflow with locked contracts and 15 specialized AI agents.',
-		tags: ['TypeScript', 'OpenCode', 'AI', 'Developer Tools', 'Plugin'],
+		tags: ['TypeScript', 'Bun', 'OpenCode', 'AI', 'Developer Tools'],
 		githubUrl: 'https://github.com/hffmnnj/opencode-goopspec',
 		githubOwner: 'hffmnnj',
 		githubRepo: 'opencode-goopspec',
@@ -78,7 +78,7 @@ export const projects: Project[] = [
 		description:
 			"I wanted to hear multiple AI opinions at once without leaving the terminal. MAMF spins up an AI council in Rust with Ratatui. Multiple LLMs respond in parallel, RAG with Qdrant gives them memory, and Living Council mode detects when they have converged.",
 		shortDescription: 'Rust TUI that runs multiple LLMs as a council. Parallel responses, Qdrant RAG, Living Council consensus detection.',
-		tags: ['Rust', 'TUI', 'AI', 'Ratatui', 'Multi-LLM'],
+		tags: ['Rust', 'Tokio', 'Ratatui', 'Qdrant', 'AI', 'TUI'],
 		githubUrl: 'https://github.com/hffmnnj/me-and-my-friends',
 		githubOwner: 'hffmnnj',
 		githubRepo: 'me-and-my-friends',
@@ -98,7 +98,7 @@ export const projects: Project[] = [
 			"Nano Banana generates images via Gemini without requiring an API key. It authenticates through your Google account using Playwright-driven browser automation, runs multiple prompts in parallel, and exports straight to disk. Zero config, one command.",
 		shortDescription:
 			'Gemini image generation in the terminal, no API key. Playwright browser auth, parallel generation, zero config.',
-		tags: ['CLI', 'TypeScript', 'Bun', 'Gemini', 'AI'],
+		tags: ['TypeScript', 'Bun', 'Playwright', 'CLI', 'AI'],
 		githubUrl: 'https://github.com/hffmnnj/nano-banana-cli',
 		githubOwner: 'hffmnnj',
 		githubRepo: 'nano-banana-cli',
@@ -120,7 +120,7 @@ export const capyseoProjects: Project[] = [
 		description:
 			"The core of the CapySEO toolkit. Fifty-plus rules cover meta, images, headings, social tags, and technical SEO. Plug in Gemini, OpenAI, Anthropic, or Ollama for AI suggestions. Outputs console, JSON, HTML, CSV, or SARIF.",
 		shortDescription: 'SEO analysis engine with 50+ rules. Multi-provider AI (Gemini, OpenAI, Anthropic, Ollama), five output formats.',
-		tags: ['TypeScript', 'SEO', 'AI', 'Node.js'],
+		tags: ['TypeScript', 'Bun', 'Playwright', 'Anthropic', 'OpenAI', 'SEO', 'AI'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-core',
 		githubOwner: 'Capyseo',
 		githubRepo: 'capyseo-core',
@@ -137,7 +137,7 @@ export const capyseoProjects: Project[] = [
 		description:
 			"Analyze any website or local folder from the command line. CapySEO CLI checks 50+ SEO rules, suggests AI-generated meta descriptions and alt text, and exits with codes that plug into CI/CD. Ships sitemaps and robots.txt too.",
 		shortDescription: 'CLI SEO analyzer for live URLs and local builds. AI suggestions, CI/CD-compatible exit codes, sitemap generation.',
-		tags: ['CLI', 'SEO', 'AI', 'Node.js'],
+		tags: ['TypeScript', 'Bun', 'Node.js', 'SEO', 'CLI'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-cli',
 		githubOwner: 'Capyseo',
 		githubRepo: 'capyseo-cli',
@@ -154,7 +154,7 @@ export const capyseoProjects: Project[] = [
 		description:
 			"SvelteKit Vite plugin that surfaces SEO issues as you develop. The server hook catches problems at request time during dev, AI suggests meta descriptions and alt text, and the build-time check runs before your CI does.",
 		shortDescription: 'SvelteKit Vite plugin for dev-time SEO analysis. AI suggestions on save, build-time checks, zero config.',
-		tags: ['SvelteKit', 'Vite', 'SEO', 'TypeScript'],
+		tags: ['TypeScript', 'SvelteKit', 'Vite', 'Bun', 'SEO'],
 		githubUrl: 'https://github.com/Capyseo/capyseo-sveltekit',
 		githubOwner: 'Capyseo',
 		githubRepo: 'capyseo-sveltekit',

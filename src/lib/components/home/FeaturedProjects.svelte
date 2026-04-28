@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { Kicker, Byline } from "$lib/components/editorial";
 	import { Badge } from "$lib/components/ui/badge";
+	import TechIcon from "$lib/components/ui/TechIcon.svelte";
 	import { projects, capyseoProjects } from "$lib/data/projects";
 	import { reveal, countUp } from "$lib/actions";
+
+	const iconTags = ['TypeScript', 'Rust', 'Svelte', 'SvelteKit', 'Bun', 'Node.js', 'Vite', 'Arch Linux', 'Astro', 'React', 'Hono', 'Docker', 'Tokio', 'Playwright', 'Anthropic', 'OpenAI', 'Gemini', 'Hyprland', 'Qdrant'];
 </script>
 
 <section id="tools-section" class="section-counter py-20 md:py-28 px-6 border-t border-rule" data-n="00" use:countUp={{ target: 3 }}>
@@ -35,7 +38,15 @@
 						<h3 class="ledger-row-title fraunces-hover font-display text-xl md:text-2xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h3>
-						<Byline author="hffmnnj" class="text-xs" />
+						<div class="flex items-center gap-2 mt-1">
+							{#each project.tags.filter(t => iconTags.includes(t)) as tag (tag)}
+								<TechIcon {tag} size={13} />
+							{/each}
+							{#if project.tags.some(t => iconTags.includes(t))}
+								<span class="w-px h-3 bg-rule-strong" aria-hidden="true"></span>
+							{/if}
+							<Byline author="hffmnnj" class="text-xs" />
+						</div>
 					</div>
 
 					<div class="md:col-span-6">
@@ -91,6 +102,15 @@
 						<h4 class="ledger-row-title fraunces-hover font-display text-lg md:text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
 							{project.title}
 						</h4>
+						<div class="flex items-center gap-2 mt-1 mb-3">
+							{#each project.tags.filter(t => iconTags.includes(t)) as tag (tag)}
+								<TechIcon {tag} size={12} />
+							{/each}
+							{#if project.tags.some(t => iconTags.includes(t))}
+								<span class="w-px h-3 bg-rule-strong" aria-hidden="true"></span>
+							{/if}
+							<span class="editorial-byline text-xs">hffmnnj</span>
+						</div>
 						<p class="font-body text-sm text-ink-soft leading-[1.65] mb-3">
 							{project.shortDescription}
 						</p>
