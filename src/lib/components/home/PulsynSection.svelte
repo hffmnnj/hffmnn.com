@@ -45,14 +45,14 @@
 					<span class="ticker-live-dot" aria-hidden="true"></span>
 					PRE-ORDER OPEN
 				</span>
-				<span class="editorial-mono text-xs text-ink-faint block mb-1">Pre-order</span>
+				<span class="editorial-mono text-xs text-ink-faint block mb-1">Reserve for</span>
 				<span
 					class="font-display fraunces-hover font-bold text-6xl md:text-8xl tracking-[-0.04em] text-ink leading-none"
 				>
-					$160
+					$10
 				</span>
 				<span class="editorial-mono text-xs text-ink-faint block mt-1"
-					>Retail $200</span
+					>Ships at $160 &middot; Retail $200</span
 				>
 			</div>
 		</div>
@@ -112,7 +112,7 @@
 							rel="noopener noreferrer"
 							class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-paper text-sm font-medium rounded-sm hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
 						>
-							Pre-order for $160
+							Reserve for $10
 							<HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
 						</a>
 						<a

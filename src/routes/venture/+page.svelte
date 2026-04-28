@@ -53,9 +53,9 @@
 	const valueProps = [
 		{
 			title: "Fair Pricing",
-			callout: "Pre-order $160",
+			callout: "Reserve for $10",
 			points: [
-				"Retail price is $200, pre-order locks in $160",
+				"Ships at $160, retail is $200",
 				"Core health tracking is free forever",
 				"Optional Pro tier at $6/month for cloud AI and sync"
 			]
@@ -124,14 +124,14 @@
 	<title>Pulsyn Rune 1 · James Hoffmann</title>
 	<meta
 		name="description"
-		content="Pulsyn Rune 1. Privacy-first smart ring with on-device AI health intelligence. Core tracking free forever, optional Pro at $6/month. Pre-order for $160, retail $200. Ships Q3 2026."
+		content="Pulsyn Rune 1. Privacy-first smart ring with on-device AI health intelligence. Reserve your slot for $10, ships at $160, retail $200. Core tracking free forever. Ships Q3 2026."
 	/>
 
 	<!-- Open Graph -->
 	<meta property="og:title" content="Pulsyn Rune 1 · James Hoffmann" />
 	<meta
 		property="og:description"
-		content="Privacy-first smart ring with on-device AI health intelligence. Core tracking free forever, optional Pro at $6/month. Pre-order for $160, retail $200."
+		content="Privacy-first smart ring with on-device AI health intelligence. Reserve for $10, ships at $160, retail $200. Core tracking free forever."
 	/>
 	<meta property="og:url" content="https://hffmnn.com/venture" />
 
@@ -139,7 +139,7 @@
 	<meta name="twitter:title" content="Pulsyn Rune 1 · James Hoffmann" />
 	<meta
 		name="twitter:description"
-		content="Privacy-first smart ring with on-device AI. Core tracking free forever. Pre-order $160, retail $200."
+		content="Privacy-first smart ring with on-device AI. Reserve for $10, ships at $160, retail $200. Core tracking free forever."
 	/>
 
 	<!-- JSON-LD Structured Data -->
@@ -164,7 +164,7 @@
 				Privacy-First Smart Ring. On-Device AI.
 			</p>
 			<p class="font-body text-base md:text-lg text-ink-soft max-w-2xl leading-[1.6] mb-6">
-				PPG, SpO2, skin temperature, 3-axis accelerometer. On-device AI runs as Milo, a conversational health assistant built on PRANA 0.7B. Core tracking is free forever. Retail $200, pre-order for $160. Ships Q3 2026.
+				PPG, SpO2, skin temperature, 3-axis accelerometer. On-device AI runs as Milo, a conversational health assistant built on PRANA 0.7B. Core tracking is free forever. Reserve your slot for $10, ships at $160. Q3 2026.
 			</p>
 			<Byline author="James Hoffmann" location="Phoenix, AZ" class="text-xs mb-8" />
 
@@ -175,7 +175,7 @@
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-paper rounded-sm hover:bg-ink/90 transition-colors"
 				>
-					Pre-order at getpulsyn.com <span aria-hidden="true">&rarr;</span>
+					Reserve for $10 <span aria-hidden="true">&rarr;</span>
 				</a>
 				<a
 					href="https://getpulsyn.com"
@@ -335,11 +335,11 @@
 				class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-10 px-8 sm:px-12 py-8 border border-ink animate-fade-up"
 			>
 				<div class="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
-					<span class="editorial-mono text-xs text-ink-faint">Pre-order price</span>
-					<span class="font-display text-5xl sm:text-6xl font-bold text-ink">$160</span>
-					<span class="editorial-byline text-xs"
-						>Retail $200 &middot; Core tracking free forever</span
-					>
+				<span class="editorial-mono text-xs text-ink-faint">Reserve for</span>
+				<span class="font-display text-5xl sm:text-6xl font-bold text-ink">$10</span>
+				<span class="editorial-byline text-xs"
+					>Ships at $160 &middot; Retail $200 &middot; No subscription</span
+				>
 				</div>
 				<a
 					href="https://getpulsyn.com"
@@ -347,7 +347,7 @@
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-paper rounded-sm font-medium hover:bg-accent/90 transition-colors"
 				>
-					Pre-order at getpulsyn.com <span aria-hidden="true">&rarr;</span>
+					Reserve at getpulsyn.com <span aria-hidden="true">&rarr;</span>
 				</a>
 			</div>
 		</section>
