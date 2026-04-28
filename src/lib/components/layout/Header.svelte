@@ -69,7 +69,7 @@
 						page.url.pathname === "/venture" && "text-ink font-medium nav-active",
 					)}
 				>
-					Venture
+					Pulsyn
 				</a>
 			</nav>
 
@@ -90,7 +90,7 @@
 			<div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3 text-sm">
 				<a href="/" class="editorial-link py-1">Home</a>
 				<a href="/tools" class="editorial-link py-1">Tools</a>
-				<a href="/venture" class="editorial-link py-1">Venture</a>
+				<a href="/venture" class="editorial-link py-1">Pulsyn</a>
 				<div class="border-t border-rule pt-3 mt-1 flex items-center gap-4">
 					<a
 						href={socials.github.url}
