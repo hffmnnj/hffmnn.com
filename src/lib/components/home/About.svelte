@@ -28,7 +28,7 @@
 						class="font-body text-xl md:text-2xl leading-[1.55] text-ink mb-8"
 						style="text-wrap: pretty;"
 					>
-						Twenty-two years old, building hardware and training language models out of Phoenix, Arizona. The Rune 1 runs PRANA 0.7B on-device, so biometric data never leaves the wearer's wrist.
+						Based in Phoenix, Arizona, building hardware and training language models. The Rune 1 runs PRANA 0.7B on-device, so biometric data never leaves the wearer's wrist.
 					</p>
 				</DropCap>
 
@@ -37,7 +37,7 @@
 				</blockquote>
 
 				<p class="font-body text-base text-ink-soft leading-[1.65] mt-6">
-					Everything I ship is open source. The code is there. The decisions are auditable. The direction is funded by the people using it, not by anyone harvesting the people using it.
+					Not everything I ship is open source, but I believe in open source standards. The code is there. The decisions are auditable. The direction is funded by the people using it, not by anyone harvesting the people using it.
 				</p>
 
 				<!-- MineXO callout: scale/audience proof -->

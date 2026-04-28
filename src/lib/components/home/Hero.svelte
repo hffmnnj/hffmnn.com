@@ -101,7 +101,7 @@
 				class="font-body text-base md:text-lg leading-[1.65] text-ink-soft"
 				style="text-wrap: pretty;"
 			>
-				Twenty-two years old, writing Flutter and SvelteKit by day, training a small language model on two million rows of biometric data by night. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
+				I spend most of my time curating the best datasets possible for health and wellness. When the data I need does not exist, I build synthetic datasets to fill the gaps. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
 			</p>
 		</div>
 
