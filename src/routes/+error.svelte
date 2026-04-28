@@ -9,35 +9,35 @@
 </script>
 
 <svelte:head>
-	<title>Page Not Found - hffmnn</title>
-	<meta name="description" content="The page you're looking for doesn't exist. Return to hffmnn.com to explore privacy-focused tools and projects." />
+	<title>404 — hffmnn</title>
+	<meta name="description" content="This page doesn't exist. Head back." />
 	<meta name="robots" content="noindex, nofollow" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Page Not Found - hffmnn" />
-	<meta property="og:description" content="The page you're looking for doesn't exist." />
+	<meta property="og:title" content="404 — hffmnn" />
+	<meta property="og:description" content="This page doesn't exist." />
 	<meta property="og:url" content="https://hffmnn.com" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="https://hffmnn.com/og-image.png" />
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Page Not Found - hffmnn" />
-	<meta name="twitter:description" content="The page you're looking for doesn't exist." />
+	<meta name="twitter:title" content="404 — hffmnn" />
+	<meta name="twitter:description" content="This page doesn't exist." />
 </svelte:head>
 
 <div class="pt-24 pb-16 px-6 min-h-[80vh] flex items-center justify-center">
 	<div class="max-w-md mx-auto text-center animate-fade-up">
 		<div class="mb-8">
-			<span class="font-display text-8xl font-bold text-white/10">{statusCode}</span>
+			<span class="font-display text-8xl font-bold text-ink/10">{statusCode}</span>
 		</div>
 
 		<h1 class="font-display text-3xl md:text-4xl font-bold mb-4">
-			Page Not Found
+			Nothing here.
 		</h1>
 
 		<p class="text-muted-foreground mb-8">
-			{message}. The page you're looking for might have been moved or doesn't exist.
+			That page doesn't exist. Might have moved.
 		</p>
 
 		<div class="flex flex-wrap justify-center gap-4">
