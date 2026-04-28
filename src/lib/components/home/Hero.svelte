@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Kicker, DropCap } from "$lib/components/editorial";
-	import { reveal } from "$lib/actions";
+	import { reveal, countUp } from "$lib/actions";
 	import { onMount } from "svelte";
 
 	const birthYear = 2004;
@@ -65,7 +65,8 @@
 <section
 	id="hero-section"
 	class="section-counter pt-16 md:pt-28 pb-16 md:pb-24 px-6"
-	data-n="01"
+	data-n="00"
+	use:countUp={{ target: 1 }}
 >
 	<div class="max-w-6xl mx-auto">
 		<Kicker label="FEATURE  ·  PORTFOLIO  ·  ISSUE 04" showRule={true} />
@@ -123,12 +124,18 @@
 
 	<!-- Ticker below hero -->
 	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip" use:reveal>
-		<div class="ticker-track" aria-hidden="true">
-			{#each [0, 1] as loop (loop)}
-				{#each tickerTerms as term (`${loop}-${term}`)}
-					<span class="ticker-item">{term}</span>
+		<span class="ticker-live" aria-hidden="true">
+			<span class="ticker-live-dot"></span>
+			<span>LIVE</span>
+		</span>
+		<div class="flex-1 overflow-hidden">
+			<div class="ticker-track" aria-hidden="true">
+				{#each [0, 1] as loop (loop)}
+					{#each tickerTerms as term (`${loop}-${term}`)}
+						<span class="ticker-item">{term}</span>
+					{/each}
 				{/each}
-			{/each}
+			</div>
 		</div>
 	</div>
 </section>
