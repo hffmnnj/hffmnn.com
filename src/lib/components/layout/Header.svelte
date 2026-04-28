@@ -105,7 +105,7 @@
 						page.url.pathname === "/" && "text-ink font-medium nav-active",
 					)}
 				>
-					<span class="relative -top-[1px]"><HugeiconsIcon icon={Home01Icon} size={14} strokeWidth={1.5} /></span>
+					<span class="flex items-center"><HugeiconsIcon icon={Home01Icon} size={14} strokeWidth={1.5} /></span>
 					Home
 				</a>
 				<a
@@ -115,7 +115,7 @@
 						page.url.pathname.startsWith("/tools") && "text-ink font-medium nav-active",
 					)}
 				>
-					<span class="relative -top-[1px]"><HugeiconsIcon icon={CodeIcon} size={14} strokeWidth={1.5} /></span>
+					<span class="flex items-center"><HugeiconsIcon icon={CodeIcon} size={14} strokeWidth={1.5} /></span>
 					Tools
 				</a>
 				<a
@@ -125,7 +125,7 @@
 						page.url.pathname === "/venture" && "text-ink font-medium nav-active",
 					)}
 				>
-					<span class="relative -top-[1px]"><HugeiconsIcon icon={HeartCheckIcon} size={14} strokeWidth={1.5} /></span>
+					<span class="flex items-center"><HugeiconsIcon icon={HeartCheckIcon} size={14} strokeWidth={1.5} /></span>
 					Pulsyn
 				</a>
 			</nav>
@@ -146,15 +146,15 @@
 		<div class="md:hidden bg-paper border-t border-rule animate-fade-in">
 			<div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3 text-sm">
 				<a href="/" class="editorial-link inline-flex items-center gap-2 py-1">
-					<span class="relative -top-[1px]"><HugeiconsIcon icon={Home01Icon} size={14} strokeWidth={1.5} /></span>
+					<span class="flex items-center"><HugeiconsIcon icon={Home01Icon} size={14} strokeWidth={1.5} /></span>
 					Home
 				</a>
 				<a href="/tools" class="editorial-link inline-flex items-center gap-2 py-1">
-					<span class="relative -top-[1px]"><HugeiconsIcon icon={CodeIcon} size={14} strokeWidth={1.5} /></span>
+					<span class="flex items-center"><HugeiconsIcon icon={CodeIcon} size={14} strokeWidth={1.5} /></span>
 					Tools
 				</a>
 				<a href="/venture" class="editorial-link inline-flex items-center gap-2 py-1">
-					<span class="relative -top-[1px]"><HugeiconsIcon icon={HeartCheckIcon} size={14} strokeWidth={1.5} /></span>
+					<span class="flex items-center"><HugeiconsIcon icon={HeartCheckIcon} size={14} strokeWidth={1.5} /></span>
 					Pulsyn
 				</a>
 				<div class="border-t border-rule pt-3 mt-1 flex items-center gap-4">
