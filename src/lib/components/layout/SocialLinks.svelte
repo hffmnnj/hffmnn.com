@@ -23,14 +23,18 @@
 				href={link.href}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="editorial-link inline-flex items-center gap-2"
+				class="editorial-link flex items-center gap-2"
 			>
-				<HugeiconsIcon icon={link.icon} size={16} strokeWidth={1.5} />
+			<span class="relative -top-[2px]">
+					<HugeiconsIcon icon={link.icon} size={16} strokeWidth={1.5} />
+				</span>
 				{link.label}
 			</a>
 		{:else}
-			<a href={link.href} class="editorial-link inline-flex items-center gap-2">
-				<HugeiconsIcon icon={link.icon} size={16} strokeWidth={1.5} />
+			<a href={link.href} class="editorial-link flex items-center gap-2">
+				<span class="relative -top-[2px]">
+					<HugeiconsIcon icon={link.icon} size={16} strokeWidth={1.5} />
+				</span>
 				{link.label}
 			</a>
 		{/if}
