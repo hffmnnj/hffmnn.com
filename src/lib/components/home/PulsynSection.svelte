@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Kicker, IssueTag } from "$lib/components/editorial";
 	import { HugeiconsIcon, ArrowUpRight01Icon } from "$lib/icons";
-	import { parallax, magnetic, countUp } from "$lib/actions";
+	import { magnetic, countUp } from "$lib/actions";
 
 	const features: ReadonlyArray<readonly [string, boolean]> = [
 		["Sleep Tracking", true],
@@ -61,15 +61,14 @@
 				<!-- Image side — full-bleed editorial photo, no padding -->
 				<div class="overflow-hidden min-h-[320px] md:min-h-[400px]">
 					<picture>
-						<source srcset="/images/pulsyn_hero.webp" type="image/webp" />
-						<img
-							src="/images/pulsyn_hero.png"
-							alt="Pulsyn Rune 1 smart ring"
-							class="w-full h-full object-cover object-center parallax-host"
-							use:parallax={{ speed: 0.3, clamp: 50 }}
-							width="800"
-							height="600"
-						/>
+					<source srcset="/images/pulsyn_hero.webp" type="image/webp" />
+					<img
+						src="/images/pulsyn_hero.png"
+						alt="Pulsyn Rune 1 smart ring"
+						class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+						width="800"
+						height="600"
+					/>
 					</picture>
 				</div>
 
