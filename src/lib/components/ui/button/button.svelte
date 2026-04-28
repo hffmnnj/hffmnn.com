@@ -36,9 +36,11 @@
 		"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
 
 	const variantStyles: Record<Variant, string> = {
-		default: "bg-ink text-paper hover:bg-ink/90 rounded-sm",
+		default:
+			"bg-ink text-paper hover:bg-ink/90 rounded-sm border-b-2 border-black/30 active:translate-y-px active:border-b-0",
 		destructive: "bg-destructive text-paper hover:bg-destructive/90 rounded-sm",
-		outline: "border border-ink bg-transparent text-ink hover:bg-paper-elevated rounded-sm",
+		outline:
+			"border border-ink border-b-2 bg-transparent text-ink hover:bg-paper-elevated rounded-sm active:translate-y-px active:border-b",
 		secondary: "bg-paper-elevated text-ink hover:bg-rule rounded-sm",
 		ghost: "text-ink hover:text-accent rounded-none editorial-link",
 		link: "text-ink-soft hover:text-ink underline-offset-4 hover:underline",

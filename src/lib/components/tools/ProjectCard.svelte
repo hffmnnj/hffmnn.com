@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Badge } from "$lib/components/ui/badge";
 	import { Byline } from "$lib/components/editorial";
+	import TechIcon from "$lib/components/ui/TechIcon.svelte";
 	import { cn } from "$lib/utils/cn";
 
 	interface Props {
@@ -21,6 +22,10 @@
 		features,
 		class: className = "",
 	}: Props = $props();
+
+	// Tags that have a Simple Icon — used to populate the icon row
+	const iconTags = ['TypeScript', 'Rust', 'Svelte', 'SvelteKit', 'Bun', 'Node.js', 'Vite', 'Arch Linux', 'Astro', 'React', 'Hono', 'Docker', 'Tokio', 'Playwright', 'Anthropic', 'OpenAI', 'Gemini', 'Hyprland', 'Qdrant'];
+	const techTags = $derived(tags.filter(t => iconTags.includes(t)));
 </script>
 
 <a
@@ -37,7 +42,15 @@
 			{title}
 		</h3>
 
-		<Byline class="text-xs mb-4" />
+		<div class="flex items-center gap-2 mb-4">
+			{#each techTags as tag (tag)}
+				<TechIcon {tag} size={13} />
+			{/each}
+			{#if techTags.length > 0}
+				<span class="w-px h-3 bg-rule-strong" aria-hidden="true"></span>
+			{/if}
+			<Byline class="text-xs" />
+		</div>
 
 		<p class="font-body text-base text-ink-soft leading-[1.6] mb-4">
 			{description}

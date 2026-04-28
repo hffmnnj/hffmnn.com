@@ -57,10 +57,7 @@
 			<div>{resolvedDate}</div>
 		</div>
 	</div>
-	<div class="border-rule mt-4 flex items-center justify-between border-t pt-3">
-		<span class="editorial-mono text-ink-faint text-xs">
-			VOL. {volume} · ISSUE {issue}
-		</span>
+	<div class="border-rule mt-4 flex items-center justify-end border-t pt-3">
 		<nav class="flex items-center gap-4">
 			{@render children?.()}
 		</nav>

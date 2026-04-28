@@ -13,11 +13,6 @@
 			>
 		</div>
 
-		<!-- Colophon label -->
-		<p class="editorial-mono text-xs text-ink-faint mb-4" style="letter-spacing: 0.2em;">
-			COLOPHON &nbsp;&middot;&nbsp; VOL. I &nbsp;&middot;&nbsp; ISSUE 04
-		</p>
-
 		<!-- Large nameplate -->
 		<a
 			href="/"

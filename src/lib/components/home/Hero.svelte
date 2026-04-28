@@ -69,7 +69,7 @@
 	use:countUp={{ target: 1 }}
 >
 	<div class="max-w-6xl mx-auto">
-		<Kicker label="FEATURE  ·  PORTFOLIO  ·  ISSUE 04" showRule={true} />
+		<Kicker label="FEATURE  ·  PORTFOLIO" showRule={true} />
 
 		<div class="animate-fade-up">
 			<p class="editorial-byline text-sm mb-5">

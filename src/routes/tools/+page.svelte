@@ -42,7 +42,7 @@
 <div class="px-6 py-12 md:py-16">
 	<div class="max-w-6xl mx-auto">
 		<header class="mb-12 md:mb-16 animate-fade-up">
-			<Kicker label="DEPARTMENT  ·  TOOLS  ·  ISSUE 04" showRule={true} />
+			<Kicker label="DEPARTMENT  ·  TOOLS" showRule={true} />
 			<h1 class="font-display text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-ink mb-3">
 				Open Source Work
 			</h1>

@@ -95,7 +95,7 @@
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<span style="color: oklch(72% 0.14 72); display:contents;">
+							<span class="relative -top-[2px]" style="color: oklch(72% 0.14 72);">
 								<HugeiconsIcon icon={CpuIcon} size={18} strokeWidth={1.5} />
 							</span>
 							<h3
@@ -117,7 +117,7 @@
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<span style="color: oklch(58% 0.12 240); display:contents;">
+							<span class="relative -top-[2px]" style="color: oklch(58% 0.12 240);">
 								<HugeiconsIcon icon={Shield01Icon} size={18} strokeWidth={1.5} />
 							</span>
 							<h3
@@ -139,7 +139,7 @@
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<span style="color: oklch(55% 0.09 105); display:contents;">
+							<span class="relative -top-[2px]" style="color: oklch(55% 0.09 105);">
 								<HugeiconsIcon icon={LockKeyIcon} size={18} strokeWidth={1.5} />
 							</span>
 							<h3
@@ -161,7 +161,7 @@
 				>
 					<div class="skill-row-content">
 						<div class="flex items-center gap-2 mb-3">
-							<span style="color: oklch(50% 0.18 25); display:contents;">
+							<span class="relative -top-[2px]" style="color: oklch(50% 0.18 25);">
 								<HugeiconsIcon icon={AiNetworkIcon} size={18} strokeWidth={1.5} />
 							</span>
 							<h3
