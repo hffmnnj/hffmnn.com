@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Kicker, DropCap } from "$lib/components/editorial";
+	import { reveal } from "$lib/actions";
 	import { onMount } from "svelte";
 
 	const birthYear = 2004;
@@ -121,7 +122,7 @@
 	</div>
 
 	<!-- Ticker below hero -->
-	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip">
+	<div class="ticker-wrap mt-16 md:mt-24 -mx-6 md:mx-0 reveal-clip" use:reveal>
 		<div class="ticker-track" aria-hidden="true">
 			{#each [0, 1] as loop (loop)}
 				{#each tickerTerms as term (`${loop}-${term}`)}
