@@ -5,8 +5,7 @@
 		CpuIcon,
 		Shield01Icon,
 		LockKeyIcon,
-		AiNetworkIcon,
-		FingerPrintIcon
+		AiNetworkIcon
 	} from "$lib/icons";
 	import { reveal, countUp } from "$lib/actions";
 </script>
@@ -154,29 +153,6 @@
 					</div>
 				</div>
 
-				<div
-					class="skill-row"
-					use:reveal
-					style="--row-delay: 400ms"
-				>
-					<div class="skill-row-content">
-						<div class="flex items-center gap-2 mb-3">
-							<HugeiconsIcon
-								icon={FingerPrintIcon}
-								size={18}
-								strokeWidth={1.5}
-							/>
-							<h3
-								class="font-display fraunces-hover text-xl md:text-2xl font-semibold text-ink"
-							>
-								Design
-							</h3>
-						</div>
-						<p class="font-body text-sm md:text-base text-ink-soft leading-[1.65]">
-							The Liquid Metal design system, with rhythm borrowed from 3Blue1Brown and the Swiss editorial tradition.
-						</p>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

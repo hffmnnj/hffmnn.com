@@ -168,59 +168,10 @@ export const capyseoProjects: Project[] = [
 	}
 ];
 
-export const reinsProjects: Project[] = [
-	{
-		slug: 'reins-tui',
-		title: 'Reins TUI',
-		description:
-			"The terminal frontend for Reins. Full keyboard navigation, no mouse needed. On-device AI processing via the Reins Core runtime, 30+ app integrations without cloud calls. Session history is searchable and the whole thing is scriptable through stdin/stdout.",
-		shortDescription:
-			'Keyboard-driven terminal for Reins AI. On-device processing, 30+ app integrations, fully scriptable via stdin/stdout.',
-		tags: ['TUI', 'Terminal', 'AI', 'Privacy', 'Rust'],
-		githubUrl: 'https://github.com/reins-ai/reins-tui',
-		githubOwner: 'reins-ai',
-		githubRepo: 'reins-tui',
-		websiteUrl: 'https://reinsbot.com',
-		features: [
-			'Full keyboard navigation — mouse-free, distraction-free',
-			'On-device AI processing — no cloud calls, no data leakage',
-			'Integrates with the Reins Core runtime for 30+ app connections',
-			'Session history with searchable conversation log',
-			'Scriptable via stdin/stdout for shell pipeline integration',
-			'Lightweight — runs on any machine with a terminal'
-		]
-	},
-	{
-		slug: 'reins-core',
-		title: 'Reins Core',
-		description:
-			"Reins is a privacy-first AI assistant that runs on your device. MIT licensed, offline-capable, 30+ integrations across productivity and dev tools. One codebase covers desktop, mobile, and browser. Your data stays on your machine by default.",
-		shortDescription:
-			'Open-source AI assistant for desktop, mobile, and browser. Offline-capable, 30+ integrations, MIT licensed.',
-		tags: ['AI', 'Privacy', 'TypeScript', 'Open Source', 'Multi-platform'],
-		githubUrl: 'https://github.com/reins-ai/reins-core',
-		githubOwner: 'reins-ai',
-		githubRepo: 'reins-core',
-		websiteUrl: 'https://reinsbot.com',
-		features: [
-			'Open source under MIT — full transparency, no lock-in',
-			'On-device AI processing — your data never leaves your machine',
-			'30+ app integrations across productivity, communication, and dev tools',
-			'Offline support — works without an internet connection',
-			'Runs on Desktop, Mobile, and Browser from a single codebase',
-			'Three deployment modes: local, self-hosted, and cloud'
-		]
-	}
-];
-
 export function getProjectBySlug(slug: string): Project | undefined {
 	return projects.find((p) => p.slug === slug);
 }
 
 export function getCapyseoProjectBySlug(slug: string): Project | undefined {
 	return capyseoProjects.find((p) => p.slug === slug);
-}
-
-export function getReinsProjectBySlug(slug: string): Project | undefined {
-	return reinsProjects.find((p) => p.slug === slug);
 }
