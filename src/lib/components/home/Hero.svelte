@@ -37,24 +37,52 @@
 	onMount(() => {
 		// Word-split h1 for per-word variable-font animation (MH3).
 		// SSR-safe: original text remains in static HTML; spans only appear post-mount.
+		// Handles inline links by preserving anchor tags around word spans.
 		if (h1El) {
 			const fullText = (h1El.textContent ?? "").trim();
 			h1El.setAttribute("aria-label", fullText);
+
+			// Collect existing anchor elements to preserve their href and styling
+			const existingAnchors = Array.from(h1El.querySelectorAll("a"));
+			const anchorData = existingAnchors.map((a) => ({
+				href: a.getAttribute("href"),
+				text: a.textContent ?? "",
+				className: a.className,
+			}));
+
 			// Clear and rebuild with word spans, preserving whitespace as text nodes.
 			h1El.textContent = "";
 			let wordIndex = 0;
 			const tokens = fullText.split(/(\s+)/);
+
 			for (const token of tokens) {
 				if (token.length === 0) continue;
 				if (/^\s+$/.test(token)) {
 					h1El.appendChild(document.createTextNode(token));
 				} else {
+					// Check if this word was originally inside an anchor
+					const anchorInfo = anchorData.find((a) =>
+						a.text.toLowerCase().includes(token.toLowerCase()),
+					);
+
 					const span = document.createElement("span");
 					span.className = "word";
 					span.setAttribute("aria-hidden", "true");
 					span.style.setProperty("--word-delay", `${wordIndex * 80}ms`);
 					span.textContent = token;
-					h1El.appendChild(span);
+
+					if (anchorInfo) {
+						// Wrap the word span in an anchor
+						const a = document.createElement("a");
+						a.href = anchorInfo.href ?? "#";
+						a.className = anchorInfo.className;
+						a.target = "_blank";
+						a.rel = "noopener noreferrer";
+						a.appendChild(span);
+						h1El.appendChild(a);
+					} else {
+						h1El.appendChild(span);
+					}
 					wordIndex++;
 				}
 			}
@@ -99,7 +127,7 @@
 				class="font-display fraunces-hover word-split text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
-				I run Pulsyn. Building hardware that thinks on-device.
+				I run <a href="https://getpulsyn.com" class="text-pulsyn hover:underline">Pulsyn</a>. Building hardware that thinks on-device.
 			</h1>
 		</div>
 
