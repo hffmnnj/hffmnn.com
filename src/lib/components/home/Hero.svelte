@@ -37,53 +37,76 @@
 	onMount(() => {
 		// Word-split h1 for per-word variable-font animation (MH3).
 		// SSR-safe: original text remains in static HTML; spans only appear post-mount.
-		// Handles inline links by preserving anchor tags around word spans.
+		// Preserves anchor elements by cloning them and inserting word spans as children.
 		if (h1El) {
 			const fullText = (h1El.textContent ?? "").trim();
 			h1El.setAttribute("aria-label", fullText);
 
-			// Collect existing anchor elements to preserve their href and styling
-			const existingAnchors = Array.from(h1El.querySelectorAll("a"));
-			const anchorData = existingAnchors.map((a) => ({
-				href: a.getAttribute("href"),
-				text: a.textContent ?? "",
-				className: a.className,
-			}));
+			// Use TreeWalker to traverse all text nodes while tracking parent anchors
+			const walker = document.createTreeWalker(
+				h1El,
+				NodeFilter.SHOW_TEXT,
+				null,
+			);
 
-			// Clear and rebuild with word spans, preserving whitespace as text nodes.
-			h1El.textContent = "";
-			let wordIndex = 0;
-			const tokens = fullText.split(/(\s+)/);
-
-			for (const token of tokens) {
-				if (token.length === 0) continue;
-				if (/^\s+$/.test(token)) {
-					h1El.appendChild(document.createTextNode(token));
-				} else {
-					// Check if this word was originally inside an anchor
-					const anchorInfo = anchorData.find((a) =>
-						a.text.toLowerCase().includes(token.toLowerCase()),
-					);
-
-					const span = document.createElement("span");
-					span.className = "word";
-					span.setAttribute("aria-hidden", "true");
-					span.style.setProperty("--word-delay", `${wordIndex * 80}ms`);
-					span.textContent = token;
-
-					if (anchorInfo) {
-						// Wrap the word span in an anchor
-						const a = document.createElement("a");
-						a.href = anchorInfo.href ?? "#";
-						a.className = anchorInfo.className;
-						a.target = "_blank";
-						a.rel = "noopener noreferrer";
-						a.appendChild(span);
-						h1El.appendChild(a);
-					} else {
-						h1El.appendChild(span);
+			// Collect all text nodes and their parent anchor info before modifying DOM
+			const textNodes: Array<{ node: Text; parentAnchor: HTMLAnchorElement | null }> = [];
+			let node: Node | null;
+			while ((node = walker.nextNode())) {
+				// Find closest anchor ancestor within h1El
+				let parentAnchor: HTMLAnchorElement | null = null;
+				let el: Element | null = node.parentElement;
+				while (el && el !== h1El) {
+					if (el.tagName === "A") {
+						parentAnchor = el as HTMLAnchorElement;
+						break;
 					}
-					wordIndex++;
+					el = el.parentElement;
+				}
+				// Store reference - anchor is valid if we found one (it's inside h1El by definition)
+				textNodes.push({ node: node as Text, parentAnchor });
+			}
+
+			// Clear the h1 content
+			h1El.textContent = "";
+
+			// Track cloned anchors to avoid recreating them for each word
+			const clonedAnchors = new Map<HTMLAnchorElement, HTMLAnchorElement>();
+			let wordIndex = 0;
+
+			for (const { node, parentAnchor } of textNodes) {
+				const text = node.textContent ?? "";
+				const tokens = text.split(/(\s+)/);
+
+				for (const token of tokens) {
+					if (token.length === 0) continue;
+
+					if (/^\s+$/.test(token)) {
+						// Whitespace goes directly to h1
+						h1El.appendChild(document.createTextNode(token));
+					} else {
+						// Create word span with animation delay
+						const span = document.createElement("span");
+						span.className = "word";
+						span.setAttribute("aria-hidden", "true");
+						span.style.setProperty("--word-delay", `${wordIndex * 80}ms`);
+						span.textContent = token;
+
+						if (parentAnchor) {
+							// Get or create cloned anchor
+							let clonedAnchor = clonedAnchors.get(parentAnchor);
+							if (!clonedAnchor) {
+								clonedAnchor = parentAnchor.cloneNode(false) as HTMLAnchorElement;
+								clonedAnchor.textContent = "";
+								clonedAnchors.set(parentAnchor, clonedAnchor);
+								h1El.appendChild(clonedAnchor);
+							}
+							clonedAnchor.appendChild(span);
+						} else {
+							h1El.appendChild(span);
+						}
+						wordIndex++;
+					}
 				}
 			}
 		}
@@ -127,7 +150,7 @@
 				class="font-display fraunces-hover word-split text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
-				I run <a href="https://getpulsyn.com" class="text-pulsyn hover:underline">Pulsyn</a>. Building hardware that thinks on-device.
+				I run <a href="https://getpulsyn.com" class="text-accent link-persistent-underline">Pulsyn</a>. Building hardware that thinks on-device.
 			</h1>
 		</div>
 

@@ -257,6 +257,27 @@
     width: 100%;
   }
 
+  /* Persistent underline that gets thicker on hover (for inline links in headlines) */
+  .link-persistent-underline {
+    position: relative;
+    text-decoration: none;
+  }
+  .link-persistent-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.05em;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.6;
+    transition: height 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-persistent-underline:hover::after {
+    height: 2px;
+    opacity: 1;
+  }
+
   /* Drop cap — first-letter on .has-drop-cap p */
   .has-drop-cap::first-letter {
     float: left;
