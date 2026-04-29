@@ -150,7 +150,7 @@
 				class="font-display fraunces-hover word-split text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
-				I run <a href="https://getpulsyn.com" class="text-accent link-persistent-underline">Pulsyn</a>. Building hardware that thinks on-device.
+				I run <a href="https://getpulsyn.com" class="text-accent link-persistent-underline">Pulsyn.</a> Building hardware that thinks on-device.
 			</h1>
 		</div>
 
