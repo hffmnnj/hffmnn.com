@@ -150,7 +150,7 @@
 				class="font-display fraunces-hover word-split text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-[-0.03em] text-ink leading-[0.97] mb-10 max-w-5xl"
 				style="text-wrap: balance;"
 			>
-				I run <a href="https://getpulsyn.com" class="text-accent link-persistent-underline">Pulsyn</a>. Building hardware that thinks on-device.
+				I run <a href="https://getpulsyn.com" class="link-persistent-underline"><span class="text-accent">Pulsyn</span>.</a> Building hardware that thinks on-device.
 			</h1>
 		</div>
 
@@ -168,7 +168,7 @@
 				class="font-body text-base md:text-lg leading-[1.65] text-ink-soft"
 				style="text-wrap: pretty;"
 			>
-				I spend most of my time curating the best datasets possible for health and wellness. When the data I need does not exist, I build synthetic datasets to fill the gaps. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
+				I have a lot of fun right now curating the best datasets possible for health and wellness. When the data I need does not exist, I build synthetic datasets to fill the gaps. Reverse-engineered Arizona Mobile ID earlier this year to prove a point about state-issued credentials. The work underneath is unfashionable: SQLCipher AES-256, local-first storage, on-device inference, no cloud round-trip for anything that matters.
 			</p>
 		</div>
 
