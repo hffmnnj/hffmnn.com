@@ -261,21 +261,23 @@
   .link-persistent-underline {
     position: relative;
     text-decoration: none;
+    color: var(--ink);
   }
   .link-persistent-underline::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: 0.05em;
+    bottom: 0.02em;
     width: 100%;
     height: 1px;
-    background-color: currentColor;
-    opacity: 0.6;
+    background-color: var(--ink);
+    opacity: 0.5;
     transition: height 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
   }
   .link-persistent-underline:hover::after {
     height: 2px;
-    opacity: 1;
+    opacity: 0.8;
   }
 
   /* Drop cap — first-letter on .has-drop-cap p */
