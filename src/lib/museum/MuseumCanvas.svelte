@@ -24,6 +24,10 @@
 		let clock: import('three').Clock | undefined;
 		let removeResizeListener: (() => void) | undefined;
 		let mounted = true;
+		let exhibits: Map<
+			import('./types.js').RoomId,
+			import('./exhibits/index.js').Exhibit
+		> = new Map();
 
 		async function init() {
 			const THREE = await import('three');
@@ -61,6 +65,9 @@
 			const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
 
+			const { createAllExhibits } = await import('./exhibits/index.js');
+			exhibits = await createAllExhibits(THREE, scene);
+
 			controlsApi = await createControls(camera, canvas, THREE);
 			controls = controlsApi.controls;
 
@@ -95,6 +102,11 @@
 
 				applyCollision(camera, prevX, prevZ);
 				camera.position.y = PLAYER_HEIGHT;
+
+				const t = clock.getElapsedTime();
+				for (const [, exhibit] of exhibits) {
+					exhibit.tick(t, false); // Wave 3 always false; Wave 3.T3 will pass active state
+				}
 
 				renderer.render(scene, camera);
 			}
