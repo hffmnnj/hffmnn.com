@@ -24,6 +24,25 @@
 
 	let controls: import('three/examples/jsm/controls/PointerLockControls.js').PointerLockControls | null = $state(null);
 
+	function disposeObjectTree(object: import('three').Object3D): void {
+		object.traverse((child) => {
+			const maybeMesh = child as import('three').Object3D & {
+				geometry?: { dispose: () => void };
+				material?:
+					| { dispose: () => void }
+					| Array<{ dispose: () => void }>;
+			};
+
+			maybeMesh.geometry?.dispose();
+			const material = maybeMesh.material;
+			if (Array.isArray(material)) {
+				for (const mat of material) mat.dispose();
+			} else {
+				material?.dispose();
+			}
+		});
+	}
+
 	onMount(() => {
 		if (!browser) return;
 
@@ -59,6 +78,7 @@
 		let clock: import('three').Clock | undefined;
 		let removeResizeListener: (() => void) | undefined;
 		let mounted = true;
+		let removeContextLostListener: (() => void) | undefined;
 		let exhibits: Map<
 			import('./types.js').RoomId,
 			import('./exhibits/index.js').Exhibit
@@ -137,17 +157,16 @@
 
 			// If the GPU context is lost, stop the loop and show the fallback
 			// rather than rendering a frozen/black canvas.
-			canvas.addEventListener(
-				'webglcontextlost',
-				(e: Event) => {
-					e.preventDefault();
-					fallbackReason = 'webgl';
-					if (animationId !== undefined) {
-						cancelAnimationFrame(animationId);
-					}
-				},
-				{ once: true }
-			);
+			function onContextLost(e: Event) {
+				e.preventDefault();
+				fallbackReason = 'webgl';
+				if (animationId !== undefined) {
+					cancelAnimationFrame(animationId);
+				}
+			}
+
+			canvas.addEventListener('webglcontextlost', onContextLost, { once: true });
+			removeContextLostListener = () => canvas.removeEventListener('webglcontextlost', onContextLost);
 
 			// CSS2DRenderer for crisp DOM exhibit panels overlaid on the canvas.
 			const { CSS2DRenderer } = await import(
@@ -168,24 +187,24 @@
 			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
 			scene.add(ambient);
 
-		const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
-		dirLight.position.set(0, 8, -15);
-		dirLight.castShadow = true;
-		scene.add(dirLight);
+			const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
+			dirLight.position.set(0, 8, -15);
+			dirLight.castShadow = true;
+			scene.add(dirLight);
 
-		const { createDayCycle } = await import('$lib/museum/daycycle.js');
-		dayCycle = createDayCycle(THREE, ambient, dirLight);
+			const { createDayCycle } = await import('$lib/museum/daycycle.js');
+			dayCycle = createDayCycle(THREE, ambient, dirLight);
 
-		const { createLightShafts } = await import('$lib/museum/shafts.js');
-		shafts = createLightShafts(THREE, scene);
+			const { createLightShafts } = await import('$lib/museum/shafts.js');
+			shafts = createLightShafts(THREE, scene);
 
-		const { createHiddenDoor } = await import('$lib/museum/hiddenDoor.js');
-		hiddenDoor = createHiddenDoor(THREE, scene);
+			const { createHiddenDoor } = await import('$lib/museum/hiddenDoor.js');
+			hiddenDoor = createHiddenDoor(THREE, scene);
 
-		const { createHiddenWing } = await import('$lib/museum/hiddenWing.js');
-		hiddenWing = await createHiddenWing(THREE, scene, labelRenderer);
+			const { createHiddenWing } = await import('$lib/museum/hiddenWing.js');
+			hiddenWing = await createHiddenWing(THREE, scene, labelRenderer);
 
-		const { buildMuseumGeometry } = await import('./geometry.js');
+			const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
 
 			const { createDustSystem } = await import('./dust.js');
@@ -206,55 +225,55 @@
 
 			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
 
-		const KEY_ROOMS = new Set<import('./types.js').RoomId>([
-			'vault',
-			'protocol',
-			'hacker',
-			'council',
-			'lab'
-		]);
-		const KEY_DWELL_TIME = 3000;
-		const exhibitTimers = new Map<import('./types.js').RoomId, number>();
+			const KEY_ROOMS = new Set<import('./types.js').RoomId>([
+				'vault',
+				'protocol',
+				'hacker',
+				'council',
+				'lab'
+			]);
+			const KEY_DWELL_TIME = 3000;
+			const exhibitTimers = new Map<import('./types.js').RoomId, number>();
 
-		// Build one CSS2D panel per exhibit, floating above its artifact.
-		// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
-		const { createPanel } = await import('./panel.js');
-		const { EXHIBIT_MAP } = await import('./exhibitMap.js');
-		for (const room of ROOMS) {
-			if (!exhibits.has(room.id)) continue;
-			const content = EXHIBIT_MAP.get(room.id);
-			if (!content) continue; // skip hidden-wing and any unmapped rooms
-			const [x, y, z] = room.exhibitPosition;
-			const panel = await createPanel(
-				THREE,
-				content,
-				new THREE.Vector3(x, y, z),
-				scene
-			);
-			panels.set(room.id, panel);
-		}
-
-		// Show the active panel, hide all others, on every activation change.
-		// Dwell timer for residue keys: start when a key-dropping room is
-		// newly activated, clear when focus leaves.
-		unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
-			for (const [roomId, panel] of panels) {
-				panel.setVisible(roomId === newId);
-			}
-			if (newId) {
-				const ex = exhibits.get(newId);
-				if (ex) ex.group.scale.setScalar(1.0);
+			// Build one CSS2D panel per exhibit, floating above its artifact.
+			// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
+			const { createPanel } = await import('./panel.js');
+			const { EXHIBIT_MAP } = await import('./exhibitMap.js');
+			for (const room of ROOMS) {
+				if (!exhibits.has(room.id)) continue;
+				const content = EXHIBIT_MAP.get(room.id);
+				if (!content) continue; // skip hidden-wing and any unmapped rooms
+				const [x, y, z] = room.exhibitPosition;
+				const panel = await createPanel(
+					THREE,
+					content,
+					new THREE.Vector3(x, y, z),
+					scene
+				);
+				panels.set(room.id, panel);
 			}
 
-			for (const [roomId] of exhibitTimers) {
-				if (roomId !== newId) {
-					exhibitTimers.delete(roomId);
+			// Show the active panel, hide all others, on every activation change.
+			// Dwell timer for residue keys: start when a key-dropping room is
+			// newly activated, clear when focus leaves.
+			unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
+				for (const [roomId, panel] of panels) {
+					panel.setVisible(roomId === newId);
 				}
-			}
-			if (newId && KEY_ROOMS.has(newId) && !hasKey(newId)) {
-				exhibitTimers.set(newId, Date.now());
-			}
-		});
+				if (newId) {
+					const ex = exhibits.get(newId);
+					if (ex) ex.group.scale.setScalar(1.0);
+				}
+
+				for (const [roomId] of exhibitTimers) {
+					if (roomId !== newId) {
+						exhibitTimers.delete(roomId);
+					}
+				}
+				if (newId && KEY_ROOMS.has(newId) && !hasKey(newId)) {
+					exhibitTimers.set(newId, Date.now());
+				}
+			});
 
 			controlsApi = await createControls(camera, canvas, THREE);
 			controls = controlsApi.controls;
@@ -324,7 +343,10 @@
 								const [x, y, z] = room.exhibitPosition;
 								const pos = new THREE.Vector3(x, y + 0.5, z);
 								void createKeyPickup(THREE, pos).then(({ mesh, light, tick, dispose }) => {
-									if (!scene) return;
+									if (!mounted || !scene) {
+										dispose();
+										return;
+									}
 									scene.add(mesh);
 									scene.add(light);
 									keyPickups.set(roomId, { mesh, light, tick, dispose });
@@ -335,12 +357,12 @@
 					}
 				}
 
-			for (const [, pickup] of keyPickups) {
-				pickup.tick(t);
-			}
+				for (const [, pickup] of keyPickups) {
+					pickup.tick(t);
+				}
 
-			dustSystem?.tick(t);
-			dayCycle?.tick(t);
+				dustSystem?.tick(t);
+				dayCycle?.tick(t);
 				shafts?.tick(t, dirLight.intensity / 1.2);
 
 				const allKeys = allKeysFound;
@@ -376,6 +398,7 @@
 			}
 
 			removeResizeListener?.();
+			removeContextLostListener?.();
 			unsubscribeActivation?.();
 			for (const [, pickup] of keyPickups) {
 				scene?.remove(pickup.mesh);
@@ -387,6 +410,11 @@
 				panel.dispose();
 			}
 			panels.clear();
+			for (const exhibit of exhibits.values()) {
+				scene?.remove(exhibit.group);
+				disposeObjectTree(exhibit.group);
+			}
+			exhibits.clear();
 			labelRenderer?.domElement.remove();
 			dustSystem?.dispose();
 			shafts?.dispose();
