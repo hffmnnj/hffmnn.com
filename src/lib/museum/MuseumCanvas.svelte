@@ -4,6 +4,7 @@
 	import { createControls, type ControlsState } from './controls.js';
 
 	let canvas: HTMLCanvasElement;
+	let container: HTMLDivElement;
 	let animationId: number | undefined;
 	let isLocked = $state(false);
 
@@ -28,13 +29,35 @@
 			import('./types.js').RoomId,
 			import('./exhibits/index.js').Exhibit
 		> = new Map();
+		let labelRenderer:
+			| import('three/examples/jsm/renderers/CSS2DRenderer.js').CSS2DRenderer
+			| undefined;
+		const panels = new Map<
+			import('./types.js').RoomId,
+			import('./panel.js').PanelObject
+		>();
+		let unsubscribeActivation: (() => void) | undefined;
+		const keyPickups = new Map<
+			import('./types.js').RoomId,
+			{
+				mesh: import('three').Mesh;
+				light: import('three').PointLight;
+				tick: (t: number) => void;
+				dispose: () => void;
+			}
+		>();
 
 		async function init() {
 			const THREE = await import('three');
-			const [{ applyCollision }, { PLAYER_HEIGHT }] = await Promise.all([
+			const [{ applyCollision }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
 				import('./floorplan.js')
 			]);
+
+			const { collectKey, hasAllKeys, hasKey, getKeyCount } = await import(
+				'$lib/museum/keys.svelte.js'
+			);
+			const { createKeyPickup } = await import('$lib/museum/keyVisual.js');
 
 			if (!mounted) return;
 
@@ -54,6 +77,22 @@
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 			renderer.shadowMap.enabled = true;
 
+			// CSS2DRenderer for crisp DOM exhibit panels overlaid on the canvas.
+			const { CSS2DRenderer } = await import(
+				'three/examples/jsm/renderers/CSS2DRenderer.js'
+			);
+			labelRenderer = new CSS2DRenderer();
+			labelRenderer.setSize(window.innerWidth, window.innerHeight);
+			labelRenderer.domElement.style.position = 'absolute';
+			labelRenderer.domElement.style.top = '0';
+			labelRenderer.domElement.style.left = '0';
+			labelRenderer.domElement.style.width = '100%';
+			labelRenderer.domElement.style.height = '100%';
+			// Overlay never blocks first-person navigation; only visible panel
+			// links opt back into pointer events (see panel.ts setVisible).
+			labelRenderer.domElement.style.pointerEvents = 'none';
+			container.appendChild(labelRenderer.domElement);
+
 			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
 			scene.add(ambient);
 
@@ -70,7 +109,6 @@
 
 			const { createProximitySystem } = await import('./proximity.js');
 
-			const { ROOMS } = await import('./floorplan.js');
 			const exhibitPositions = new Map<import('./types.js').RoomId, import('three').Vector3>();
 			for (const room of ROOMS) {
 				if (exhibits.has(room.id)) {
@@ -80,12 +118,56 @@
 			}
 
 			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
-			proximitySystem.onActivationChange((newId, _wasActive) => {
-				if (newId) {
-					const ex = exhibits.get(newId);
-					if (ex) ex.group.scale.setScalar(1.0);
+
+		const KEY_ROOMS = new Set<import('./types.js').RoomId>([
+			'vault',
+			'protocol',
+			'hacker',
+			'council',
+			'lab'
+		]);
+		const KEY_DWELL_TIME = 3000;
+		const exhibitTimers = new Map<import('./types.js').RoomId, number>();
+
+		// Build one CSS2D panel per exhibit, floating above its artifact.
+		// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
+		const { createPanel } = await import('./panel.js');
+		const { EXHIBIT_MAP } = await import('./exhibitMap.js');
+		for (const room of ROOMS) {
+			if (!exhibits.has(room.id)) continue;
+			const content = EXHIBIT_MAP.get(room.id);
+			if (!content) continue; // skip hidden-wing and any unmapped rooms
+			const [x, y, z] = room.exhibitPosition;
+			const panel = await createPanel(
+				THREE,
+				content,
+				new THREE.Vector3(x, y, z),
+				scene
+			);
+			panels.set(room.id, panel);
+		}
+
+		// Show the active panel, hide all others, on every activation change.
+		// Dwell timer for residue keys: start when a key-dropping room is
+		// newly activated, clear when focus leaves.
+		unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
+			for (const [roomId, panel] of panels) {
+				panel.setVisible(roomId === newId);
+			}
+			if (newId) {
+				const ex = exhibits.get(newId);
+				if (ex) ex.group.scale.setScalar(1.0);
+			}
+
+			for (const [roomId] of exhibitTimers) {
+				if (roomId !== newId) {
+					exhibitTimers.delete(roomId);
 				}
-			});
+			}
+			if (newId && KEY_ROOMS.has(newId) && !hasKey(newId)) {
+				exhibitTimers.set(newId, Date.now());
+			}
+		});
 
 			controlsApi = await createControls(camera, canvas, THREE);
 			controls = controlsApi.controls;
@@ -103,6 +185,7 @@
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 				renderer.setSize(window.innerWidth, window.innerHeight);
+				labelRenderer?.setSize(window.innerWidth, window.innerHeight);
 			}
 
 			window.addEventListener('resize', onResize);
@@ -132,7 +215,37 @@
 					exhibit.tick(t, isActive);
 				}
 
+				const now = Date.now();
+				for (const [roomId, startTime] of exhibitTimers) {
+					if (now - startTime >= KEY_DWELL_TIME) {
+						const collected = collectKey(roomId);
+						if (collected) {
+							const room = ROOMS.find((r) => r.id === roomId);
+							if (room) {
+								const [x, y, z] = room.exhibitPosition;
+								const pos = new THREE.Vector3(x, y + 0.5, z);
+								void createKeyPickup(THREE, pos).then(({ mesh, light, tick, dispose }) => {
+									if (!scene) return;
+									scene.add(mesh);
+									scene.add(light);
+									keyPickups.set(roomId, { mesh, light, tick, dispose });
+								});
+							}
+						}
+						exhibitTimers.delete(roomId);
+					}
+				}
+
+				for (const [, pickup] of keyPickups) {
+					pickup.tick(t);
+				}
+
+				// Reactive read for future HUD/door wiring (W6/W7).
+				void hasAllKeys();
+				void getKeyCount();
+
 				renderer.render(scene, camera);
+				labelRenderer?.render(scene, camera);
 			}
 
 			animate();
@@ -148,13 +261,25 @@
 			}
 
 			removeResizeListener?.();
+			unsubscribeActivation?.();
+			for (const [, pickup] of keyPickups) {
+				scene?.remove(pickup.mesh);
+				scene?.remove(pickup.light);
+				pickup.dispose();
+			}
+			keyPickups.clear();
+			for (const panel of panels.values()) {
+				panel.dispose();
+			}
+			panels.clear();
+			labelRenderer?.domElement.remove();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
 	});
 </script>
 
-<div style="position:relative;width:100vw;height:100vh;overflow:hidden;">
+<div bind:this={container} style="position:relative;width:100vw;height:100vh;overflow:hidden;">
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
 
 	{#if !isLocked}
