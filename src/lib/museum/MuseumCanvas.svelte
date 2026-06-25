@@ -24,6 +24,10 @@
 		let clock: import('three').Clock | undefined;
 		let removeResizeListener: (() => void) | undefined;
 		let mounted = true;
+		let exhibits: Map<
+			import('./types.js').RoomId,
+			import('./exhibits/index.js').Exhibit
+		> = new Map();
 
 		async function init() {
 			const THREE = await import('three');
@@ -61,6 +65,28 @@
 			const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
 
+			const { createAllExhibits } = await import('./exhibits/index.js');
+			exhibits = await createAllExhibits(THREE, scene);
+
+			const { createProximitySystem } = await import('./proximity.js');
+
+			const { ROOMS } = await import('./floorplan.js');
+			const exhibitPositions = new Map<import('./types.js').RoomId, import('three').Vector3>();
+			for (const room of ROOMS) {
+				if (exhibits.has(room.id)) {
+					const [x, y, z] = room.exhibitPosition;
+					exhibitPositions.set(room.id, new THREE.Vector3(x, y, z));
+				}
+			}
+
+			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
+			proximitySystem.onActivationChange((newId, _wasActive) => {
+				if (newId) {
+					const ex = exhibits.get(newId);
+					if (ex) ex.group.scale.setScalar(1.0);
+				}
+			});
+
 			controlsApi = await createControls(camera, canvas, THREE);
 			controls = controlsApi.controls;
 
@@ -95,6 +121,16 @@
 
 				applyCollision(camera, prevX, prevZ);
 				camera.position.y = PLAYER_HEIGHT;
+
+				const t = clock.getElapsedTime();
+
+				proximitySystem.update(camera);
+				const activeExhibitId = proximitySystem.getActiveExhibitId();
+
+				for (const [roomId, exhibit] of exhibits) {
+					const isActive = roomId === activeExhibitId;
+					exhibit.tick(t, isActive);
+				}
 
 				renderer.render(scene, camera);
 			}
