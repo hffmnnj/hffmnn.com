@@ -7,6 +7,7 @@
 	let container: HTMLDivElement;
 	let animationId: number | undefined;
 	let isLocked = $state(false);
+	let museumAudio: import('$lib/museum/audio.js').MuseumAudioController | undefined;
 
 	let controls: import('three/examples/jsm/controls/PointerLockControls.js').PointerLockControls | null = $state(null);
 
@@ -63,7 +64,7 @@
 
 		async function init() {
 			const THREE = await import('three');
-			const [{ applyCollision, setHiddenWingPassable }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
+			const [{ applyCollision, getCurrentRoom, setHiddenWingPassable }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
 				import('./floorplan.js')
 			]);
@@ -82,6 +83,10 @@
 
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 			camera.position.set(0, 1.7, 4);
+
+			const { createMuseumAudio } = await import('$lib/museum/audio.js');
+			museumAudio = createMuseumAudio();
+			museumAudio.attachSpatialCues(THREE, camera, scene);
 
 			renderer = new THREE.WebGLRenderer({
 				canvas,
@@ -233,6 +238,8 @@
 
 				applyCollision(camera, prevX, prevZ);
 				camera.position.y = PLAYER_HEIGHT;
+				const currentRoom = getCurrentRoom(camera.position.x, camera.position.z);
+				museumAudio?.setRoom(currentRoom);
 
 				const t = clock.getElapsedTime();
 
@@ -319,6 +326,7 @@
 			shafts?.dispose();
 			hiddenDoor?.dispose();
 			hiddenWing?.dispose();
+			museumAudio?.stop();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
@@ -331,7 +339,13 @@
 	{#if !isLocked}
 		<div class="museum-overlay">
 			<p class="museum-overlay__hint">Click to enter the museum</p>
-			<button class="museum-overlay__btn" onclick={() => controls?.lock()}>Enter Museum</button>
+			<button
+				class="museum-overlay__btn"
+				onclick={() => {
+					museumAudio?.start();
+					controls?.lock();
+				}}>Enter Museum</button
+			>
 		</div>
 	{/if}
 </div>
