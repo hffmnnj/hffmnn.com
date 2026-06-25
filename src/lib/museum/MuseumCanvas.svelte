@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { createControls, type ControlsState } from './controls.js';
 	import LoadingScreen from '$lib/museum/LoadingScreen.svelte';
+	import Hud from '$lib/museum/Hud.svelte';
 
 	let canvas: HTMLCanvasElement;
 	let container: HTMLDivElement;
@@ -10,6 +11,11 @@
 	let isLocked = $state(false);
 	let loadingProgress = $state(0);
 	let isLoaded = $state(false);
+
+	// HUD state — updated each frame from the render loop.
+	let currentRoom: import('$lib/museum/types.js').RoomId | null = $state(null);
+	let keyCount = $state(0);
+	let allKeysFound = $state(false);
 	let museumAudio: import('$lib/museum/audio.js').MuseumAudioController | undefined;
 
 	let controls: import('three/examples/jsm/controls/PointerLockControls.js').PointerLockControls | null = $state(null);
@@ -252,8 +258,13 @@
 
 				applyCollision(camera, prevX, prevZ);
 				camera.position.y = PLAYER_HEIGHT;
-				const currentRoom = getCurrentRoom(camera.position.x, camera.position.z);
-				museumAudio?.setRoom(currentRoom);
+				const activeRoom = getCurrentRoom(camera.position.x, camera.position.z);
+				museumAudio?.setRoom(activeRoom);
+
+				// Mirror room + key progress into reactive HUD state.
+				currentRoom = activeRoom;
+				keyCount = getKeyCount();
+				allKeysFound = hasAllKeys();
 
 				const t = clock.getElapsedTime();
 
@@ -294,7 +305,7 @@
 			dayCycle?.tick(t);
 				shafts?.tick(t, dirLight.intensity / 1.2);
 
-				const allKeys = hasAllKeys();
+				const allKeys = allKeysFound;
 				hiddenDoor?.tick(t, allKeys);
 				hiddenWing?.tick(t);
 
@@ -352,6 +363,10 @@
 
 <div bind:this={container} style="position:relative;width:100vw;height:100vh;overflow:hidden;">
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
+
+	{#if isLoaded && isLocked}
+		<Hud {currentRoom} {keyCount} hasAllKeys={allKeysFound} />
+	{/if}
 
 	{#if !isLoaded}
 		<LoadingScreen progress={loadingProgress} onComplete={() => (isLoaded = true)} />
