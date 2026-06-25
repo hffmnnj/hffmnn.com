@@ -998,3 +998,43 @@
   outline: 2px solid rgba(232, 224, 208, 0.7);
   outline-offset: 3px;
 }
+
+/* ── Museum Hidden Wing Lore ───────────────────────────────── */
+.lore-fragment {
+  font-family: var(--font-mono, "Geist Mono Variable", monospace);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: rgba(200, 180, 240, 0.85);
+  background: rgba(8, 4, 16, 0.75);
+  border: 1px solid rgba(180, 120, 255, 0.2);
+  padding: 1rem 1.25rem;
+  max-width: 220px;
+  white-space: pre-line;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lore-thanks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lore-thanks__line1 {
+  font-family: var(--font-display, "Fraunces Variable", serif);
+  font-size: 1.6rem;
+  color: #e8d8ff;
+  letter-spacing: -0.02em;
+  font-style: italic;
+}
+
+.lore-thanks__line2 {
+  font-family: var(--font-body, "Newsreader Variable", serif);
+  font-size: 0.9rem;
+  color: rgba(200, 180, 220, 0.6);
+  letter-spacing: 0.04em;
+}

@@ -7,6 +7,7 @@
 	let container: HTMLDivElement;
 	let animationId: number | undefined;
 	let isLocked = $state(false);
+	let museumAudio: import('$lib/museum/audio.js').MuseumAudioController | undefined;
 
 	let controls: import('three/examples/jsm/controls/PointerLockControls.js').PointerLockControls | null = $state(null);
 
@@ -40,6 +41,17 @@
 		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
 		let dayCycle: { tick: (elapsed: number) => void } | undefined;
 		let shafts: { tick: (t: number, dayIntensity: number) => void; dispose: () => void } | undefined;
+		let hiddenDoor: {
+			mesh: import('three').Mesh;
+			isOpen: () => boolean;
+			tick: (t: number, allKeys: boolean) => void;
+			dispose: () => void;
+		} | undefined;
+		let hiddenWing: {
+			group: import('three').Group;
+			tick: (t: number) => void;
+			dispose: () => void;
+		} | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -52,7 +64,7 @@
 
 		async function init() {
 			const THREE = await import('three');
-			const [{ applyCollision }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
+			const [{ applyCollision, getCurrentRoom, setHiddenWingPassable }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
 				import('./floorplan.js')
 			]);
@@ -71,6 +83,10 @@
 
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 			camera.position.set(0, 1.7, 4);
+
+			const { createMuseumAudio } = await import('$lib/museum/audio.js');
+			museumAudio = createMuseumAudio();
+			museumAudio.attachSpatialCues(THREE, camera, scene);
 
 			renderer = new THREE.WebGLRenderer({
 				canvas,
@@ -109,6 +125,12 @@
 
 		const { createLightShafts } = await import('$lib/museum/shafts.js');
 		shafts = createLightShafts(THREE, scene);
+
+		const { createHiddenDoor } = await import('$lib/museum/hiddenDoor.js');
+		hiddenDoor = createHiddenDoor(THREE, scene);
+
+		const { createHiddenWing } = await import('$lib/museum/hiddenWing.js');
+		hiddenWing = await createHiddenWing(THREE, scene, labelRenderer);
 
 		const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
@@ -216,6 +238,8 @@
 
 				applyCollision(camera, prevX, prevZ);
 				camera.position.y = PLAYER_HEIGHT;
+				const currentRoom = getCurrentRoom(camera.position.x, camera.position.z);
+				museumAudio?.setRoom(currentRoom);
 
 				const t = clock.getElapsedTime();
 
@@ -254,11 +278,20 @@
 
 			dustSystem?.tick(t);
 			dayCycle?.tick(t);
-			shafts?.tick(t, dirLight.intensity / 1.2);
+				shafts?.tick(t, dirLight.intensity / 1.2);
 
-			// Reactive read for future HUD/door wiring (W6/W7).
-			void hasAllKeys();
-			void getKeyCount();
+				const allKeys = hasAllKeys();
+				hiddenDoor?.tick(t, allKeys);
+				hiddenWing?.tick(t);
+
+				if (hiddenDoor?.isOpen()) {
+					setHiddenWingPassable(true);
+				}
+
+				const updateGlow = hiddenDoor?.mesh.userData['updateStripeGlow'] as
+					| ((n: number) => void)
+					| undefined;
+				updateGlow?.(getKeyCount());
 
 				renderer.render(scene, camera);
 				labelRenderer?.render(scene, camera);
@@ -291,6 +324,9 @@
 			labelRenderer?.domElement.remove();
 			dustSystem?.dispose();
 			shafts?.dispose();
+			hiddenDoor?.dispose();
+			hiddenWing?.dispose();
+			museumAudio?.stop();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
@@ -303,7 +339,13 @@
 	{#if !isLocked}
 		<div class="museum-overlay">
 			<p class="museum-overlay__hint">Click to enter the museum</p>
-			<button class="museum-overlay__btn" onclick={() => controls?.lock()}>Enter Museum</button>
+			<button
+				class="museum-overlay__btn"
+				onclick={() => {
+					museumAudio?.start();
+					controls?.lock();
+				}}>Enter Museum</button
+			>
 		</div>
 	{/if}
 </div>
