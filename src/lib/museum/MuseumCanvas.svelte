@@ -38,6 +38,7 @@
 		>();
 		let unsubscribeActivation: (() => void) | undefined;
 		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
+		let dayCycle: { tick: (elapsed: number) => void } | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -97,12 +98,15 @@
 			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
 			scene.add(ambient);
 
-			const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
-			dirLight.position.set(0, 8, -15);
-			dirLight.castShadow = true;
-			scene.add(dirLight);
+		const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
+		dirLight.position.set(0, 8, -15);
+		dirLight.castShadow = true;
+		scene.add(dirLight);
 
-			const { buildMuseumGeometry } = await import('./geometry.js');
+		const { createDayCycle } = await import('$lib/museum/daycycle.js');
+		dayCycle = createDayCycle(THREE, ambient, dirLight);
+
+		const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
 
 			const { createDustSystem } = await import('./dust.js');
@@ -245,6 +249,7 @@
 			}
 
 			dustSystem?.tick(t);
+			dayCycle?.tick(t);
 
 			// Reactive read for future HUD/door wiring (W6/W7).
 			void hasAllKeys();
