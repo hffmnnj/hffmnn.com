@@ -8,6 +8,8 @@ export default defineConfig({
 		include: ['three']
 	},
 	build: {
+		// Three.js chunk is intentionally large (~600KB) — expected for WebGL apps
+		chunkSizeWarningLimit: 1000,
 		rollupOptions: {
 			output: {
 				manualChunks: (id) => {
