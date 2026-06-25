@@ -40,6 +40,12 @@
 		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
 		let dayCycle: { tick: (elapsed: number) => void } | undefined;
 		let shafts: { tick: (t: number, dayIntensity: number) => void; dispose: () => void } | undefined;
+		let hiddenDoor: {
+			mesh: import('three').Mesh;
+			isOpen: () => boolean;
+			tick: (t: number, allKeys: boolean) => void;
+			dispose: () => void;
+		} | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -52,7 +58,7 @@
 
 		async function init() {
 			const THREE = await import('three');
-			const [{ applyCollision }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
+			const [{ applyCollision, setHiddenWingPassable }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
 				import('./floorplan.js')
 			]);
@@ -109,6 +115,9 @@
 
 		const { createLightShafts } = await import('$lib/museum/shafts.js');
 		shafts = createLightShafts(THREE, scene);
+
+		const { createHiddenDoor } = await import('$lib/museum/hiddenDoor.js');
+		hiddenDoor = createHiddenDoor(THREE, scene);
 
 		const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
@@ -254,11 +263,19 @@
 
 			dustSystem?.tick(t);
 			dayCycle?.tick(t);
-			shafts?.tick(t, dirLight.intensity / 1.2);
+				shafts?.tick(t, dirLight.intensity / 1.2);
 
-			// Reactive read for future HUD/door wiring (W6/W7).
-			void hasAllKeys();
-			void getKeyCount();
+				const allKeys = hasAllKeys();
+				hiddenDoor?.tick(t, allKeys);
+
+				if (hiddenDoor?.isOpen()) {
+					setHiddenWingPassable(true);
+				}
+
+				const updateGlow = hiddenDoor?.mesh.userData['updateStripeGlow'] as
+					| ((n: number) => void)
+					| undefined;
+				updateGlow?.(getKeyCount());
 
 				renderer.render(scene, camera);
 				labelRenderer?.render(scene, camera);
@@ -291,6 +308,7 @@
 			labelRenderer?.domElement.remove();
 			dustSystem?.dispose();
 			shafts?.dispose();
+			hiddenDoor?.dispose();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
