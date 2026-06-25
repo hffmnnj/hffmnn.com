@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 export async function createExhibit(
 	THREE: typeof import('three'),
@@ -70,6 +71,9 @@ export async function createExhibit(
 		id: 'lab',
 		group,
 		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const bobSpeed = active ? 1.5 : 0.6;
 			const bobAmount = active ? 0.15 : 0.06;
 			banana.position.y = 2.2 + Math.sin(t * bobSpeed) * bobAmount;

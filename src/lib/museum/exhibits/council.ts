@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 const ORB_COLORS = [0x9966ff, 0x66cc88, 0xffaa44, 0x4488ff, 0xff5555];
 
@@ -71,6 +72,9 @@ export async function createExhibit(
 		id: 'council',
 		group,
 		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const orbitSpeed = active ? 0.7 : 0.25;
 			const bobSpeed = active ? 2.5 : 1.2;
 			const bobAmount = active ? 0.12 : 0.05;

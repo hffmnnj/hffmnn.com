@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 function createSignTexture(THREE: typeof import('three')): Three.CanvasTexture {
 	const canvas = document.createElement('canvas');
@@ -76,7 +77,10 @@ export async function createExhibit(
 	return {
 		id: 'atrium',
 		group,
-		tick(t: number, _active: boolean) {
+		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const rotationSpeed = 0.15;
 			group.rotation.y = Math.sin(t * rotationSpeed) * 0.08;
 			signMaterial.emissiveIntensity = 0.15 + Math.sin(t * 1.5) * 0.05;

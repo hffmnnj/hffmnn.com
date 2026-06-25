@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 const NODE_COLORS = [
 	0x2288ff, // blue
@@ -76,6 +77,9 @@ export async function createExhibit(
 		id: 'protocol',
 		group,
 		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const orbitSpeed = active ? 0.8 : 0.25;
 			group.rotation.y = t * orbitSpeed;
 

@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 const CARD_TITLES = ['@capyseo/core', '@capyseo/cli', '@capyseo/sveltekit'];
 const CARD_ACCENT = '#e8b84a';
@@ -84,6 +85,9 @@ export async function createExhibit(
 		id: 'archive',
 		group,
 		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const driftSpeed = active ? 0.8 : 0.25;
 			const driftAmount = active ? 0.06 : 0.025;
 

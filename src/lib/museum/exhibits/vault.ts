@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 export async function createExhibit(
 	THREE: typeof import('three'),
@@ -40,6 +41,9 @@ export async function createExhibit(
 		id: 'vault',
 		group,
 		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const speed = active ? 1.2 : 0.3;
 			keystone.rotation.y = t * speed;
 			keystone.rotation.x = t * speed * 0.3;

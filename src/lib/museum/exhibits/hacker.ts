@@ -1,5 +1,6 @@
 import type * as Three from 'three';
 import type { Exhibit } from './index.js';
+import { breathe } from './breathe.js';
 
 function createScreenTexture(THREE: typeof import('three')): Three.CanvasTexture {
 	const canvas = document.createElement('canvas');
@@ -113,6 +114,9 @@ export async function createExhibit(
 		id: 'hacker',
 		group,
 		tick(t: number, active: boolean) {
+			if (!active) {
+				breathe(group, t);
+			}
 			const flickerSpeed = active ? 18 : 8;
 			const baseIntensity = active ? 0.9 : 0.35;
 			screenMaterial.emissiveIntensity = baseIntensity + Math.sin(t * flickerSpeed) * 0.12;
