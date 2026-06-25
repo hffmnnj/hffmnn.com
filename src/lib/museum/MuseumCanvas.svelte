@@ -4,6 +4,7 @@
 	import { createControls, type ControlsState } from './controls.js';
 	import LoadingScreen from '$lib/museum/LoadingScreen.svelte';
 	import Hud from '$lib/museum/Hud.svelte';
+	import Fallback from '$lib/museum/Fallback.svelte';
 
 	let canvas: HTMLCanvasElement;
 	let container: HTMLDivElement;
@@ -11,6 +12,9 @@
 	let isLocked = $state(false);
 	let loadingProgress = $state(0);
 	let isLoaded = $state(false);
+	// When set, Three.js is never initialized (or has been torn down) and the
+	// designed fallback interstitial is shown instead of the canvas experience.
+	let fallbackReason = $state<'mobile' | 'webgl' | null>(null);
 
 	// HUD state — updated each frame from the render loop.
 	let currentRoom: import('$lib/museum/types.js').RoomId | null = $state(null);
@@ -22,6 +26,26 @@
 
 	onMount(() => {
 		if (!browser) return;
+
+		// Detect mobile/touch and WebGL support BEFORE any Three.js init.
+		// Touch-primary devices (no fine pointer) can't drive first-person controls.
+		if (!window.matchMedia('(pointer: fine)').matches) {
+			fallbackReason = 'mobile';
+		}
+
+		// WebGL 2.0 is mandatory for the museum renderer.
+		if (!fallbackReason) {
+			const testCanvas = document.createElement('canvas');
+			const gl = testCanvas.getContext('webgl2');
+			if (!gl) {
+				fallbackReason = 'webgl';
+			}
+		}
+
+		// Bail out early — no renderer, scene, or animation loop is created.
+		if (fallbackReason) {
+			return;
+		}
 
 		let renderer: import('three').WebGLRenderer | undefined;
 		let scene: import('three').Scene | undefined;
@@ -110,6 +134,20 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 			renderer.shadowMap.enabled = true;
+
+			// If the GPU context is lost, stop the loop and show the fallback
+			// rather than rendering a frozen/black canvas.
+			canvas.addEventListener(
+				'webglcontextlost',
+				(e: Event) => {
+					e.preventDefault();
+					fallbackReason = 'webgl';
+					if (animationId !== undefined) {
+						cancelAnimationFrame(animationId);
+					}
+				},
+				{ once: true }
+			);
 
 			// CSS2DRenderer for crisp DOM exhibit panels overlaid on the canvas.
 			const { CSS2DRenderer } = await import(
@@ -364,11 +402,13 @@
 <div bind:this={container} style="position:relative;width:100vw;height:100vh;overflow:hidden;">
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
 
-	{#if isLoaded && isLocked}
+	{#if isLoaded && isLocked && !fallbackReason}
 		<Hud {currentRoom} {keyCount} hasAllKeys={allKeysFound} />
 	{/if}
 
-	{#if !isLoaded}
+	{#if fallbackReason}
+		<Fallback reason={fallbackReason} />
+	{:else if !isLoaded}
 		<LoadingScreen progress={loadingProgress} onComplete={() => (isLoaded = true)} />
 	{:else if !isLocked}
 		<div class="museum-overlay">

@@ -1038,3 +1038,104 @@
   color: rgba(200, 180, 220, 0.6);
   letter-spacing: 0.04em;
 }
+
+/* ── Classic Fallback Portfolio ─────────────────────────────── */
+.classic {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+  font-family: var(--font-body, "Newsreader Variable", serif);
+}
+
+.classic__header {
+  margin-bottom: 4rem;
+}
+
+.classic__name {
+  font-family: var(--font-display, "Fraunces Variable", serif);
+  font-size: 2.5rem;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+}
+
+.classic__subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.65;
+  margin: 0 0 1.5rem;
+}
+
+.classic__museum-link {
+  font-family: var(--font-mono, "Geist Mono Variable", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.2s;
+}
+
+.classic__museum-link:hover,
+.classic__museum-link:focus-visible {
+  opacity: 0.85;
+}
+
+.classic__section {
+  margin-bottom: 3rem;
+}
+
+.classic__section-title {
+  font-family: var(--font-mono, "Geist Mono Variable", monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin: 0 0 1.5rem;
+}
+
+.classic__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.classic__item-title {
+  font-family: var(--font-display, "Fraunces Variable", serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.4rem;
+  transition: opacity 0.2s;
+}
+
+.classic__item-title:hover,
+.classic__item-title:focus-visible {
+  opacity: 0.7;
+}
+
+.classic__item-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  opacity: 0.65;
+  margin: 0 0 0.75rem;
+}
+
+.classic__item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.classic__tag {
+  font-family: var(--font-mono, "Geist Mono Variable", monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  opacity: 0.45;
+  border: 1px solid currentColor;
+  padding: 0.15rem 0.4rem;
+}
