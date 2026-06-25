@@ -46,6 +46,11 @@
 			tick: (t: number, allKeys: boolean) => void;
 			dispose: () => void;
 		} | undefined;
+		let hiddenWing: {
+			group: import('three').Group;
+			tick: (t: number) => void;
+			dispose: () => void;
+		} | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -118,6 +123,9 @@
 
 		const { createHiddenDoor } = await import('$lib/museum/hiddenDoor.js');
 		hiddenDoor = createHiddenDoor(THREE, scene);
+
+		const { createHiddenWing } = await import('$lib/museum/hiddenWing.js');
+		hiddenWing = await createHiddenWing(THREE, scene, labelRenderer);
 
 		const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
@@ -267,6 +275,7 @@
 
 				const allKeys = hasAllKeys();
 				hiddenDoor?.tick(t, allKeys);
+				hiddenWing?.tick(t);
 
 				if (hiddenDoor?.isOpen()) {
 					setHiddenWingPassable(true);
@@ -309,6 +318,7 @@
 			dustSystem?.dispose();
 			shafts?.dispose();
 			hiddenDoor?.dispose();
+			hiddenWing?.dispose();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
