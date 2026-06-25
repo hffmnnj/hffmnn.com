@@ -23,7 +23,7 @@
 			scene.background = new THREE.Color(0x0a0a0a);
 
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-			camera.position.set(0, 1.7, 5);
+			camera.position.set(0, 1.7, 4);
 
 			renderer = new THREE.WebGLRenderer({
 				canvas,
@@ -32,6 +32,17 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 			renderer.shadowMap.enabled = true;
+
+			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+			scene.add(ambient);
+
+			const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
+			dirLight.position.set(0, 8, -15);
+			dirLight.castShadow = true;
+			scene.add(dirLight);
+
+			const { buildMuseumGeometry } = await import('./geometry.js');
+			buildMuseumGeometry(THREE, scene);
 
 			function onResize() {
 				if (!camera || !renderer) return;
