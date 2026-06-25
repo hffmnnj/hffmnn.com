@@ -37,13 +37,27 @@
 			import('./panel.js').PanelObject
 		>();
 		let unsubscribeActivation: (() => void) | undefined;
+		const keyPickups = new Map<
+			import('./types.js').RoomId,
+			{
+				mesh: import('three').Mesh;
+				light: import('three').PointLight;
+				tick: (t: number) => void;
+				dispose: () => void;
+			}
+		>();
 
 		async function init() {
 			const THREE = await import('three');
-			const [{ applyCollision }, { PLAYER_HEIGHT }] = await Promise.all([
+			const [{ applyCollision }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
 				import('./floorplan.js')
 			]);
+
+			const { collectKey, hasAllKeys, hasKey, getKeyCount } = await import(
+				'$lib/museum/keys.svelte.js'
+			);
+			const { createKeyPickup } = await import('$lib/museum/keyVisual.js');
 
 			if (!mounted) return;
 
@@ -95,7 +109,6 @@
 
 			const { createProximitySystem } = await import('./proximity.js');
 
-			const { ROOMS } = await import('./floorplan.js');
 			const exhibitPositions = new Map<import('./types.js').RoomId, import('three').Vector3>();
 			for (const room of ROOMS) {
 				if (exhibits.has(room.id)) {
@@ -105,6 +118,16 @@
 			}
 
 			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
+
+		const KEY_ROOMS = new Set<import('./types.js').RoomId>([
+			'vault',
+			'protocol',
+			'hacker',
+			'council',
+			'lab'
+		]);
+		const KEY_DWELL_TIME = 3000;
+		const exhibitTimers = new Map<import('./types.js').RoomId, number>();
 
 		// Build one CSS2D panel per exhibit, floating above its artifact.
 		// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
@@ -124,16 +147,27 @@
 			panels.set(room.id, panel);
 		}
 
-			// Show the active panel, hide all others, on every activation change.
-			unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
-				for (const [roomId, panel] of panels) {
-					panel.setVisible(roomId === newId);
+		// Show the active panel, hide all others, on every activation change.
+		// Dwell timer for residue keys: start when a key-dropping room is
+		// newly activated, clear when focus leaves.
+		unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
+			for (const [roomId, panel] of panels) {
+				panel.setVisible(roomId === newId);
+			}
+			if (newId) {
+				const ex = exhibits.get(newId);
+				if (ex) ex.group.scale.setScalar(1.0);
+			}
+
+			for (const [roomId] of exhibitTimers) {
+				if (roomId !== newId) {
+					exhibitTimers.delete(roomId);
 				}
-				if (newId) {
-					const ex = exhibits.get(newId);
-					if (ex) ex.group.scale.setScalar(1.0);
-				}
-			});
+			}
+			if (newId && KEY_ROOMS.has(newId) && !hasKey(newId)) {
+				exhibitTimers.set(newId, Date.now());
+			}
+		});
 
 			controlsApi = await createControls(camera, canvas, THREE);
 			controls = controlsApi.controls;
@@ -181,6 +215,35 @@
 					exhibit.tick(t, isActive);
 				}
 
+				const now = Date.now();
+				for (const [roomId, startTime] of exhibitTimers) {
+					if (now - startTime >= KEY_DWELL_TIME) {
+						const collected = collectKey(roomId);
+						if (collected) {
+							const room = ROOMS.find((r) => r.id === roomId);
+							if (room) {
+								const [x, y, z] = room.exhibitPosition;
+								const pos = new THREE.Vector3(x, y + 0.5, z);
+								void createKeyPickup(THREE, pos).then(({ mesh, light, tick, dispose }) => {
+									if (!scene) return;
+									scene.add(mesh);
+									scene.add(light);
+									keyPickups.set(roomId, { mesh, light, tick, dispose });
+								});
+							}
+						}
+						exhibitTimers.delete(roomId);
+					}
+				}
+
+				for (const [, pickup] of keyPickups) {
+					pickup.tick(t);
+				}
+
+				// Reactive read for future HUD/door wiring (W6/W7).
+				void hasAllKeys();
+				void getKeyCount();
+
 				renderer.render(scene, camera);
 				labelRenderer?.render(scene, camera);
 			}
@@ -199,6 +262,12 @@
 
 			removeResizeListener?.();
 			unsubscribeActivation?.();
+			for (const [, pickup] of keyPickups) {
+				scene?.remove(pickup.mesh);
+				scene?.remove(pickup.light);
+				pickup.dispose();
+			}
+			keyPickups.clear();
 			for (const panel of panels.values()) {
 				panel.dispose();
 			}
