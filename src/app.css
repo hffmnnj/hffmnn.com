@@ -920,3 +920,81 @@
     transition: none !important;
   }
 }
+
+/* ── Museum Exhibit Panels ──────────────────────────────────── */
+.exhibit-panel {
+  font-family: var(--font-body, "Newsreader Variable", serif);
+  color: #e8e0d0;
+  max-width: 320px;
+  pointer-events: none; /* overridden per-panel when visible */
+  user-select: none;
+}
+
+.exhibit-panel__inner {
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(232, 224, 208, 0.25);
+  padding: 1.5rem 1.75rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.exhibit-panel__title {
+  font-family: var(--font-display, "Fraunces Variable", serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: #f0e8d8;
+  line-height: 1.2;
+}
+
+.exhibit-panel__desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+  opacity: 0.75;
+}
+
+.exhibit-panel__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.exhibit-panel__tag {
+  font-family: var(--font-mono, "Geist Mono Variable", monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  background: rgba(232, 224, 208, 0.08);
+  border: 1px solid rgba(232, 224, 208, 0.2);
+  padding: 0.2rem 0.5rem;
+  color: #b8b0a0;
+}
+
+.exhibit-panel__link {
+  display: inline-block;
+  font-family: var(--font-display, "Fraunces Variable", serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8e0d0;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232, 224, 208, 0.4);
+  padding-bottom: 0.1rem;
+  pointer-events: auto;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.exhibit-panel__link:hover,
+.exhibit-panel__link:focus-visible {
+  border-color: #e8e0d0;
+  color: #f0e8d8;
+  outline: none;
+}
+
+.exhibit-panel__link:focus-visible {
+  outline: 2px solid rgba(232, 224, 208, 0.7);
+  outline-offset: 3px;
+}

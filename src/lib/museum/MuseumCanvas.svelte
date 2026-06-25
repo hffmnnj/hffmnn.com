@@ -4,6 +4,7 @@
 	import { createControls, type ControlsState } from './controls.js';
 
 	let canvas: HTMLCanvasElement;
+	let container: HTMLDivElement;
 	let animationId: number | undefined;
 	let isLocked = $state(false);
 
@@ -28,6 +29,14 @@
 			import('./types.js').RoomId,
 			import('./exhibits/index.js').Exhibit
 		> = new Map();
+		let labelRenderer:
+			| import('three/examples/jsm/renderers/CSS2DRenderer.js').CSS2DRenderer
+			| undefined;
+		const panels = new Map<
+			import('./types.js').RoomId,
+			import('./panel.js').PanelObject
+		>();
+		let unsubscribeActivation: (() => void) | undefined;
 
 		async function init() {
 			const THREE = await import('three');
@@ -53,6 +62,22 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 			renderer.shadowMap.enabled = true;
+
+			// CSS2DRenderer for crisp DOM exhibit panels overlaid on the canvas.
+			const { CSS2DRenderer } = await import(
+				'three/examples/jsm/renderers/CSS2DRenderer.js'
+			);
+			labelRenderer = new CSS2DRenderer();
+			labelRenderer.setSize(window.innerWidth, window.innerHeight);
+			labelRenderer.domElement.style.position = 'absolute';
+			labelRenderer.domElement.style.top = '0';
+			labelRenderer.domElement.style.left = '0';
+			labelRenderer.domElement.style.width = '100%';
+			labelRenderer.domElement.style.height = '100%';
+			// Overlay never blocks first-person navigation; only visible panel
+			// links opt back into pointer events (see panel.ts setVisible).
+			labelRenderer.domElement.style.pointerEvents = 'none';
+			container.appendChild(labelRenderer.domElement);
 
 			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
 			scene.add(ambient);
@@ -80,7 +105,33 @@
 			}
 
 			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
-			proximitySystem.onActivationChange((newId, _wasActive) => {
+
+			// Build one CSS2D panel per exhibit, floating above its artifact.
+			// Placeholder content for now — W4.T2 binds real project data.
+			const { createPanel } = await import('./panel.js');
+			for (const room of ROOMS) {
+				if (!exhibits.has(room.id)) continue;
+				const [x, y, z] = room.exhibitPosition;
+				const panel = await createPanel(
+					THREE,
+					{
+						roomId: room.id,
+						title: room.label,
+						shortDescription: '',
+						tags: [],
+						detailUrl: null
+					},
+					new THREE.Vector3(x, y, z),
+					scene
+				);
+				panels.set(room.id, panel);
+			}
+
+			// Show the active panel, hide all others, on every activation change.
+			unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
+				for (const [roomId, panel] of panels) {
+					panel.setVisible(roomId === newId);
+				}
 				if (newId) {
 					const ex = exhibits.get(newId);
 					if (ex) ex.group.scale.setScalar(1.0);
@@ -103,6 +154,7 @@
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 				renderer.setSize(window.innerWidth, window.innerHeight);
+				labelRenderer?.setSize(window.innerWidth, window.innerHeight);
 			}
 
 			window.addEventListener('resize', onResize);
@@ -133,6 +185,7 @@
 				}
 
 				renderer.render(scene, camera);
+				labelRenderer?.render(scene, camera);
 			}
 
 			animate();
@@ -148,13 +201,19 @@
 			}
 
 			removeResizeListener?.();
+			unsubscribeActivation?.();
+			for (const panel of panels.values()) {
+				panel.dispose();
+			}
+			panels.clear();
+			labelRenderer?.domElement.remove();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
 	});
 </script>
 
-<div style="position:relative;width:100vw;height:100vh;overflow:hidden;">
+<div bind:this={container} style="position:relative;width:100vw;height:100vh;overflow:hidden;">
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
 
 	{#if !isLocked}
