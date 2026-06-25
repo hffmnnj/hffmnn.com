@@ -27,6 +27,10 @@
 
 		async function init() {
 			const THREE = await import('three');
+			const [{ applyCollision }, { PLAYER_HEIGHT }] = await Promise.all([
+				import('./collision.js'),
+				import('./floorplan.js')
+			]);
 
 			if (!mounted) return;
 
@@ -82,8 +86,16 @@
 				if (!scene || !camera || !renderer || !clock || !controlsApi) return;
 
 				animationId = requestAnimationFrame(animate);
+
+				const prevX = camera.position.x;
+				const prevZ = camera.position.z;
+
 				const delta = clock.getDelta();
 				controlsApi.update(delta);
+
+				applyCollision(camera, prevX, prevZ);
+				camera.position.y = PLAYER_HEIGHT;
+
 				renderer.render(scene, camera);
 			}
 
