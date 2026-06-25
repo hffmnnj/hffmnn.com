@@ -1,19 +1,14 @@
 <script lang="ts">
-	import { ROOMS } from '$lib/museum/floorplan.js';
 	import type { RoomId } from '$lib/museum/types.js';
 
 	interface Props {
-		currentRoom: RoomId | null;
+		roomLabel: string;
 		keyCount: number; // 0-5
 		hasAllKeys: boolean;
+		currentRoom?: RoomId | null; // kept for potential future use
 	}
 
-	let { currentRoom, keyCount, hasAllKeys }: Props = $props();
-
-	// Resolve the human-readable label for the current room id.
-	const roomLabel = $derived(
-		currentRoom ? (ROOMS.find((r) => r.id === currentRoom)?.label ?? '') : ''
-	);
+	let { roomLabel, keyCount, hasAllKeys }: Props = $props();
 </script>
 
 <div class="hud" aria-hidden="true">

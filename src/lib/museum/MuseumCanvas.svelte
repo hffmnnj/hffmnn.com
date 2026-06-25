@@ -18,6 +18,7 @@
 
 	// HUD state — updated each frame from the render loop.
 	let currentRoom: import('$lib/museum/types.js').RoomId | null = $state(null);
+	let currentRoomLabel = $state('');
 	let keyCount = $state(0);
 	let allKeysFound = $state(false);
 	let museumAudio: import('$lib/museum/audio.js').MuseumAudioController | undefined;
@@ -128,6 +129,8 @@
 				import('./floorplan.js')
 			]);
 
+		const roomLabelMap = new Map(ROOMS.map((r) => [r.id, r.label]));
+
 			const { collectKey, hasAllKeys, hasKey, getKeyCount } = await import(
 				'$lib/museum/keys.svelte.js'
 			);
@@ -204,11 +207,33 @@
 			const { createHiddenWing } = await import('$lib/museum/hiddenWing.js');
 			hiddenWing = await createHiddenWing(THREE, scene, labelRenderer);
 
-			const { buildMuseumGeometry } = await import('./geometry.js');
-			buildMuseumGeometry(THREE, scene);
+		const { buildMuseumGeometry } = await import('./geometry.js');
+		buildMuseumGeometry(THREE, scene);
 
-			const { createDustSystem } = await import('./dust.js');
-			dustSystem = createDustSystem(THREE, scene);
+		// Floor environment map (MH04): RoomEnvironment + PMREMGenerator, no external HDR.
+		const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js');
+		const pmremGenerator = new THREE.PMREMGenerator(renderer);
+		const roomEnv = new RoomEnvironment();
+		const envTexture = pmremGenerator.fromScene(roomEnv).texture;
+		scene.traverse((child) => {
+			if ((child as { isMesh?: boolean }).isMesh) {
+				const mesh = child as import('three').Mesh;
+				const mat = mesh.material;
+				if (!Array.isArray(mat) && (mat as { roughness?: number }).roughness !== undefined) {
+					const physMat = mat as import('three').MeshPhysicalMaterial;
+					if (physMat.roughness < 0.3) {
+						physMat.envMap = envTexture;
+						physMat.envMapIntensity = 0.5;
+						physMat.needsUpdate = true;
+					}
+				}
+			}
+		});
+		pmremGenerator.dispose();
+		roomEnv.dispose();
+
+		const { createDustSystem } = await import('./dust.js');
+		dustSystem = createDustSystem(THREE, scene);
 
 			const { createAllExhibits } = await import('./exhibits/index.js');
 			exhibits = await createAllExhibits(THREE, scene);
@@ -320,6 +345,7 @@
 
 				// Mirror room + key progress into reactive HUD state.
 				currentRoom = activeRoom;
+				currentRoomLabel = roomLabelMap.get(activeRoom ?? ('x' as never)) ?? '';
 				keyCount = getKeyCount();
 				allKeysFound = hasAllKeys();
 
@@ -431,7 +457,7 @@
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
 
 	{#if isLoaded && isLocked && !fallbackReason}
-		<Hud {currentRoom} {keyCount} hasAllKeys={allKeysFound} />
+		<Hud roomLabel={currentRoomLabel} {keyCount} hasAllKeys={allKeysFound} />
 	{/if}
 
 	{#if fallbackReason}
