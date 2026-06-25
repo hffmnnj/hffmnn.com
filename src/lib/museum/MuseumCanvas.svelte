@@ -106,26 +106,23 @@
 
 			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
 
-			// Build one CSS2D panel per exhibit, floating above its artifact.
-			// Placeholder content for now — W4.T2 binds real project data.
-			const { createPanel } = await import('./panel.js');
-			for (const room of ROOMS) {
-				if (!exhibits.has(room.id)) continue;
-				const [x, y, z] = room.exhibitPosition;
-				const panel = await createPanel(
-					THREE,
-					{
-						roomId: room.id,
-						title: room.label,
-						shortDescription: '',
-						tags: [],
-						detailUrl: null
-					},
-					new THREE.Vector3(x, y, z),
-					scene
-				);
-				panels.set(room.id, panel);
-			}
+		// Build one CSS2D panel per exhibit, floating above its artifact.
+		// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
+		const { createPanel } = await import('./panel.js');
+		const { EXHIBIT_MAP } = await import('./exhibitMap.js');
+		for (const room of ROOMS) {
+			if (!exhibits.has(room.id)) continue;
+			const content = EXHIBIT_MAP.get(room.id);
+			if (!content) continue; // skip hidden-wing and any unmapped rooms
+			const [x, y, z] = room.exhibitPosition;
+			const panel = await createPanel(
+				THREE,
+				content,
+				new THREE.Vector3(x, y, z),
+				scene
+			);
+			panels.set(room.id, panel);
+		}
 
 			// Show the active panel, hide all others, on every activation change.
 			unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
