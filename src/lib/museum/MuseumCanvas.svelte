@@ -2,11 +2,14 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { createControls, type ControlsState } from './controls.js';
+	import LoadingScreen from '$lib/museum/LoadingScreen.svelte';
 
 	let canvas: HTMLCanvasElement;
 	let container: HTMLDivElement;
 	let animationId: number | undefined;
 	let isLocked = $state(false);
+	let loadingProgress = $state(0);
+	let isLoaded = $state(false);
 	let museumAudio: import('$lib/museum/audio.js').MuseumAudioController | undefined;
 
 	let controls: import('three/examples/jsm/controls/PointerLockControls.js').PointerLockControls | null = $state(null);
@@ -38,6 +41,7 @@
 			import('./panel.js').PanelObject
 		>();
 		let unsubscribeActivation: (() => void) | undefined;
+		let progressInterval: ReturnType<typeof setInterval> | undefined;
 		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
 		let dayCycle: { tick: (elapsed: number) => void } | undefined;
 		let shafts: { tick: (t: number, dayIntensity: number) => void; dispose: () => void } | undefined;
@@ -63,6 +67,11 @@
 		>();
 
 		async function init() {
+			// Simulated ramp: Three.js loads fast, so fake progress until ready.
+			progressInterval = setInterval(() => {
+				loadingProgress = Math.min(loadingProgress + 12, 95);
+			}, 180);
+
 			const THREE = await import('three');
 			const [{ applyCollision, getCurrentRoom, setHiddenWingPassable }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
@@ -225,6 +234,11 @@
 			window.addEventListener('resize', onResize);
 			removeResizeListener = () => window.removeEventListener('resize', onResize);
 
+			// Scene is fully built; complete the ramp to trigger the ticket tear.
+			clearInterval(progressInterval);
+			progressInterval = undefined;
+			loadingProgress = 100;
+
 			function animate() {
 				if (!scene || !camera || !renderer || !clock || !controlsApi) return;
 
@@ -305,6 +319,9 @@
 		return () => {
 			mounted = false;
 
+			if (progressInterval !== undefined) {
+				clearInterval(progressInterval);
+			}
 			if (animationId !== undefined) {
 				cancelAnimationFrame(animationId);
 			}
@@ -336,7 +353,9 @@
 <div bind:this={container} style="position:relative;width:100vw;height:100vh;overflow:hidden;">
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
 
-	{#if !isLocked}
+	{#if !isLoaded}
+		<LoadingScreen progress={loadingProgress} onComplete={() => (isLoaded = true)} />
+	{:else if !isLocked}
 		<div class="museum-overlay">
 			<p class="museum-overlay__hint">Click to enter the museum</p>
 			<button
