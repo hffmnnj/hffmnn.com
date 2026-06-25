@@ -39,6 +39,7 @@
 		let unsubscribeActivation: (() => void) | undefined;
 		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
 		let dayCycle: { tick: (elapsed: number) => void } | undefined;
+		let shafts: { tick: (t: number, dayIntensity: number) => void; dispose: () => void } | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -105,6 +106,9 @@
 
 		const { createDayCycle } = await import('$lib/museum/daycycle.js');
 		dayCycle = createDayCycle(THREE, ambient, dirLight);
+
+		const { createLightShafts } = await import('$lib/museum/shafts.js');
+		shafts = createLightShafts(THREE, scene);
 
 		const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
@@ -250,6 +254,7 @@
 
 			dustSystem?.tick(t);
 			dayCycle?.tick(t);
+			shafts?.tick(t, dirLight.intensity / 1.2);
 
 			// Reactive read for future HUD/door wiring (W6/W7).
 			void hasAllKeys();
@@ -285,6 +290,7 @@
 			panels.clear();
 			labelRenderer?.domElement.remove();
 			dustSystem?.dispose();
+			shafts?.dispose();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
