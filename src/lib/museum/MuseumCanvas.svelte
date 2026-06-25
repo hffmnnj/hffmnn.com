@@ -37,6 +37,7 @@
 			import('./panel.js').PanelObject
 		>();
 		let unsubscribeActivation: (() => void) | undefined;
+		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -103,6 +104,9 @@
 
 			const { buildMuseumGeometry } = await import('./geometry.js');
 			buildMuseumGeometry(THREE, scene);
+
+			const { createDustSystem } = await import('./dust.js');
+			dustSystem = createDustSystem(THREE, scene);
 
 			const { createAllExhibits } = await import('./exhibits/index.js');
 			exhibits = await createAllExhibits(THREE, scene);
@@ -236,13 +240,15 @@
 					}
 				}
 
-				for (const [, pickup] of keyPickups) {
-					pickup.tick(t);
-				}
+			for (const [, pickup] of keyPickups) {
+				pickup.tick(t);
+			}
 
-				// Reactive read for future HUD/door wiring (W6/W7).
-				void hasAllKeys();
-				void getKeyCount();
+			dustSystem?.tick(t);
+
+			// Reactive read for future HUD/door wiring (W6/W7).
+			void hasAllKeys();
+			void getKeyCount();
 
 				renderer.render(scene, camera);
 				labelRenderer?.render(scene, camera);
@@ -273,6 +279,7 @@
 			}
 			panels.clear();
 			labelRenderer?.domElement.remove();
+			dustSystem?.dispose();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
