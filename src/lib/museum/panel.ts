@@ -59,20 +59,20 @@ export async function createPanel(
 			}
 		</div>
 	`;
-	panel.style.display = 'none'; // hidden until activated
+	// CSS2DRenderer overwrites element.style.display every frame from
+	// CSS2DObject.visible, so visibility must be driven via .visible (below).
 	panel.style.pointerEvents = 'none';
 
 	const css2dObject = new CSS2DObject(panel);
 	css2dObject.position.copy(attachPosition);
-	css2dObject.position.y += 2.5; // float above exhibit
+	css2dObject.position.y += 2.5;
+	css2dObject.visible = false;
 	scene.add(css2dObject);
 
 	return {
 		object: css2dObject,
 		setVisible(visible: boolean) {
-			panel.style.display = visible ? 'block' : 'none';
-			// Enable pointer events only on visible panels so the active
-			// panel's link is clickable while idle panels never block navigation.
+			css2dObject.visible = visible;
 			panel.style.pointerEvents = visible ? 'auto' : 'none';
 		},
 		dispose() {

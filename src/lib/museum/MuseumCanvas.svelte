@@ -105,6 +105,7 @@
 		let hiddenWing: {
 			group: import('three').Group;
 			tick: (t: number) => void;
+			setRevealed: (revealed: boolean) => void;
 			dispose: () => void;
 		} | undefined;
 		const keyPickups = new Map<
@@ -185,6 +186,8 @@
 			// Overlay never blocks first-person navigation; only visible panel
 			// links opt back into pointer events (see panel.ts setVisible).
 			labelRenderer.domElement.style.pointerEvents = 'none';
+			// Sit above the canvas but below HUD (10), overlay (50), loading (100).
+			labelRenderer.domElement.style.zIndex = '5';
 			container.appendChild(labelRenderer.domElement);
 
 			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
@@ -223,7 +226,7 @@
 					const physMat = mat as import('three').MeshPhysicalMaterial;
 					if (physMat.roughness < 0.3) {
 						physMat.envMap = envTexture;
-						physMat.envMapIntensity = 0.5;
+						physMat.envMapIntensity = 0.3;
 						physMat.needsUpdate = true;
 					}
 				}
@@ -395,6 +398,10 @@
 				hiddenDoor?.tick(t, allKeys);
 				hiddenWing?.tick(t);
 
+				// CSS2D lore fragments have no depth test, so reveal them only once
+				// the door opens — otherwise they bleed through walls at spawn.
+				hiddenWing?.setRevealed(hiddenDoor?.isOpen() ?? false);
+
 				if (hiddenDoor?.isOpen()) {
 					setHiddenWingPassable(true);
 				}
@@ -482,6 +489,7 @@
 	.museum-overlay {
 		position: absolute;
 		inset: 0;
+		z-index: 50;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

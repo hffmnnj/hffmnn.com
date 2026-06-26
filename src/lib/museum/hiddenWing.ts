@@ -14,6 +14,7 @@ export async function createHiddenWing(
 ): Promise<{
 	group: Three.Group;
 	tick: (t: number) => void;
+	setRevealed: (revealed: boolean) => void;
 	dispose: () => void;
 }> {
 	const { CSS2DObject } = await import(
@@ -152,6 +153,7 @@ export async function createHiddenWing(
 
 		const css2d = new CSS2DObject(div);
 		css2d.position.set(...frag.pos);
+		css2d.visible = false;
 		scene.add(css2d);
 		cssObjects.push(css2d);
 		cssElements.push(div);
@@ -167,6 +169,7 @@ export async function createHiddenWing(
 	`;
 	const thanksCss2d = new CSS2DObject(thanksDiv);
 	thanksCss2d.position.set(0, 4.5, -62);
+	thanksCss2d.visible = false;
 	scene.add(thanksCss2d);
 	cssObjects.push(thanksCss2d);
 	cssElements.push(thanksDiv);
@@ -185,6 +188,12 @@ export async function createHiddenWing(
 		centerGlow.intensity = 1.5 + Math.sin(t * 1.2) * 0.5;
 	}
 
+	function setRevealed(revealed: boolean) {
+		for (const obj of cssObjects) {
+			obj.visible = revealed;
+		}
+	}
+
 	function dispose() {
 		scene.remove(group);
 		group.remove(noteLight.target);
@@ -199,5 +208,5 @@ export async function createHiddenWing(
 		}
 	}
 
-	return { group, tick, dispose };
+	return { group, tick, setRevealed, dispose };
 }
