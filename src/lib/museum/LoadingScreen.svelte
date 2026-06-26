@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
+
 	interface Props {
 		/** Loading progress, 0–100. */
 		progress: number;
@@ -9,20 +11,20 @@
 	let { progress, onComplete }: Props = $props();
 
 	let phase: 'loading' | 'tearing' | 'done' = $state('loading');
-	let tearStarted = $state(false);
 
-	// Trigger the tear once progress reaches 100. Guard with tearStarted so
-	// the effect can't re-enter if progress is re-assigned 100 repeatedly.
+	// Drive the tear strictly off `progress`. Use untrack so writing phase
+	// (and reading it) does NOT re-trigger this effect and clear the timer.
 	$effect(() => {
-		if (progress >= 100 && phase === 'loading' && !tearStarted) {
-			tearStarted = true;
+		if (progress < 100) return;
+		untrack(() => {
+			if (phase !== 'loading') return; // already tearing/done — run once
 			phase = 'tearing';
-			const timer = setTimeout(() => {
-				phase = 'done';
-				onComplete();
-			}, 1000); // matches the slide transition duration + a beat
-			return () => clearTimeout(timer);
-		}
+		});
+		const timer = setTimeout(() => {
+			phase = 'done';
+			onComplete();
+		}, 1000); // matches the slide transition duration + a beat
+		return () => clearTimeout(timer);
 	});
 
 	const year = new Date().getFullYear();
