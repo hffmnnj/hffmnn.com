@@ -2,16 +2,70 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { createControls, type ControlsState } from './controls.js';
+	import LoadingScreen from '$lib/museum/LoadingScreen.svelte';
+	import Hud from '$lib/museum/Hud.svelte';
+	import Fallback from '$lib/museum/Fallback.svelte';
 
 	let canvas: HTMLCanvasElement;
 	let container: HTMLDivElement;
 	let animationId: number | undefined;
 	let isLocked = $state(false);
+	let loadingProgress = $state(0);
+	let isLoaded = $state(false);
+	// When set, Three.js is never initialized (or has been torn down) and the
+	// designed fallback interstitial is shown instead of the canvas experience.
+	let fallbackReason = $state<'mobile' | 'webgl' | null>(null);
+
+	// HUD state — updated each frame from the render loop.
+	let currentRoom: import('$lib/museum/types.js').RoomId | null = $state(null);
+	let currentRoomLabel = $state('');
+	let keyCount = $state(0);
+	let allKeysFound = $state(false);
+	let museumAudio: import('$lib/museum/audio.js').MuseumAudioController | undefined;
 
 	let controls: import('three/examples/jsm/controls/PointerLockControls.js').PointerLockControls | null = $state(null);
 
+	function disposeObjectTree(object: import('three').Object3D): void {
+		object.traverse((child) => {
+			const maybeMesh = child as import('three').Object3D & {
+				geometry?: { dispose: () => void };
+				material?:
+					| { dispose: () => void }
+					| Array<{ dispose: () => void }>;
+			};
+
+			maybeMesh.geometry?.dispose();
+			const material = maybeMesh.material;
+			if (Array.isArray(material)) {
+				for (const mat of material) mat.dispose();
+			} else {
+				material?.dispose();
+			}
+		});
+	}
+
 	onMount(() => {
 		if (!browser) return;
+
+		// Detect mobile/touch and WebGL support BEFORE any Three.js init.
+		// Touch-primary devices (no fine pointer) can't drive first-person controls.
+		if (!window.matchMedia('(pointer: fine)').matches) {
+			fallbackReason = 'mobile';
+		}
+
+		// WebGL 2.0 is mandatory for the museum renderer.
+		if (!fallbackReason) {
+			const testCanvas = document.createElement('canvas');
+			const gl = testCanvas.getContext('webgl2');
+			if (!gl) {
+				fallbackReason = 'webgl';
+			}
+		}
+
+		// Bail out early — no renderer, scene, or animation loop is created.
+		if (fallbackReason) {
+			return;
+		}
 
 		let renderer: import('three').WebGLRenderer | undefined;
 		let scene: import('three').Scene | undefined;
@@ -25,6 +79,7 @@
 		let clock: import('three').Clock | undefined;
 		let removeResizeListener: (() => void) | undefined;
 		let mounted = true;
+		let removeContextLostListener: (() => void) | undefined;
 		let exhibits: Map<
 			import('./types.js').RoomId,
 			import('./exhibits/index.js').Exhibit
@@ -37,9 +92,22 @@
 			import('./panel.js').PanelObject
 		>();
 		let unsubscribeActivation: (() => void) | undefined;
+		let progressInterval: ReturnType<typeof setInterval> | undefined;
 		let dustSystem: { tick: (t: number) => void; dispose: () => void } | undefined;
 		let dayCycle: { tick: (elapsed: number) => void } | undefined;
 		let shafts: { tick: (t: number, dayIntensity: number) => void; dispose: () => void } | undefined;
+		let hiddenDoor: {
+			mesh: import('three').Mesh;
+			isOpen: () => boolean;
+			tick: (t: number, allKeys: boolean) => void;
+			dispose: () => void;
+		} | undefined;
+		let hiddenWing: {
+			group: import('three').Group;
+			tick: (t: number) => void;
+			setRevealed: (revealed: boolean) => void;
+			dispose: () => void;
+		} | undefined;
 		const keyPickups = new Map<
 			import('./types.js').RoomId,
 			{
@@ -51,11 +119,18 @@
 		>();
 
 		async function init() {
+			// Simulated ramp: Three.js loads fast, so fake progress until ready.
+			progressInterval = setInterval(() => {
+				loadingProgress = Math.min(loadingProgress + 12, 95);
+			}, 180);
+
 			const THREE = await import('three');
-			const [{ applyCollision }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
+			const [{ applyCollision, getCurrentRoom, setHiddenWingPassable }, { PLAYER_HEIGHT, ROOMS }] = await Promise.all([
 				import('./collision.js'),
 				import('./floorplan.js')
 			]);
+
+		const roomLabelMap = new Map(ROOMS.map((r) => [r.id, r.label]));
 
 			const { collectKey, hasAllKeys, hasKey, getKeyCount } = await import(
 				'$lib/museum/keys.svelte.js'
@@ -72,6 +147,10 @@
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 			camera.position.set(0, 1.7, 4);
 
+			const { createMuseumAudio } = await import('$lib/museum/audio.js');
+			museumAudio = createMuseumAudio();
+			museumAudio.attachSpatialCues(THREE, camera, scene);
+
 			renderer = new THREE.WebGLRenderer({
 				canvas,
 				antialias: true
@@ -79,6 +158,19 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 			renderer.shadowMap.enabled = true;
+
+			// If the GPU context is lost, stop the loop and show the fallback
+			// rather than rendering a frozen/black canvas.
+			function onContextLost(e: Event) {
+				e.preventDefault();
+				fallbackReason = 'webgl';
+				if (animationId !== undefined) {
+					cancelAnimationFrame(animationId);
+				}
+			}
+
+			canvas.addEventListener('webglcontextlost', onContextLost, { once: true });
+			removeContextLostListener = () => canvas.removeEventListener('webglcontextlost', onContextLost);
 
 			// CSS2DRenderer for crisp DOM exhibit panels overlaid on the canvas.
 			const { CSS2DRenderer } = await import(
@@ -94,27 +186,57 @@
 			// Overlay never blocks first-person navigation; only visible panel
 			// links opt back into pointer events (see panel.ts setVisible).
 			labelRenderer.domElement.style.pointerEvents = 'none';
+			// Sit above the canvas but below HUD (10), overlay (50), loading (100).
+			labelRenderer.domElement.style.zIndex = '5';
 			container.appendChild(labelRenderer.domElement);
 
 			const ambient = new THREE.AmbientLight(0xffffff, 0.3);
 			scene.add(ambient);
 
-		const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
-		dirLight.position.set(0, 8, -15);
-		dirLight.castShadow = true;
-		scene.add(dirLight);
+			const dirLight = new THREE.DirectionalLight(0xfff8e7, 1.2);
+			dirLight.position.set(0, 8, -15);
+			dirLight.castShadow = true;
+			scene.add(dirLight);
 
-		const { createDayCycle } = await import('$lib/museum/daycycle.js');
-		dayCycle = createDayCycle(THREE, ambient, dirLight);
+			const { createDayCycle } = await import('$lib/museum/daycycle.js');
+			dayCycle = createDayCycle(THREE, ambient, dirLight);
 
-		const { createLightShafts } = await import('$lib/museum/shafts.js');
-		shafts = createLightShafts(THREE, scene);
+			const { createLightShafts } = await import('$lib/museum/shafts.js');
+			shafts = createLightShafts(THREE, scene);
+
+			const { createHiddenDoor } = await import('$lib/museum/hiddenDoor.js');
+			hiddenDoor = createHiddenDoor(THREE, scene);
+
+			const { createHiddenWing } = await import('$lib/museum/hiddenWing.js');
+			hiddenWing = await createHiddenWing(THREE, scene, labelRenderer);
 
 		const { buildMuseumGeometry } = await import('./geometry.js');
-			buildMuseumGeometry(THREE, scene);
+		buildMuseumGeometry(THREE, scene);
 
-			const { createDustSystem } = await import('./dust.js');
-			dustSystem = createDustSystem(THREE, scene);
+		// Floor environment map (MH04): RoomEnvironment + PMREMGenerator, no external HDR.
+		const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js');
+		const pmremGenerator = new THREE.PMREMGenerator(renderer);
+		const roomEnv = new RoomEnvironment();
+		const envTexture = pmremGenerator.fromScene(roomEnv).texture;
+		scene.traverse((child) => {
+			if ((child as { isMesh?: boolean }).isMesh) {
+				const mesh = child as import('three').Mesh;
+				const mat = mesh.material;
+				if (!Array.isArray(mat) && (mat as { roughness?: number }).roughness !== undefined) {
+					const physMat = mat as import('three').MeshPhysicalMaterial;
+					if (physMat.roughness < 0.3) {
+						physMat.envMap = envTexture;
+						physMat.envMapIntensity = 0.3;
+						physMat.needsUpdate = true;
+					}
+				}
+			}
+		});
+		pmremGenerator.dispose();
+		roomEnv.dispose();
+
+		const { createDustSystem } = await import('./dust.js');
+		dustSystem = createDustSystem(THREE, scene);
 
 			const { createAllExhibits } = await import('./exhibits/index.js');
 			exhibits = await createAllExhibits(THREE, scene);
@@ -131,55 +253,55 @@
 
 			const proximitySystem = createProximitySystem(exhibits, exhibitPositions);
 
-		const KEY_ROOMS = new Set<import('./types.js').RoomId>([
-			'vault',
-			'protocol',
-			'hacker',
-			'council',
-			'lab'
-		]);
-		const KEY_DWELL_TIME = 3000;
-		const exhibitTimers = new Map<import('./types.js').RoomId, number>();
+			const KEY_ROOMS = new Set<import('./types.js').RoomId>([
+				'vault',
+				'protocol',
+				'hacker',
+				'council',
+				'lab'
+			]);
+			const KEY_DWELL_TIME = 3000;
+			const exhibitTimers = new Map<import('./types.js').RoomId, number>();
 
-		// Build one CSS2D panel per exhibit, floating above its artifact.
-		// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
-		const { createPanel } = await import('./panel.js');
-		const { EXHIBIT_MAP } = await import('./exhibitMap.js');
-		for (const room of ROOMS) {
-			if (!exhibits.has(room.id)) continue;
-			const content = EXHIBIT_MAP.get(room.id);
-			if (!content) continue; // skip hidden-wing and any unmapped rooms
-			const [x, y, z] = room.exhibitPosition;
-			const panel = await createPanel(
-				THREE,
-				content,
-				new THREE.Vector3(x, y, z),
-				scene
-			);
-			panels.set(room.id, panel);
-		}
-
-		// Show the active panel, hide all others, on every activation change.
-		// Dwell timer for residue keys: start when a key-dropping room is
-		// newly activated, clear when focus leaves.
-		unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
-			for (const [roomId, panel] of panels) {
-				panel.setVisible(roomId === newId);
-			}
-			if (newId) {
-				const ex = exhibits.get(newId);
-				if (ex) ex.group.scale.setScalar(1.0);
+			// Build one CSS2D panel per exhibit, floating above its artifact.
+			// Content is bound from projects.ts via EXHIBIT_MAP; hidden-wing has no entry and gets no panel.
+			const { createPanel } = await import('./panel.js');
+			const { EXHIBIT_MAP } = await import('./exhibitMap.js');
+			for (const room of ROOMS) {
+				if (!exhibits.has(room.id)) continue;
+				const content = EXHIBIT_MAP.get(room.id);
+				if (!content) continue; // skip hidden-wing and any unmapped rooms
+				const [x, y, z] = room.exhibitPosition;
+				const panel = await createPanel(
+					THREE,
+					content,
+					new THREE.Vector3(x, y, z),
+					scene
+				);
+				panels.set(room.id, panel);
 			}
 
-			for (const [roomId] of exhibitTimers) {
-				if (roomId !== newId) {
-					exhibitTimers.delete(roomId);
+			// Show the active panel, hide all others, on every activation change.
+			// Dwell timer for residue keys: start when a key-dropping room is
+			// newly activated, clear when focus leaves.
+			unsubscribeActivation = proximitySystem.onActivationChange((newId, _wasActive) => {
+				for (const [roomId, panel] of panels) {
+					panel.setVisible(roomId === newId);
 				}
-			}
-			if (newId && KEY_ROOMS.has(newId) && !hasKey(newId)) {
-				exhibitTimers.set(newId, Date.now());
-			}
-		});
+				if (newId) {
+					const ex = exhibits.get(newId);
+					if (ex) ex.group.scale.setScalar(1.0);
+				}
+
+				for (const [roomId] of exhibitTimers) {
+					if (roomId !== newId) {
+						exhibitTimers.delete(roomId);
+					}
+				}
+				if (newId && KEY_ROOMS.has(newId) && !hasKey(newId)) {
+					exhibitTimers.set(newId, Date.now());
+				}
+			});
 
 			controlsApi = await createControls(camera, canvas, THREE);
 			controls = controlsApi.controls;
@@ -203,6 +325,11 @@
 			window.addEventListener('resize', onResize);
 			removeResizeListener = () => window.removeEventListener('resize', onResize);
 
+			// Scene is fully built; complete the ramp to trigger the ticket tear.
+			clearInterval(progressInterval);
+			progressInterval = undefined;
+			loadingProgress = 100;
+
 			function animate() {
 				if (!scene || !camera || !renderer || !clock || !controlsApi) return;
 
@@ -216,6 +343,14 @@
 
 				applyCollision(camera, prevX, prevZ);
 				camera.position.y = PLAYER_HEIGHT;
+				const activeRoom = getCurrentRoom(camera.position.x, camera.position.z);
+				museumAudio?.setRoom(activeRoom);
+
+				// Mirror room + key progress into reactive HUD state.
+				currentRoom = activeRoom;
+				currentRoomLabel = roomLabelMap.get(activeRoom ?? ('x' as never)) ?? '';
+				keyCount = getKeyCount();
+				allKeysFound = hasAllKeys();
 
 				const t = clock.getElapsedTime();
 
@@ -237,7 +372,10 @@
 								const [x, y, z] = room.exhibitPosition;
 								const pos = new THREE.Vector3(x, y + 0.5, z);
 								void createKeyPickup(THREE, pos).then(({ mesh, light, tick, dispose }) => {
-									if (!scene) return;
+									if (!mounted || !scene) {
+										dispose();
+										return;
+									}
 									scene.add(mesh);
 									scene.add(light);
 									keyPickups.set(roomId, { mesh, light, tick, dispose });
@@ -248,17 +386,30 @@
 					}
 				}
 
-			for (const [, pickup] of keyPickups) {
-				pickup.tick(t);
-			}
+				for (const [, pickup] of keyPickups) {
+					pickup.tick(t);
+				}
 
-			dustSystem?.tick(t);
-			dayCycle?.tick(t);
-			shafts?.tick(t, dirLight.intensity / 1.2);
+				dustSystem?.tick(t);
+				dayCycle?.tick(t);
+				shafts?.tick(t, dirLight.intensity / 1.2);
 
-			// Reactive read for future HUD/door wiring (W6/W7).
-			void hasAllKeys();
-			void getKeyCount();
+				const allKeys = allKeysFound;
+				hiddenDoor?.tick(t, allKeys);
+				hiddenWing?.tick(t);
+
+				// CSS2D lore fragments have no depth test, so reveal them only once
+				// the door opens — otherwise they bleed through walls at spawn.
+				hiddenWing?.setRevealed(hiddenDoor?.isOpen() ?? false);
+
+				if (hiddenDoor?.isOpen()) {
+					setHiddenWingPassable(true);
+				}
+
+				const updateGlow = hiddenDoor?.mesh.userData['updateStripeGlow'] as
+					| ((n: number) => void)
+					| undefined;
+				updateGlow?.(getKeyCount());
 
 				renderer.render(scene, camera);
 				labelRenderer?.render(scene, camera);
@@ -272,11 +423,15 @@
 		return () => {
 			mounted = false;
 
+			if (progressInterval !== undefined) {
+				clearInterval(progressInterval);
+			}
 			if (animationId !== undefined) {
 				cancelAnimationFrame(animationId);
 			}
 
 			removeResizeListener?.();
+			removeContextLostListener?.();
 			unsubscribeActivation?.();
 			for (const [, pickup] of keyPickups) {
 				scene?.remove(pickup.mesh);
@@ -288,9 +443,17 @@
 				panel.dispose();
 			}
 			panels.clear();
+			for (const exhibit of exhibits.values()) {
+				scene?.remove(exhibit.group);
+				disposeObjectTree(exhibit.group);
+			}
+			exhibits.clear();
 			labelRenderer?.domElement.remove();
 			dustSystem?.dispose();
 			shafts?.dispose();
+			hiddenDoor?.dispose();
+			hiddenWing?.dispose();
+			museumAudio?.stop();
 			controlsApi?.dispose();
 			renderer?.dispose();
 		};
@@ -300,10 +463,24 @@
 <div bind:this={container} style="position:relative;width:100vw;height:100vh;overflow:hidden;">
 	<canvas bind:this={canvas} style="display:block;width:100%;height:100%;" aria-label="The Museum of James 3D canvas"></canvas>
 
-	{#if !isLocked}
+	{#if isLoaded && isLocked && !fallbackReason}
+		<Hud roomLabel={currentRoomLabel} {keyCount} hasAllKeys={allKeysFound} />
+	{/if}
+
+	{#if fallbackReason}
+		<Fallback reason={fallbackReason} />
+	{:else if !isLoaded}
+		<LoadingScreen progress={loadingProgress} onComplete={() => (isLoaded = true)} />
+	{:else if !isLocked}
 		<div class="museum-overlay">
 			<p class="museum-overlay__hint">Click to enter the museum</p>
-			<button class="museum-overlay__btn" onclick={() => controls?.lock()}>Enter Museum</button>
+			<button
+				class="museum-overlay__btn"
+				onclick={() => {
+					museumAudio?.start();
+					controls?.lock();
+				}}>Enter Museum</button
+			>
 		</div>
 	{/if}
 </div>
@@ -312,6 +489,7 @@
 	.museum-overlay {
 		position: absolute;
 		inset: 0;
+		z-index: 50;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

@@ -9,6 +9,12 @@ interface Bounds {
 	maxZ: number;
 }
 
+let hiddenWingPassable = false;
+
+export function setHiddenWingPassable(passable: boolean): void {
+	hiddenWingPassable = passable;
+}
+
 function roomToBounds(
 	center: [number, number, number],
 	size: [number, number, number],
@@ -22,14 +28,29 @@ function roomToBounds(
 	};
 }
 
-// All walkable AABB regions (rooms + corridors), shrunk by player radius
-const WALKABLE_REGIONS: Bounds[] = [
-	...ROOMS.map((r) => roomToBounds(r.center, r.size, PLAYER_RADIUS + 0.3)),
-	...CORRIDORS.map((c) => roomToBounds(c.center, c.size, PLAYER_RADIUS + 0.2))
-];
+function getWalkableRegions(): Bounds[] {
+	const base = [
+		...ROOMS.filter((r) => r.id !== 'hidden-wing').map((r) =>
+			roomToBounds(r.center, r.size, PLAYER_RADIUS + 0.3)
+		),
+		...CORRIDORS.slice(0, -1).map((c) => roomToBounds(c.center, c.size, PLAYER_RADIUS + 0.2))
+	];
+
+	if (hiddenWingPassable) {
+		const lastCorridor = CORRIDORS[CORRIDORS.length - 1];
+		base.push(roomToBounds(lastCorridor.center, lastCorridor.size, PLAYER_RADIUS + 0.2));
+
+		const hiddenRoom = ROOMS.find((r) => r.id === 'hidden-wing');
+		if (hiddenRoom) {
+			base.push(roomToBounds(hiddenRoom.center, hiddenRoom.size, PLAYER_RADIUS + 0.3));
+		}
+	}
+
+	return base;
+}
 
 function isInsideAny(x: number, z: number): boolean {
-	return WALKABLE_REGIONS.some(
+	return getWalkableRegions().some(
 		(b) => x >= b.minX && x <= b.maxX && z >= b.minZ && z <= b.maxZ
 	);
 }
@@ -50,15 +71,13 @@ export function applyCollision(
 	const okZ = isInsideAny(prevX, newZ);
 	const okBoth = isInsideAny(newX, newZ);
 
-	if (okBoth) return; // no collision
+	if (okBoth) return;
 
-	// Try sliding along X or Z axis
 	if (okX) {
 		camera.position.z = prevZ;
 	} else if (okZ) {
 		camera.position.x = prevX;
 	} else {
-		// Full revert
 		camera.position.x = prevX;
 		camera.position.z = prevZ;
 	}

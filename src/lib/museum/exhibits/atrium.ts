@@ -51,12 +51,12 @@ export async function createExhibit(
 	const signTexture = createSignTexture(THREE);
 	const signMaterial = new THREE.MeshStandardMaterial({
 		map: signTexture,
-		emissive: 0xffffff,
+		emissive: 0xece8e0,
 		emissiveMap: signTexture,
-		emissiveIntensity: 0.15,
+		emissiveIntensity: 0.08,
 		roughness: 0.4,
 		metalness: 0,
-		side: THREE.DoubleSide
+		side: THREE.FrontSide
 	});
 	const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 0.45), signMaterial);
 	sign.position.set(0, 3.1, 0.2);
@@ -83,7 +83,7 @@ export async function createExhibit(
 			}
 			const rotationSpeed = 0.15;
 			group.rotation.y = Math.sin(t * rotationSpeed) * 0.08;
-			signMaterial.emissiveIntensity = 0.15 + Math.sin(t * 1.5) * 0.05;
+			signMaterial.emissiveIntensity = 0.08 + Math.sin(t * 1.5) * 0.03;
 		}
 	};
 }

@@ -7,6 +7,10 @@
 
 	let { children } = $props();
 
+	// The museum route group owns the full viewport — no chrome, no paper-texture
+	// vignette. Route groups don't escape the root layout, so gate it here.
+	const isMuseum = $derived(page.route.id === '/(museum)');
+
 	afterNavigate(() => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 	});
@@ -59,10 +63,14 @@
 	{@html `<style>html { scroll-behavior: smooth; }</style>`}
 </svelte:head>
 
-<div class="min-h-screen flex flex-col bg-paper text-ink paper-texture">
-	<Header />
-	<main class="flex-1">
-		{@render children()}
-	</main>
-	<Footer />
-</div>
+{#if isMuseum}
+	{@render children()}
+{:else}
+	<div class="min-h-screen flex flex-col bg-paper text-ink paper-texture">
+		<Header />
+		<main class="flex-1">
+			{@render children()}
+		</main>
+		<Footer />
+	</div>
+{/if}
