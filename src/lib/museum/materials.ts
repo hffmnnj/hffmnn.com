@@ -60,9 +60,9 @@ export function createCeilingMaterial(THREE: typeof import('three')): THREE.Mesh
 export function createFloorMaterial(THREE: typeof import('three')): THREE.MeshPhysicalMaterial {
 	return new THREE.MeshPhysicalMaterial({
 		color: 0x1a1a1a,
-		roughness: 0.1,
+		roughness: 0.28,
 		metalness: 0,
-		reflectivity: 0.8
+		reflectivity: 0.5
 	});
 }
 
